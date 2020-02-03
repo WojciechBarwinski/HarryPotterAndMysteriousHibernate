@@ -1,0 +1,55 @@
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence
+             http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
+             version="2.1">
+    <!--try change name here and in main EntityManagerFactory-->
+    <persistence-unit name="ORM">
+        <description>
+            Persistence unit for connection to Harry Potter custom DataBase
+        </description>
+
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+
+        <class>entities.HPCharacter</class>
+        <class>entities.Pet</class>
+
+
+        <properties>
+            <property name="javax.persistence.jdbc.driver"
+                      value="com.mysql.cj.jdbc.Driver"/>
+
+
+            <property name="javax.persistence.jdbc.url"
+                      value="jdbc:mysql://localhost:3306/harry_potter_db?useTimezone=true&amp;serverTimezone=GMT"/>
+
+            <property name="javax.persistence.jdbc.user"
+                      value="root"/>
+
+            <property name="javax.persistence.jdbc.password"
+                      value="PASSWORD"/>
+
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect"/>
+
+
+            <property name="hibernate.show_sql"
+                      value="true"/>
+
+            <property name="hibernate.connection.autocommit"
+                      value="true"/>
+
+            <!--WARNING-->
+            <property name="hibernate.hbm2ddl.auto"
+                      value="create"/>
+
+
+            <property name="hibernate.archive.autodetection"
+                      value="false"/>
+
+
+        </properties>
+
+
+    </persistence-unit>
+
+</persistence>
