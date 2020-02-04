@@ -21,7 +21,6 @@ public class HPCharacter {
     @Column(nullable = false)
     private LocalDate birthDate;
 
-
     protected HPCharacter(
     ){}
 
