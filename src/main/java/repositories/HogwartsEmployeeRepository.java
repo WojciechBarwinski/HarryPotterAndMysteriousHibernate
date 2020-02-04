@@ -7,10 +7,8 @@ public interface HogwartsEmployeeRepository {
     HogwartsEmployee create(HogwartsEmployee hogwartsEmployee);
     HogwartsEmployee readById(Long id);
     HogwartsEmployee upDate(HogwartsEmployee hogwartsEmployee);
-    HogwartsEmployee delete(HogwartsEmployee hogwartsEmployee);
-
-    HogwartsEmployee upDateById(Long id);
-    HogwartsEmployee deleteById(Long id);
+    void delete(HogwartsEmployee hogwartsEmployee);
+    void deleteById(Long id);
 
 
 }

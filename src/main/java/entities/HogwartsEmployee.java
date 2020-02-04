@@ -2,6 +2,8 @@ package entities;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -12,9 +14,9 @@ public class HogwartsEmployee {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "character_id", foreignKey = @ForeignKey(name = "FK_employee_character_id"))
-    private HPCharacter hpCharacter;
+    @ManyToMany
+    @JoinColumn(name = "characters_id")
+    private List<HPCharacter> charactersAsEmployee = new ArrayList<>();
 
     @Column(nullable = false)
     private BigDecimal salary;
@@ -26,7 +28,7 @@ public class HogwartsEmployee {
     }
 
     public HogwartsEmployee(HPCharacter hpCharacter, BigDecimal salary, String position) {
-        this.hpCharacter = hpCharacter;
+        setCharactersAsEmployee(hpCharacter);
         this.salary = salary;
         this.position = position;
     }
@@ -39,12 +41,12 @@ public class HogwartsEmployee {
         this.id = id;
     }
 
-    public HPCharacter getHpCharacter() {
-        return hpCharacter;
+    public List<HPCharacter> getCharactersAsEmployee() {
+        return charactersAsEmployee;
     }
 
-    public void setHpCharacter(HPCharacter hpCharacter) {
-        this.hpCharacter = hpCharacter;
+    public void setCharactersAsEmployee(HPCharacter hpCharacter) {
+        this.charactersAsEmployee.add(hpCharacter);
     }
 
     public BigDecimal getSalary() {
@@ -67,15 +69,15 @@ public class HogwartsEmployee {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        HogwartsEmployee that = (HogwartsEmployee) o;
-        return Objects.equals(id, that.id) &&
-                Objects.equals(hpCharacter, that.hpCharacter) &&
-                Objects.equals(salary, that.salary) &&
-                Objects.equals(position, that.position);
+        HogwartsEmployee employee = (HogwartsEmployee) o;
+        return Objects.equals(id, employee.id) &&
+                Objects.equals(charactersAsEmployee, employee.charactersAsEmployee) &&
+                Objects.equals(salary, employee.salary) &&
+                Objects.equals(position, employee.position);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, hpCharacter, salary, position);
+        return Objects.hash(id, charactersAsEmployee, salary, position);
     }
 }

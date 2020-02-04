@@ -2,6 +2,8 @@ package entities;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -20,6 +22,10 @@ public class HPCharacter {
 
     @Column(nullable = false)
     private LocalDate birthDate;
+
+    @ManyToMany
+    @JoinColumn(name = "HogwartsEmployee_id")
+    List<HogwartsEmployee> listOfHogwartsEmployee = new ArrayList<>();
 
     protected HPCharacter(
     ){}
@@ -58,6 +64,13 @@ public class HPCharacter {
         this.birthDate = birthDate;
     }
 
+    public List<HogwartsEmployee> getListOfHogwartsEmployee() {
+        return listOfHogwartsEmployee;
+    }
+
+    public void setListOfHogwartsEmployee(List<HogwartsEmployee> listOfHogwartsEmployee) {
+        this.listOfHogwartsEmployee = listOfHogwartsEmployee;
+    }
 
     @Override
     public boolean equals(Object o) {

@@ -23,26 +23,23 @@ public class HogwartsEmployeeRepositoryImpl implements HogwartsEmployeeRepositor
 
     @Override
     public HogwartsEmployee readById(Long id) {
-        return null;
+        HogwartsEmployee foundHogwartsEmployee = em.find(HogwartsEmployee.class, id);
+        return foundHogwartsEmployee;
     }
 
     @Override
     public HogwartsEmployee upDate(HogwartsEmployee hogwartsEmployee) {
-        return null;
+        HogwartsEmployee upDateEmployee = em.merge(hogwartsEmployee);
+        return upDateEmployee;
     }
 
     @Override
-    public HogwartsEmployee delete(HogwartsEmployee hogwartsEmployee) {
-        return null;
+    public void delete(HogwartsEmployee hogwartsEmployee) {
+        em.remove(hogwartsEmployee);
     }
 
     @Override
-    public HogwartsEmployee upDateById(Long id) {
-        return null;
-    }
-
-    @Override
-    public HogwartsEmployee deleteById(Long id) {
-        return null;
+    public void deleteById(Long id) {
+        delete(readById(id));
     }
 }
