@@ -26,4 +26,14 @@ public class CharacterRepositoryImpl implements CharacterRepository {
         HPCharacter foundCharacter = em.find(HPCharacter.class, id);
         return foundCharacter;
     }
+    @Override
+    public HPCharacter modify(HPCharacter characterToModify) {
+        HPCharacter mergedCharacter = em.merge(characterToModify);
+        return mergedCharacter;
+    }
+
+    @Override
+    public void delete(HPCharacter characterToDelete) {
+        em.remove(characterToDelete);
+    }
 }
