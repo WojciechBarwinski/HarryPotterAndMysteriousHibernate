@@ -19,6 +19,7 @@ class CharacterRepositoryImplTest {
     private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("ORM");
     private EntityManager em;
     private CharacterRepository characterRepository;
+    private static Long personId;
 
     @BeforeEach
     void setUp() {
@@ -42,6 +43,7 @@ class CharacterRepositoryImplTest {
         transaction.begin();
         HPCharacter savedHarryPotter = characterRepository.create(harryPotter);
         transaction.commit();
+        personId = savedHarryPotter.getId();
 
         assertThat(savedHarryPotter.getId()).isGreaterThan(0);
     }
@@ -52,18 +54,17 @@ class CharacterRepositoryImplTest {
         EntityTransaction transaction = em.getTransaction();
 
         transaction.begin();
-        HPCharacter foundCharacter = characterRepository.findById(1L);
+        HPCharacter foundCharacter = characterRepository.findById(personId);
         transaction.commit();
 
         assertThat(foundCharacter).isNotNull();
-//        assertThat(foundCharacter.getFirstName()).isEqualTo("Harry");
     }
 
     @Order(3)
     @Test
     void shouldModifyCharacter() {
         EntityTransaction transaction = em.getTransaction();
-        HPCharacter characterToModify = characterRepository.findById(1L);
+        HPCharacter characterToModify = characterRepository.findById(personId);
         String newNameForCharacter = "Barry";
 
 
@@ -76,23 +77,23 @@ class CharacterRepositoryImplTest {
         em.close();
 
         characterRepository = new CharacterRepositoryImpl(emf.createEntityManager());
-        HPCharacter characterAfterMerge = characterRepository.findById(1L);
+        HPCharacter characterAfterMerge = characterRepository.findById(personId);
 
         assertThat(characterAfterMerge.getFirstName()).isEqualTo(newNameForCharacter);
 
     }
+
     @Order(4)
     @Test
-    void shouldDeleteCharacter(){
+    void shouldDeleteCharacter() {
         EntityTransaction transaction = em.getTransaction();
-        HPCharacter characterToDelete = characterRepository.findById(1L);
+        HPCharacter characterToDelete = characterRepository.findById(personId);
 
         transaction.begin();
         characterRepository.delete(characterToDelete);
         transaction.commit();
 
-        HPCharacter characterAfterDelete = characterRepository.findById(1L);
+        HPCharacter characterAfterDelete = characterRepository.findById(personId);
         assertThat(characterAfterDelete).isNull();
-
     }
 }
