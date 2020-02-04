@@ -2,21 +2,20 @@ package entities;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Entity
-@Table(name = "Hogwards_Employee")
+@Table(name = "HogwartsEmployee")
 public class HogwartsEmployee {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+
     @ManyToMany
-    @JoinColumn(name = "characters_id")
-    private List<HPCharacter> charactersAsEmployee = new ArrayList<>();
+    @JoinTable(name = "Character_Employee")
+    private Set<HPCharacter> employees = new HashSet<>();
 
     @Column(nullable = false)
     private BigDecimal salary;
@@ -41,12 +40,12 @@ public class HogwartsEmployee {
         this.id = id;
     }
 
-    public List<HPCharacter> getCharactersAsEmployee() {
-        return charactersAsEmployee;
+    public Set<HPCharacter> getCharactersAsEmployee() {
+        return employees;
     }
 
     public void setCharactersAsEmployee(HPCharacter hpCharacter) {
-        this.charactersAsEmployee.add(hpCharacter);
+        this.employees.add(hpCharacter);
     }
 
     public BigDecimal getSalary() {
@@ -71,13 +70,13 @@ public class HogwartsEmployee {
         if (o == null || getClass() != o.getClass()) return false;
         HogwartsEmployee employee = (HogwartsEmployee) o;
         return Objects.equals(id, employee.id) &&
-                Objects.equals(charactersAsEmployee, employee.charactersAsEmployee) &&
+                Objects.equals(employees, employee.employees) &&
                 Objects.equals(salary, employee.salary) &&
                 Objects.equals(position, employee.position);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, charactersAsEmployee, salary, position);
+        return Objects.hash(id, employees, salary, position);
     }
 }
