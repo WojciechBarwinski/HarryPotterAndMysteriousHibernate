@@ -95,7 +95,13 @@ class HogwartsEmployeeRepositoryImplTest {
 
     }
 
-   /* @Order(5)
+    @Order(5)
+    @Test
+    public void shouldAddSecondEmployee(){
+        
+    }
+
+    @Order(15)
     @Test
     public void shouldDeleteEmployeeFromDB(){
         EntityTransaction transaction = em.getTransaction();
@@ -109,7 +115,7 @@ class HogwartsEmployeeRepositoryImplTest {
         assertThat(deletedEmployee).isNull();
     }
 
-    @Order(6)
+    @Order(17)
     @Test
     public void shouldDeleteEmployeeFromDBbyId(){
         EntityTransaction transaction = em.getTransaction();
@@ -120,6 +126,6 @@ class HogwartsEmployeeRepositoryImplTest {
 
         HogwartsEmployee deletedEmployee = hogwartsEmployeeRepository.readById(1L);
         assertThat(deletedEmployee).isNull();
-    }*/
+    }
 }
 
