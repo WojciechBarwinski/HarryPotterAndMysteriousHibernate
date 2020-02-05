@@ -28,6 +28,7 @@ public class CharacterRepositoryImpl implements CharacterRepository {
     }
     @Override
     public HPCharacter modify(HPCharacter characterToModify) {
+
         HPCharacter mergedCharacter = em.merge(characterToModify);
         return mergedCharacter;
     }

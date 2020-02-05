@@ -8,7 +8,7 @@ public interface CharacterRepository {
 
     HPCharacter findById(Long id);
 
-    HPCharacter modify(HPCharacter characterToModify);
+    HPCharacter modify(HPCharacter hpCharacter);
 
     void delete(HPCharacter characterToDelete);
 }

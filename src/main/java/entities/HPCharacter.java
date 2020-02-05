@@ -22,8 +22,8 @@ public class HPCharacter {
     private LocalDate birthDate;
 
 
-    @ManyToMany(mappedBy = "employees")
-    Set<HogwartsEmployee> positions = new HashSet<>();
+    @ManyToMany(mappedBy = "employees", fetch = FetchType.EAGER)
+    Set<HogwartsJob> positions = new HashSet<>();
 
     protected HPCharacter(
     ){}
@@ -62,23 +62,24 @@ public class HPCharacter {
         this.birthDate = birthDate;
     }
 
-    public Set<HogwartsEmployee> getPositions() {
+    public Set<HogwartsJob> getPositions() {
         return positions;
     }
 
-    public void setPositions(Set<HogwartsEmployee> positions) {
-        this.positions = positions;
+    public void setPositions(HogwartsJob hogwartsJob) {
+        this.positions.add(hogwartsJob);
     }
+
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        HPCharacter HPCharacter = (HPCharacter) o;
-        return Objects.equals(id, HPCharacter.id) &&
-                Objects.equals(firstName, HPCharacter.firstName) &&
-                Objects.equals(lastName, HPCharacter.lastName) &&
-                Objects.equals(birthDate, HPCharacter.birthDate);
+        HPCharacter that = (HPCharacter) o;
+        return Objects.equals(id, that.id) &&
+                Objects.equals(firstName, that.firstName) &&
+                Objects.equals(lastName, that.lastName) &&
+                Objects.equals(birthDate, that.birthDate);
     }
 
     @Override

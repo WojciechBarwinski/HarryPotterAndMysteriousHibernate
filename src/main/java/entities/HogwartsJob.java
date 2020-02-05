@@ -5,16 +5,16 @@ import java.math.BigDecimal;
 import java.util.*;
 
 @Entity
-@Table(name = "HogwartsEmployee")
-public class HogwartsEmployee {
+@Table(name = "Hogwarts_Jobs")
+public class HogwartsJob {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
 
-    @ManyToMany
-    @JoinTable(name = "Character_Employee")
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "Characters_Jobs")
     private Set<HPCharacter> employees = new HashSet<>();
 
     @Column(nullable = false)
@@ -23,11 +23,16 @@ public class HogwartsEmployee {
     @Column(nullable = false)
     private String position;
 
-    public HogwartsEmployee() {
+    public HogwartsJob() {
     }
 
-    public HogwartsEmployee(HPCharacter hpCharacter, BigDecimal salary, String position) {
+    public HogwartsJob(HPCharacter hpCharacter, BigDecimal salary, String position) {
         setCharactersAsEmployee(hpCharacter);
+        this.salary = salary;
+        this.position = position;
+    }
+
+    public HogwartsJob(BigDecimal salary, String position) {
         this.salary = salary;
         this.position = position;
     }
@@ -40,7 +45,7 @@ public class HogwartsEmployee {
         this.id = id;
     }
 
-    public Set<HPCharacter> getCharactersAsEmployee() {
+    public Set<HPCharacter> getCharactersInJob() {
         return employees;
     }
 
@@ -68,15 +73,14 @@ public class HogwartsEmployee {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        HogwartsEmployee employee = (HogwartsEmployee) o;
+        HogwartsJob employee = (HogwartsJob) o;
         return Objects.equals(id, employee.id) &&
                 Objects.equals(employees, employee.employees) &&
-                Objects.equals(salary, employee.salary) &&
-                Objects.equals(position, employee.position);
+                Objects.equals(salary, employee.salary);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, employees, salary, position);
+        return Objects.hash(id, employees, salary);
     }
 }

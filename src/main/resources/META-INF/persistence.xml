@@ -13,7 +13,7 @@
 
         <class>entities.HPCharacter</class>
         <class>entities.Pet</class>
-        <class>entities.HogwartsEmployee</class>
+        <class>entities.HogwartsJob</class>
 
 
         <properties>
