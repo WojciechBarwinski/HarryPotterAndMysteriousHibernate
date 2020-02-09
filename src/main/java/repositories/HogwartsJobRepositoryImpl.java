@@ -23,30 +23,19 @@ public class HogwartsJobRepositoryImpl implements HogwartsJobRepository {
 
     @Override
     public HogwartsJob readById(Long id) {
-        HogwartsJob foundHogwartsJob = em.find(HogwartsJob.class, id);
-        return foundHogwartsJob;
-    }
-
-    @Override
-    public HogwartsJob readByJob(HogwartsJob hogwartsJob) {
-        HogwartsJob foundHogwartsJob = em.find(HogwartsJob.class, hogwartsJob.getId());
-        return foundHogwartsJob;
-    }
-
-    @Override
-    public HogwartsJob upDate(HogwartsJob hogwartsJob) {
-        HogwartsJob upDateEmployee = em.merge(hogwartsJob);
-        return upDateEmployee;
+        return em.find(HogwartsJob.class, id);
     }
 
 
     @Override
-    public void delete(HogwartsJob hogwartsJob) {
-        em.remove(hogwartsJob);
+    public HogwartsJob upDate(Long id) {
+        HogwartsJob hogwartsJob = readById(id);
+        return em.merge(hogwartsJob);
     }
 
     @Override
     public void deleteById(Long id) {
-        delete(readById(id));
+        HogwartsJob hogwartsJob = readById(id);
+        em.remove(hogwartsJob);
     }
 }
