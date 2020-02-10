@@ -28,7 +28,7 @@ public class HogwartsJobRepositoryImpl implements HogwartsJobRepository {
 
 
     @Override
-    public HogwartsJob upDate(Long id) {
+    public HogwartsJob updateById(Long id) {
         HogwartsJob hogwartsJob = readById(id);
         return em.merge(hogwartsJob);
     }

@@ -6,7 +6,7 @@ public interface HogwartsJobRepository {
 
     HogwartsJob create(HogwartsJob hogwartsJob);
     HogwartsJob readById(Long id);
-    HogwartsJob upDate(Long id);
+    HogwartsJob updateById(Long id);
     void deleteById(Long id);
 
 

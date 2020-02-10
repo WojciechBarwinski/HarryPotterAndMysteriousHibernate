@@ -13,7 +13,7 @@ public class HogwartsJob {
     private Long id;
 
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinTable(name = "Characters_Jobs")
     private Set<HPCharacter> employees = new HashSet<>();
 
@@ -21,28 +21,18 @@ public class HogwartsJob {
     private BigDecimal salary;
 
     @Column(nullable = false)
-    private String position;
+    private String positionName;
 
     public HogwartsJob() {
     }
 
-    public HogwartsJob(HPCharacter hpCharacter, BigDecimal salary, String position) {
-        setCharactersAsEmployee(hpCharacter);
+    public HogwartsJob(BigDecimal salary, String positionName) {
         this.salary = salary;
-        this.position = position;
-    }
-
-    public HogwartsJob(BigDecimal salary, String position) {
-        this.salary = salary;
-        this.position = position;
+        this.positionName = positionName;
     }
 
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public Set<HPCharacter> getCharactersInJob() {
@@ -61,26 +51,26 @@ public class HogwartsJob {
         this.salary = salary;
     }
 
-    public String getPosition() {
-        return position;
+    public String getPositionName() {
+        return positionName;
     }
 
-    public void setPosition(String position) {
-        this.position = position;
+    public void setPositionName(String positionName) {
+        this.positionName = positionName;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        HogwartsJob employee = (HogwartsJob) o;
-        return Objects.equals(id, employee.id) &&
-                Objects.equals(employees, employee.employees) &&
-                Objects.equals(salary, employee.salary);
+        HogwartsJob that = (HogwartsJob) o;
+        return Objects.equals(id, that.id) &&
+                Objects.equals(salary, that.salary) &&
+                Objects.equals(positionName, that.positionName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, employees, salary);
+        return Objects.hash(id, salary, positionName);
     }
 }

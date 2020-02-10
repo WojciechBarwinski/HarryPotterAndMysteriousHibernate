@@ -22,7 +22,7 @@ public class HPCharacter {
     private LocalDate birthDate;
 
 
-    @ManyToMany(mappedBy = "employees", fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "employees", fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     Set<HogwartsJob> positions = new HashSet<>();
 
     protected HPCharacter(

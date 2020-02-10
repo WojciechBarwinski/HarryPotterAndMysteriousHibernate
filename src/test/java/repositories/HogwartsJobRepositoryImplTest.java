@@ -62,7 +62,14 @@ class HogwartsJobRepositoryImplTest {
         addedHPCharacters.add(characterRepository.create(harryPotter));
         transaction.commit();
 
+        HPCharacter hpCharacter1 = addedHPCharacters.get(0);
+        HPCharacter hpCharacter2 = addedHPCharacters.get(1);
+        HPCharacter hpCharacter3 = addedHPCharacters.get(2);
+
         assertThat(addedHPCharacters.size()).isEqualTo(3);
+        assertThat(hpCharacter1.getId()).isGreaterThan(0);
+        assertThat(hpCharacter2.getId()).isGreaterThan(0);
+        assertThat(hpCharacter3.getId()).isGreaterThan(0);
 
     }
 
@@ -73,19 +80,25 @@ class HogwartsJobRepositoryImplTest {
         List<HogwartsJob> addedHogwartsJobs = new ArrayList<>();
 
         transaction.begin();
-        addedHogwartsJobs.add(hogwartsJobRepository.create(elixirMaster));
         addedHogwartsJobs.add(hogwartsJobRepository.create(headmaster));
+        addedHogwartsJobs.add(hogwartsJobRepository.create(elixirMaster));
         addedHogwartsJobs.add(hogwartsJobRepository.create(houseHead));
         transaction.commit();
 
+        HogwartsJob hogwartsJob1 = addedHogwartsJobs.get(0);
+        HogwartsJob hogwartsJob2 = addedHogwartsJobs.get(1);
+        HogwartsJob hogwartsJob3 = addedHogwartsJobs.get(2);
+
         assertThat(addedHogwartsJobs.size()).isEqualTo(3);
+        assertThat(hogwartsJob1.getId()).isGreaterThan(0);
+        assertThat(hogwartsJob2.getId()).isGreaterThan(0);
+        assertThat(hogwartsJob3.getId()).isGreaterThan(0);
     }
 
 
-    // TODO: 05.02.2020 added job TO character dont work correct
     @Order(3)
     @Test
-    public void shouldCreateLinkBetweenOneCharacterAndOneHogwartsJobByCharacter() {
+    public void shouldCreateLinkBetweenOneCharacterAndOneHogwartsJob() {
         EntityTransaction transaction = em.getTransaction();
         Long idJobToLink = 2L;
         Long idCharacterToLink = 2L;
@@ -94,78 +107,62 @@ class HogwartsJobRepositoryImplTest {
 
         hogwartsJobToLink.setCharactersAsEmployee(characterToLink);
         transaction.begin();
-        hogwartsJobRepository.upDate(idJobToLink);
+        hogwartsJobRepository.updateById(idJobToLink);
         transaction.commit();
-        assertThat(hogwartsJobToLink.getCharactersInJob().size()).isEqualTo(1);
+
+        HogwartsJob hogwartsJobAfterUpdate = hogwartsJobRepository.readById(idJobToLink);
+        assertThat(hogwartsJobAfterUpdate.getCharactersInJob().size()).isEqualTo(1);
     }
 
     @Order(4)
     @Test
-    public void shouldCreateLinkBetweenOneHogwartsJobAndOneCharacterByJob() {
+    public void shouldAddSecondJobToCharacter() {
         EntityTransaction transaction = em.getTransaction();
-        Long idJobToLink = 2L;
-        Long idCharacterToLink = 1L;
-        HPCharacter characterToLink = characterRepository.findById(idJobToLink);
-        HogwartsJob hogwartsJobToLink = hogwartsJobRepository.readById(idCharacterToLink);
+        Long idJobToLink = 3L;
+        Long idCharacterToLink = 2L;
+        HogwartsJob hogwartsJobToLink = hogwartsJobRepository.readById(idJobToLink);
+        HPCharacter characterToLink = characterRepository.findById(idCharacterToLink);
 
         hogwartsJobToLink.setCharactersAsEmployee(characterToLink);
         transaction.begin();
-        hogwartsJobRepository.upDate(idJobToLink);
+        hogwartsJobRepository.updateById(idJobToLink);
+        characterRepository.modify(characterToLink);
         transaction.commit();
 
-        assertThat(hogwartsJobToLink.getCharactersInJob().size()).isEqualTo(1);
+        HPCharacter characterAfterUpdate = characterRepository.findById(idCharacterToLink);
+        assertThat(characterAfterUpdate.getPositions().size()).isEqualTo(2);
     }
+
 
     @Order(5)
     @Test
-    public void shouldAddSecondJobToCharacterByJob(){
+    public void shouldChangeSalaryToNewValue(){
         EntityTransaction transaction = em.getTransaction();
-        Long idJobToLink = 2L;
-        Long idCharacterToLink = 2L;
-        HPCharacter characterToUpDate = characterRepository.findById(2L);
-        HogwartsJob hogwartsJobToAdd = hogwartsJobRepository.readById(3L);
+        Long idJobToChange = 1L;
+        HogwartsJob hogwartsJobToUpdate = hogwartsJobRepository.readById(idJobToChange);
 
-        hogwartsJobToAdd.setCharactersAsEmployee(characterToUpDate);
+        hogwartsJobToUpdate.setSalary(BigDecimal.valueOf(6666));
         transaction.begin();
-        //hogwartsJobRepository.upDate(hogwartsJobToAdd);
+        hogwartsJobRepository.updateById(idJobToChange);
         transaction.commit();
 
-        assertThat(hogwartsJobToAdd.getCharactersInJob().size()).isEqualTo(1);
+        HogwartsJob hogwartsJobAfterSalaryChange = hogwartsJobRepository.readById(idJobToChange);
+        assertThat(hogwartsJobAfterSalaryChange.getSalary()).isEqualTo(BigDecimal.valueOf(6666));
     }
+
 
     @Order(6)
     @Test
-    public void shouldAddSecondCharacterToJobByJob(){
+    public void shouldDeleteJob(){
         EntityTransaction transaction = em.getTransaction();
-        HPCharacter characterToAdd = characterRepository.findById(3L);
-        HogwartsJob employeeToUpDate = hogwartsJobRepository.readById(2L);
+        Long idJobDelete = 1L;
 
+        transaction.begin();
+        hogwartsJobRepository.deleteById(idJobDelete);
+        transaction.commit();
 
-    }
-
-    @Order(7)
-    @Test
-    public void shouldReturnHogwartsJobByThisJob(){
-
-    }
-
-    //todo
-    @Order(8)
-    @Test
-    public void shouldUpDateJob(){
-
-    }
-    //todo
-    @Order(9)
-    @Test
-    public void shouldDeleteJobWithNoCharacter(){
-
-    }
-    //todo
-    @Order(10)
-    @Test
-    public void shouldDeleteJobWithCharacterLinkedToThem(){
-
+        HogwartsJob hogwartsDeletedJob = hogwartsJobRepository.readById(idJobDelete);
+        assertThat(hogwartsDeletedJob).isNull();
     }
     }
 
