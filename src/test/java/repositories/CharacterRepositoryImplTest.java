@@ -68,15 +68,15 @@ class CharacterRepositoryImplTest {
         String newNameForCharacter = "Barry";
 
 
-        em.detach(characterToModify);
+//        em.detach(characterToModify);
         characterToModify.setFirstName(newNameForCharacter);
 
         transaction.begin();
         characterRepository.modify(characterToModify);
         transaction.commit();
-        em.close();
+        /*em.close();
 
-        characterRepository = new CharacterRepositoryImpl(emf.createEntityManager());
+        characterRepository = new CharacterRepositoryImpl(emf.createEntityManager());*/
         HPCharacter characterAfterMerge = characterRepository.findById(personId);
 
         assertThat(characterAfterMerge.getFirstName()).isEqualTo(newNameForCharacter);
