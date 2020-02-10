@@ -38,7 +38,7 @@ class CharacterRepositoryImplTest {
         HPCharacter harryPotter = new HPCharacter("Harry", "Potter", birthDate);
 
         transaction.begin();
-        HPCharacter savedHarryPotter = characterRepository.create(harryPotter);
+        HPCharacter savedHarryPotter = characterRepository.add(harryPotter);
         transaction.commit();
         personId = savedHarryPotter.getId();
 
@@ -69,7 +69,7 @@ class CharacterRepositoryImplTest {
         characterToModify.setFirstName(newNameForCharacter);
 
         transaction.begin();
-        characterRepository.modify(characterToModify);
+        characterRepository.update(characterToModify);
         transaction.commit();
         /*em.close();
 

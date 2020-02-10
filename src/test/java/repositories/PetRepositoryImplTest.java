@@ -14,7 +14,6 @@ import javax.persistence.Persistence;
 import java.time.LocalDate;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 class PetRepositoryImplTest {
 
@@ -43,7 +42,7 @@ class PetRepositoryImplTest {
         Pet pet = new Pet("Hedwig", harryPotter, "Owl");
 
         transaction.begin();
-        HPCharacter savedHarryPotter = characterRepository.create(harryPotter);
+        HPCharacter savedHarryPotter = characterRepository.add(harryPotter);
         transaction.commit();
         transaction.begin();
         Pet savedHedwig = petRepository.add(pet);

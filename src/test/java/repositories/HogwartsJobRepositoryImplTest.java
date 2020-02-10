@@ -57,9 +57,9 @@ class HogwartsJobRepositoryImplTest {
         List<HPCharacter> addedHPCharacters = new ArrayList<>();
 
         transaction.begin();
-        addedHPCharacters.add(characterRepository.create(albusDumbledore));
-        addedHPCharacters.add(characterRepository.create(severusSnape));
-        addedHPCharacters.add(characterRepository.create(harryPotter));
+        addedHPCharacters.add(characterRepository.add(albusDumbledore));
+        addedHPCharacters.add(characterRepository.add(severusSnape));
+        addedHPCharacters.add(characterRepository.add(harryPotter));
         transaction.commit();
 
         HPCharacter hpCharacter1 = addedHPCharacters.get(0);
@@ -80,9 +80,9 @@ class HogwartsJobRepositoryImplTest {
         List<HogwartsJob> addedHogwartsJobs = new ArrayList<>();
 
         transaction.begin();
-        addedHogwartsJobs.add(hogwartsJobRepository.create(headmaster));
-        addedHogwartsJobs.add(hogwartsJobRepository.create(elixirMaster));
-        addedHogwartsJobs.add(hogwartsJobRepository.create(houseHead));
+        addedHogwartsJobs.add(hogwartsJobRepository.add(headmaster));
+        addedHogwartsJobs.add(hogwartsJobRepository.add(elixirMaster));
+        addedHogwartsJobs.add(hogwartsJobRepository.add(houseHead));
         transaction.commit();
 
         HogwartsJob hogwartsJob1 = addedHogwartsJobs.get(0);
@@ -102,7 +102,7 @@ class HogwartsJobRepositoryImplTest {
         EntityTransaction transaction = em.getTransaction();
         Long idJobToLink = 2L;
         Long idCharacterToLink = 2L;
-        HogwartsJob hogwartsJobToLink = hogwartsJobRepository.readById(idJobToLink);
+        HogwartsJob hogwartsJobToLink = hogwartsJobRepository.findById(idJobToLink);
         HPCharacter characterToLink = characterRepository.findById(idCharacterToLink);
 
         hogwartsJobToLink.setCharactersAsEmployee(characterToLink);
@@ -110,7 +110,7 @@ class HogwartsJobRepositoryImplTest {
         hogwartsJobRepository.updateById(idJobToLink);
         transaction.commit();
 
-        HogwartsJob hogwartsJobAfterUpdate = hogwartsJobRepository.readById(idJobToLink);
+        HogwartsJob hogwartsJobAfterUpdate = hogwartsJobRepository.findById(idJobToLink);
         assertThat(hogwartsJobAfterUpdate.getCharactersInJob().size()).isEqualTo(1);
     }
 
@@ -120,13 +120,13 @@ class HogwartsJobRepositoryImplTest {
         EntityTransaction transaction = em.getTransaction();
         Long idJobToLink = 3L;
         Long idCharacterToLink = 2L;
-        HogwartsJob hogwartsJobToLink = hogwartsJobRepository.readById(idJobToLink);
+        HogwartsJob hogwartsJobToLink = hogwartsJobRepository.findById(idJobToLink);
         HPCharacter characterToLink = characterRepository.findById(idCharacterToLink);
 
         hogwartsJobToLink.setCharactersAsEmployee(characterToLink);
         transaction.begin();
         hogwartsJobRepository.updateById(idJobToLink);
-        characterRepository.modify(characterToLink);
+        characterRepository.update(characterToLink);
         transaction.commit();
 
         HPCharacter characterAfterUpdate = characterRepository.findById(idCharacterToLink);
@@ -139,19 +139,29 @@ class HogwartsJobRepositoryImplTest {
     public void shouldChangeSalaryToNewValue(){
         EntityTransaction transaction = em.getTransaction();
         Long idJobToChange = 1L;
-        HogwartsJob hogwartsJobToUpdate = hogwartsJobRepository.readById(idJobToChange);
+        HogwartsJob hogwartsJobToUpdate = hogwartsJobRepository.findById(idJobToChange);
 
         hogwartsJobToUpdate.setSalary(BigDecimal.valueOf(6666));
         transaction.begin();
         hogwartsJobRepository.updateById(idJobToChange);
         transaction.commit();
 
-        HogwartsJob hogwartsJobAfterSalaryChange = hogwartsJobRepository.readById(idJobToChange);
+        HogwartsJob hogwartsJobAfterSalaryChange = hogwartsJobRepository.findById(idJobToChange);
         assertThat(hogwartsJobAfterSalaryChange.getSalary()).isEqualTo(BigDecimal.valueOf(6666));
     }
 
+    //todo
+    /*@Order(6)
+    @Test
+    public void shouldReturnJobByName(){
+        EntityTransaction transaction = em.getTransaction();
+        String jobName = "Elixir Master";
+        HogwartsJob foundedJob = hogwartsJobRepository.findJobByName(jobName);
 
-    @Order(6)
+        assertThat(foundedJob.getPositionName()).isEqualTo(jobName);
+
+    }*/
+    @Order(10)
     @Test
     public void shouldDeleteJob(){
         EntityTransaction transaction = em.getTransaction();
@@ -161,7 +171,7 @@ class HogwartsJobRepositoryImplTest {
         hogwartsJobRepository.deleteById(idJobDelete);
         transaction.commit();
 
-        HogwartsJob hogwartsDeletedJob = hogwartsJobRepository.readById(idJobDelete);
+        HogwartsJob hogwartsDeletedJob = hogwartsJobRepository.findById(idJobDelete);
         assertThat(hogwartsDeletedJob).isNull();
     }
     }

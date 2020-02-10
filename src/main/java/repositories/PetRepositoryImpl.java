@@ -19,4 +19,19 @@ public class PetRepositoryImpl implements PetRepository {
         }
         return pet;
     }
+
+    @Override
+    public Pet updateById(Long id) {
+        return em.merge(findById(id));
+    }
+
+    @Override
+    public Pet findById(Long id) {
+        return em.find(Pet.class, id);
+    }
+
+    @Override
+    public void deletedById(Long id) {
+        em.remove(findById(id));
+    }
 }

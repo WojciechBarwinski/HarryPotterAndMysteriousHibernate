@@ -4,11 +4,12 @@ import entities.HPCharacter;
 
 public interface CharacterRepository {
 
-    HPCharacter create(HPCharacter HPCharacter);
+    HPCharacter add(HPCharacter HPCharacter);
 
     HPCharacter findById(Long id);
 
-    HPCharacter modify(HPCharacter hpCharacter);
+    HPCharacter update(HPCharacter hpCharacter);
+    HPCharacter updateById(Long id);
 
     void delete(HPCharacter characterToDelete);
 }
