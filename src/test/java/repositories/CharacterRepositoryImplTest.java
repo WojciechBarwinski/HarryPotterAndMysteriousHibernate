@@ -1,10 +1,7 @@
 package repositories;
 
 import entities.HPCharacter;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Order;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -13,7 +10,7 @@ import javax.persistence.Persistence;
 import java.time.LocalDate;
 
 import static org.assertj.core.api.Assertions.assertThat;
-
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class CharacterRepositoryImplTest {
 
     private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("ORM");
