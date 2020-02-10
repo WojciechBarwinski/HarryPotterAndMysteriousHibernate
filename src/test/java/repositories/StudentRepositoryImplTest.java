@@ -44,7 +44,7 @@ class StudentRepositoryImplTest {
 
 
         transaction.begin();
-        characterRepository.create(draco);
+        characterRepository.add(draco);
         Student addedStudent = studentRepository.add(dracoMalfoy);
         transaction.commit();
         studentId = dracoMalfoy.getId();
@@ -90,9 +90,9 @@ class StudentRepositoryImplTest {
         House gryffindor = House.GRYFFINDOR;
 
         transaction.begin();
-        characterRepository.create(harryPotter);
-        characterRepository.create(ronWeasley);
-        characterRepository.create(hermioneGranger);
+        characterRepository.add(harryPotter);
+        characterRepository.add(ronWeasley);
+        characterRepository.add(hermioneGranger);
         studentRepository.add(harryStudent);
         studentRepository.add(ronStudent);
         studentRepository.add(hermioneStudent);
