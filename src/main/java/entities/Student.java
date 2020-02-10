@@ -32,7 +32,6 @@ public class Student {
     public Long getId() {
         return id;
     }
-
     public HPCharacter getHpCharacter() {
         return hpCharacter;
     }
