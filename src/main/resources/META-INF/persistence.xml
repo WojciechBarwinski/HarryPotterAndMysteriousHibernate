@@ -14,6 +14,8 @@
         <class>entities.HPCharacter</class>
         <class>entities.Pet</class>
         <class>entities.HogwartsJob</class>
+        <class>entities.Student</class>
+
 
 
         <properties>
@@ -28,7 +30,7 @@
                       value="root"/>
 
             <property name="javax.persistence.jdbc.password"
-                      value="shepard!n7"/>
+                      value="Wojtek1806"/>
 
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect"/>
 
