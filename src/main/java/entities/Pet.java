@@ -11,7 +11,7 @@ public class Pet {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY, orphanRemoval = true)
     @JoinColumn(name = "character_id", foreignKey = @ForeignKey(name = "FK_pet_character_id"))
     private HPCharacter owner;
 
