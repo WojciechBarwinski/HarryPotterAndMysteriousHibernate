@@ -14,7 +14,7 @@ public class CharacterRepositoryImpl implements CharacterRepository {
     }
 
     @Override
-    public HPCharacter create(HPCharacter hpCharacter) {
+    public HPCharacter add(HPCharacter hpCharacter) {
         if (Objects.isNull(hpCharacter.getId())) {
             em.persist(hpCharacter);
         }
@@ -23,14 +23,16 @@ public class CharacterRepositoryImpl implements CharacterRepository {
 
     @Override
     public HPCharacter findById(Long id) {
-        HPCharacter foundCharacter = em.find(HPCharacter.class, id);
-        return foundCharacter;
+        return em.find(HPCharacter.class, id);
     }
     @Override
-    public HPCharacter modify(HPCharacter characterToModify) {
+    public HPCharacter update(HPCharacter characterToModify) {
+        return em.merge(characterToModify);
+    }
 
-        HPCharacter mergedCharacter = em.merge(characterToModify);
-        return mergedCharacter;
+    @Override
+    public HPCharacter updateById(Long id) {
+        return em.merge(findById(id));
     }
 
     @Override

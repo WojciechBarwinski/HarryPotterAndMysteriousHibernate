@@ -3,6 +3,8 @@ package repositories;
 import entities.HogwartsJob;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
+import java.util.List;
 import java.util.Objects;
 
 public class HogwartsJobRepositoryImpl implements HogwartsJobRepository {
@@ -14,7 +16,7 @@ public class HogwartsJobRepositoryImpl implements HogwartsJobRepository {
     }
 
     @Override
-    public HogwartsJob create(HogwartsJob hogwartsJob) {
+    public HogwartsJob add(HogwartsJob hogwartsJob) {
         if (Objects.isNull(hogwartsJob.getId())) {
             em.persist(hogwartsJob);
         }
@@ -22,20 +24,27 @@ public class HogwartsJobRepositoryImpl implements HogwartsJobRepository {
     }
 
     @Override
-    public HogwartsJob readById(Long id) {
+    public HogwartsJob findById(Long id) {
         return em.find(HogwartsJob.class, id);
     }
 
-
     @Override
     public HogwartsJob updateById(Long id) {
-        HogwartsJob hogwartsJob = readById(id);
-        return em.merge(hogwartsJob);
+        return em.merge(findById(id));
     }
 
     @Override
     public void deleteById(Long id) {
-        HogwartsJob hogwartsJob = readById(id);
-        em.remove(hogwartsJob);
+        em.remove(findById(id));
+    }
+
+    @Override
+    public HogwartsJob findJobByName(String jobName) {
+        String x = "Elixir Master";
+        Query nativeQuery = em.createNativeQuery("SELECT hj.positionName, hj.salary FROM characters_jobs as cj" +
+                " JOIN hpcharacter as hp on cj.employees_id = hp.id JOIN hogwarts_jobs as hj on cj.positions_id = hj.id" +
+                " Where positionName = ?1").setParameter(1, x);
+        List<HogwartsJob> hogwartsJobList = nativeQuery.getResultList();
+        return hogwartsJobList.get(0);
     }
 }

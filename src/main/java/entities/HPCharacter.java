@@ -25,6 +25,9 @@ public class HPCharacter {
     @ManyToMany(mappedBy = "employees", fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     Set<HogwartsJob> positions = new HashSet<>();
 
+    @ManyToMany(mappedBy = "itemOwners", fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    Set<Item> items = new HashSet<>();
+
     protected HPCharacter(
     ){}
 
@@ -70,6 +73,13 @@ public class HPCharacter {
         this.positions.add(hogwartsJob);
     }
 
+    public Set<Item> getItems() {
+        return items;
+    }
+
+    public void setItems(Item item) {
+        this.items.add(item);
+    }
 
     @Override
     public boolean equals(Object o) {

@@ -14,7 +14,8 @@ public class HogwartsJob {
 
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-    @JoinTable(name = "Characters_Jobs")
+    @JoinTable(name = "Characters_Jobs", joinColumns = { @JoinColumn(foreignKey = @ForeignKey(name = "FK_job_id")) },
+            inverseJoinColumns = { @JoinColumn(foreignKey = @ForeignKey(name = "FK_employee_id")) })
     private Set<HPCharacter> employees = new HashSet<>();
 
     @Column(nullable = false)
