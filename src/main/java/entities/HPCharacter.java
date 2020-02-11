@@ -21,6 +21,9 @@ public class HPCharacter {
     @Column(nullable = false)
     private LocalDate birthDate;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "location", foreignKey = @ForeignKey(name = "FK_hpcharacter_location_id"))
+    private HPLocation location;
 
     @ManyToMany(mappedBy = "employees", fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     Set<HogwartsJob> positions = new HashSet<>();
@@ -79,6 +82,14 @@ public class HPCharacter {
 
     public void setItems(Item item) {
         this.items.add(item);
+    }
+
+    public HPLocation getLocation() {
+        return location;
+    }
+
+    public void setLocation(HPLocation location) {
+        this.location = location;
     }
 
     @Override

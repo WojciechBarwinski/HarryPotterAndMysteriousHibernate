@@ -16,6 +16,7 @@
         <class>entities.HogwartsJob</class>
         <class>entities.Student</class>
         <class>entities.Item</class>
+        <class>entities.HPLocation</class>
 
 
 
