@@ -24,9 +24,9 @@ public class HPCharacter {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "location", foreignKey = @ForeignKey(name = "FK_hpcharacter_location_id"))
     private HPLocation location;
+
     @OneToOne(mappedBy = "owner", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Pet pet;
-
 
     @ManyToMany(mappedBy = "employees", fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     Set<HogwartsJob> positions = new HashSet<>();

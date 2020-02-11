@@ -40,7 +40,7 @@ class HogwartsJobRepositoryImplTest {
         severusSnape = new HPCharacter("Severus", "Snape", LocalDate.of(1960, 6, 1));
         harryPotter = new HPCharacter("Harry", "Potter", LocalDate.of(1980, 7, 31));
 
-        elixirMaster = new HogwartsJob(BigDecimal.valueOf(5000), "Elixir Master");
+        elixirMaster =
         headmaster = new HogwartsJob(BigDecimal.valueOf(15000), "Headmaster of Hogwarts");
         houseHead = new HogwartsJob(BigDecimal.valueOf(7500), "House Head of Slytherin");
     }
