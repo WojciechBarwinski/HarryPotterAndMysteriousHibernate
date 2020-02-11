@@ -1,3 +1,5 @@
+import startingData.DataInitializer;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
@@ -10,11 +12,12 @@ public class Main {
 
         EntityManager entityManager = emf.createEntityManager();
 
-        final EntityTransaction transaction = entityManager.getTransaction();
+        DataInitializer.addAllData(entityManager);
+        /*final EntityTransaction transaction = entityManager.getTransaction();
 
         transaction.begin();
 
 
-        transaction.commit();
+        transaction.commit();*/
     }
 }

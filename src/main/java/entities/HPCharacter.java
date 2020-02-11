@@ -85,6 +85,14 @@ public class HPCharacter {
         this.items.add(item);
     }
 
+    public Pet getPet() {
+        return pet;
+    }
+
+    public void setPet(Pet pet) {
+        this.pet = pet;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
