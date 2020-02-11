@@ -2,12 +2,14 @@ package repositories;
 
 import entities.HPCharacter;
 import org.junit.jupiter.api.*;
+import startingData.DataInitializer;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import java.time.LocalDate;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
@@ -92,5 +94,14 @@ class CharacterRepositoryImplTest {
 
         HPCharacter characterAfterDelete = characterRepository.findById(personId);
         assertThat(characterAfterDelete).isNull();
+    }
+
+    @Order(5)
+    @Test
+    void shouldReturnListOfAllCharacterFromDB(){
+        DataInitializer.addAllData(em);
+        List<HPCharacter> allCharacters = characterRepository.getAllCharacters();
+
+        assertThat(allCharacters.size()).isEqualTo(5);
     }
 }

@@ -3,6 +3,8 @@ package repositories;
 import entities.HPCharacter;
 
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
+import java.util.List;
 import java.util.Objects;
 
 
@@ -38,5 +40,11 @@ public class CharacterRepositoryImpl implements CharacterRepository {
     @Override
     public void delete(HPCharacter characterToDelete) {
         em.remove(characterToDelete);
+    }
+
+    @Override
+    public List<HPCharacter> getAllCharacters() {
+        TypedQuery<HPCharacter> allHpCharactersFromDB = em.createQuery("SELECT hpc FROM HPCharacter hpc", HPCharacter.class);
+        return allHpCharactersFromDB.getResultList();
     }
 }
