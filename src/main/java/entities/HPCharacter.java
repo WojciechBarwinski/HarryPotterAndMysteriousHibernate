@@ -21,6 +21,9 @@ public class HPCharacter {
     @Column(nullable = false)
     private LocalDate birthDate;
 
+    @OneToOne(mappedBy = "owner", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Pet pet;
+
 
     @ManyToMany(mappedBy = "employees", fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     Set<HogwartsJob> positions = new HashSet<>();
@@ -29,7 +32,8 @@ public class HPCharacter {
     Set<Item> items = new HashSet<>();
 
     protected HPCharacter(
-    ){}
+    ) {
+    }
 
     public HPCharacter(String firstName, String lastName, LocalDate birthDate) {
         this.firstName = firstName;
