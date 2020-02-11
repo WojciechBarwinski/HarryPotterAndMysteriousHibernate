@@ -1,8 +1,12 @@
 package repositories;
 
-import entities.HPCharacter;
-import entities.Item;
-import entities.ItemType;
+import harryPotterApp.entities.HPCharacter;
+import harryPotterApp.entities.Item;
+import harryPotterApp.entities.ItemType;
+import harryPotterApp.repositories.CharacterRepository;
+import harryPotterApp.repositories.CharacterRepositoryImpl;
+import harryPotterApp.repositories.ItemRepository;
+import harryPotterApp.repositories.ItemRepositoryImpl;
 import org.junit.jupiter.api.*;
 
 import javax.persistence.EntityManager;

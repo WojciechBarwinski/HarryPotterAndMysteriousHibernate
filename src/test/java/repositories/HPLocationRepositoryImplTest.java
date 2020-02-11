@@ -1,8 +1,11 @@
 package repositories;
 
-import entities.HPCharacter;
-import entities.HPLocation;
-import entities.HogwartsJob;
+import harryPotterApp.entities.HPCharacter;
+import harryPotterApp.entities.HPLocation;
+import harryPotterApp.repositories.CharacterRepository;
+import harryPotterApp.repositories.CharacterRepositoryImpl;
+import harryPotterApp.repositories.HPLocationRepository;
+import harryPotterApp.repositories.HPLocationRepositoryImpl;
 import org.junit.jupiter.api.*;
 
 import javax.persistence.EntityManager;
@@ -12,10 +15,8 @@ import javax.persistence.Persistence;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class HPLocationRepositoryImplTest {
