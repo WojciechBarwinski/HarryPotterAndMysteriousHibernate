@@ -1,8 +1,12 @@
 package repositories;
 
-import entities.HPCharacter;
-import entities.House;
-import entities.Student;
+import harryPotterApp.entities.HPCharacter;
+import harryPotterApp.entities.House;
+import harryPotterApp.entities.Student;
+import harryPotterApp.repositories.CharacterRepository;
+import harryPotterApp.repositories.CharacterRepositoryImpl;
+import harryPotterApp.repositories.StudentRepository;
+import harryPotterApp.repositories.StudentRepositoryImpl;
 import org.junit.jupiter.api.*;
 
 import javax.persistence.EntityManager;
@@ -10,7 +14,6 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;

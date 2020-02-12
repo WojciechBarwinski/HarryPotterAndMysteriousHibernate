@@ -11,12 +11,12 @@
 
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
-        <class>entities.HPCharacter</class>
-        <class>entities.Pet</class>
-        <class>entities.HogwartsJob</class>
-        <class>entities.Student</class>
-        <class>entities.Item</class>
-        <class>entities.HPLocation</class>
+        <class>harryPotterApp.entities.HPCharacter</class>
+        <class>harryPotterApp.entities.Pet</class>
+        <class>harryPotterApp.entities.HogwartsJob</class>
+        <class>harryPotterApp.entities.Student</class>
+        <class>harryPotterApp.entities.Item</class>
+        <class>harryPotterApp.entities.HPLocation</class>
 
 
 
@@ -32,7 +32,7 @@
                       value="root"/>
 
             <property name="javax.persistence.jdbc.password"
-                      value="Wojtek1806"/>
+                      value="shepard!n7"/>
 
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect"/>
 
