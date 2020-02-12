@@ -1,9 +1,6 @@
 package startingData;
 
-import entities.HPCharacter;
-import entities.HPLocation;
-import entities.HogwartsJob;
-import entities.Pet;
+import entities.*;
 import repositories.*;
 
 import javax.persistence.EntityManager;
@@ -28,6 +25,8 @@ public class DataInitializer {
     static private HPCharacter ronWeasley = new HPCharacter("Ron", "Weasley", LocalDate.of(1980, 8, 15));
     static private HPCharacter hagrid = new HPCharacter("Rubeus", "Hagrid", LocalDate.of(1960, 6, 1));
     static private HPCharacter minerwaMcGonagall = new HPCharacter("Minerwa", "McGonagall", LocalDate.of(1935, 10, 4));
+    static private HPCharacter georgeWeasley = new HPCharacter("George", "Weasley", LocalDate.of(1977, 10, 4));
+    static private HPCharacter dracoMalfoy = new HPCharacter("Draco", "Malfoy", LocalDate.of(1980, 10, 4));
 
     static private HogwartsJob teacher = new HogwartsJob(BigDecimal.valueOf(5000), "Teacher");
     static private HogwartsJob headmaster = new HogwartsJob(BigDecimal.valueOf(20000), "Director of Hogwarts");
@@ -59,6 +58,8 @@ public class DataInitializer {
         characterRepository.add(ronWeasley);
         characterRepository.add(hagrid);
         characterRepository.add(minerwaMcGonagall);
+        characterRepository.add(georgeWeasley);
+        characterRepository.add(dracoMalfoy);
 
         hogwartsJobRepository.add(teacher);
         hogwartsJobRepository.add(headmaster);
@@ -96,6 +97,24 @@ public class DataInitializer {
         locationRepository.updateLocationById(2L);
         locationRepository.updateLocationById(3L);
         locationRepository.updateLocationById(4L);
+
+        studentRepository.add(new Student(characterRepository.findById(1L), 1, House.GRYFFINDOR));
+        studentRepository.add(new Student(characterRepository.findById(4L), 1, House.GRYFFINDOR));
+        studentRepository.add(new Student(characterRepository.findById(7L), 4, House.GRYFFINDOR));
+        studentRepository.add(new Student(characterRepository.findById(8L), 1, House.SLYTHERIN));
+
+        itemRepository.add(new Item(ItemType.BROOMSTICK, "Nimbus 2000", BigDecimal.valueOf(10000)));
+        itemRepository.add(new Item(ItemType.BROOMSTICK, "Nimbus 2001", BigDecimal.valueOf(15000)));
+        itemRepository.add(new Item(ItemType.WAND, "Black Wand", BigDecimal.valueOf(100000)));
+        itemRepository.add(new Item(ItemType.ROBE, "Invisible Cloak", BigDecimal.valueOf(18500)));
+        itemRepository.add(new Item(ItemType.WEAPON, "Sword of Gryffindor", BigDecimal.valueOf(50000)));
+
+        itemRepository.findById(1L).setItemOwners(characterRepository.findById(1L));
+        itemRepository.findById(1L).setItemOwners(characterRepository.findById(8L));
+        itemRepository.findById(5L).setItemOwners(characterRepository.findById(1L));
+        itemRepository.findById(4L).setItemOwners(characterRepository.findById(1L));
+        itemRepository.findById(1L).setItemOwners(characterRepository.findById(4L));
+        itemRepository.findById(1L).setItemOwners(characterRepository.findById(7L));
         transaction.commit();
     }
 }
