@@ -1,7 +1,8 @@
-package startingData;
+package harryPotterApp.startingData;
 
-import entities.*;
-import repositories.*;
+
+import harryPotterApp.entities.*;
+import harryPotterApp.repositories.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
@@ -41,7 +42,7 @@ public class DataInitializer {
 
 
     public static void addAllData(EntityManager em){
-        EntityTransaction transaction = em.getTransaction();
+
         characterRepository = new CharacterRepositoryImpl(em);
         hogwartsJobRepository = new HogwartsJobRepositoryImpl(em);
         petRepository = new PetRepositoryImpl(em);
@@ -49,72 +50,75 @@ public class DataInitializer {
         studentRepository = new StudentRepositoryImpl(em);
         itemRepository = new ItemRepositoryImpl(em);
 
+        if (characterRepository.getAllCharacters().isEmpty()){
+            EntityTransaction transaction = em.getTransaction();
+            transaction.begin();
 
-        transaction.begin();
+            characterRepository.add(harryPotter);
+            characterRepository.add(albusDumbledore);
+            characterRepository.add(severusSnape);
+            characterRepository.add(ronWeasley);
+            characterRepository.add(hagrid);
+            characterRepository.add(minerwaMcGonagall);
+            characterRepository.add(georgeWeasley);
+            characterRepository.add(dracoMalfoy);
 
-        characterRepository.add(harryPotter);
-        characterRepository.add(albusDumbledore);
-        characterRepository.add(severusSnape);
-        characterRepository.add(ronWeasley);
-        characterRepository.add(hagrid);
-        characterRepository.add(minerwaMcGonagall);
-        characterRepository.add(georgeWeasley);
-        characterRepository.add(dracoMalfoy);
+            hogwartsJobRepository.add(teacher);
+            hogwartsJobRepository.add(headmaster);
+            hogwartsJobRepository.add(houseHead);
+            hogwartsJobRepository.add(assistant);
 
-        hogwartsJobRepository.add(teacher);
-        hogwartsJobRepository.add(headmaster);
-        hogwartsJobRepository.add(houseHead);
-        hogwartsJobRepository.add(assistant);
+            petRepository.add(new Pet("Hedwig", characterRepository.findById(1L), "Owl"));
+            petRepository.add(new Pet("Fawkes", characterRepository.findById(2L), "Phoenix"));
+            petRepository.add(new Pet("Helga III", characterRepository.findById(4L), "Owl"));
+            petRepository.add(new Pet("Max", characterRepository.findById(6L), "Cat"));
+            petRepository.add(new Pet("Fang", characterRepository.findById(5L), "Dog"));
 
-        petRepository.add(new Pet("Hedwig", characterRepository.findById(1L), "Owl"));
-        petRepository.add(new Pet("Fawkes", characterRepository.findById(2L), "Phoenix"));
-        petRepository.add(new Pet("Helga III", characterRepository.findById(4L), "Owl"));
-        petRepository.add(new Pet("Max", characterRepository.findById(6L), "Cat"));
-        petRepository.add(new Pet("Fang", characterRepository.findById(5L), "Dog"));
+            locationRepository.addLocation(hogwarts);
+            locationRepository.addLocation(hagridsHouse);
+            locationRepository.addLocation(malfoyManor);
+            locationRepository.addLocation(shriekingShack);
 
-        locationRepository.addLocation(hogwarts);
-        locationRepository.addLocation(hagridsHouse);
-        locationRepository.addLocation(malfoyManor);
-        locationRepository.addLocation(shriekingShack);
+            hogwartsJobRepository.findById(1L).setCharactersAsEmployee(characterRepository.findById(3L));
+            hogwartsJobRepository.findById(1L).setCharactersAsEmployee(characterRepository.findById(6L));
+            hogwartsJobRepository.findById(3L).setCharactersAsEmployee(characterRepository.findById(3L));
+            hogwartsJobRepository.findById(3L).setCharactersAsEmployee(characterRepository.findById(6L));
+            hogwartsJobRepository.findById(4L).setCharactersAsEmployee(characterRepository.findById(5L));
+            hogwartsJobRepository.findById(2L).setCharactersAsEmployee(characterRepository.findById(2L));
+            hogwartsJobRepository.updateById(1L);
+            hogwartsJobRepository.updateById(3L);
+            hogwartsJobRepository.updateById(4L);
 
-        hogwartsJobRepository.findById(1L).setCharactersAsEmployee(characterRepository.findById(3L));
-        hogwartsJobRepository.findById(1L).setCharactersAsEmployee(characterRepository.findById(6L));
-        hogwartsJobRepository.findById(3L).setCharactersAsEmployee(characterRepository.findById(3L));
-        hogwartsJobRepository.findById(3L).setCharactersAsEmployee(characterRepository.findById(6L));
-        hogwartsJobRepository.findById(4L).setCharactersAsEmployee(characterRepository.findById(5L));
-        hogwartsJobRepository.findById(2L).setCharactersAsEmployee(characterRepository.findById(2L));
-        hogwartsJobRepository.updateById(1L);
-        hogwartsJobRepository.updateById(3L);
-        hogwartsJobRepository.updateById(4L);
+            characterRepository.findById(1L).setLocation(locationRepository.findLocationById(4L));
+            characterRepository.findById(2L).setLocation(locationRepository.findLocationById(1L));
+            characterRepository.findById(3L).setLocation(locationRepository.findLocationById(1L));
+            characterRepository.findById(4L).setLocation(locationRepository.findLocationById(4L));
+            characterRepository.findById(5L).setLocation(locationRepository.findLocationById(2L));
+            characterRepository.findById(6L).setLocation(locationRepository.findLocationById(1L));
+            locationRepository.updateLocationById(1L);
+            locationRepository.updateLocationById(2L);
+            locationRepository.updateLocationById(3L);
+            locationRepository.updateLocationById(4L);
 
-        characterRepository.findById(1L).setLocation(locationRepository.findLocationById(4L));
-        characterRepository.findById(2L).setLocation(locationRepository.findLocationById(1L));
-        characterRepository.findById(3L).setLocation(locationRepository.findLocationById(1L));
-        characterRepository.findById(4L).setLocation(locationRepository.findLocationById(4L));
-        characterRepository.findById(5L).setLocation(locationRepository.findLocationById(2L));
-        characterRepository.findById(6L).setLocation(locationRepository.findLocationById(1L));
-        locationRepository.updateLocationById(1L);
-        locationRepository.updateLocationById(2L);
-        locationRepository.updateLocationById(3L);
-        locationRepository.updateLocationById(4L);
+            studentRepository.add(new Student(characterRepository.findById(1L), 1, House.GRYFFINDOR));
+            studentRepository.add(new Student(characterRepository.findById(4L), 1, House.GRYFFINDOR));
+            studentRepository.add(new Student(characterRepository.findById(7L), 4, House.GRYFFINDOR));
+            studentRepository.add(new Student(characterRepository.findById(8L), 1, House.SLYTHERIN));
 
-        studentRepository.add(new Student(characterRepository.findById(1L), 1, House.GRYFFINDOR));
-        studentRepository.add(new Student(characterRepository.findById(4L), 1, House.GRYFFINDOR));
-        studentRepository.add(new Student(characterRepository.findById(7L), 4, House.GRYFFINDOR));
-        studentRepository.add(new Student(characterRepository.findById(8L), 1, House.SLYTHERIN));
+            itemRepository.add(new Item(ItemType.BROOMSTICK, "Nimbus 2000", BigDecimal.valueOf(10000)));
+            itemRepository.add(new Item(ItemType.BROOMSTICK, "Nimbus 2001", BigDecimal.valueOf(15000)));
+            itemRepository.add(new Item(ItemType.WAND, "Black Wand", BigDecimal.valueOf(100000)));
+            itemRepository.add(new Item(ItemType.ROBE, "Invisible Cloak", BigDecimal.valueOf(18500)));
+            itemRepository.add(new Item(ItemType.WEAPON, "Sword of Gryffindor", BigDecimal.valueOf(50000)));
 
-        itemRepository.add(new Item(ItemType.BROOMSTICK, "Nimbus 2000", BigDecimal.valueOf(10000)));
-        itemRepository.add(new Item(ItemType.BROOMSTICK, "Nimbus 2001", BigDecimal.valueOf(15000)));
-        itemRepository.add(new Item(ItemType.WAND, "Black Wand", BigDecimal.valueOf(100000)));
-        itemRepository.add(new Item(ItemType.ROBE, "Invisible Cloak", BigDecimal.valueOf(18500)));
-        itemRepository.add(new Item(ItemType.WEAPON, "Sword of Gryffindor", BigDecimal.valueOf(50000)));
+            itemRepository.findById(2L).setItemOwners(characterRepository.findById(1L));
+            itemRepository.findById(2L).setItemOwners(characterRepository.findById(8L));
+            itemRepository.findById(5L).setItemOwners(characterRepository.findById(1L));
+            itemRepository.findById(4L).setItemOwners(characterRepository.findById(1L));
+            itemRepository.findById(1L).setItemOwners(characterRepository.findById(4L));
+            itemRepository.findById(1L).setItemOwners(characterRepository.findById(7L));
+            transaction.commit();
+        }
 
-        itemRepository.findById(1L).setItemOwners(characterRepository.findById(1L));
-        itemRepository.findById(1L).setItemOwners(characterRepository.findById(8L));
-        itemRepository.findById(5L).setItemOwners(characterRepository.findById(1L));
-        itemRepository.findById(4L).setItemOwners(characterRepository.findById(1L));
-        itemRepository.findById(1L).setItemOwners(characterRepository.findById(4L));
-        itemRepository.findById(1L).setItemOwners(characterRepository.findById(7L));
-        transaction.commit();
     }
 }

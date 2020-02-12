@@ -18,7 +18,7 @@ public class Item {
     @Column(nullable = false)
     private ItemType itemType;
 
-    @Column(unique = true)
+
     private String itemName;
 
     @Column(nullable = false)

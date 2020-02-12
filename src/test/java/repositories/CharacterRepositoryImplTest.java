@@ -4,7 +4,7 @@ import harryPotterApp.entities.HPCharacter;
 import harryPotterApp.repositories.CharacterRepository;
 import harryPotterApp.repositories.CharacterRepositoryImpl;
 import org.junit.jupiter.api.*;
-import harryPotterApp.startingData.DataInitializer;
+
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -98,12 +98,4 @@ class CharacterRepositoryImplTest {
         assertThat(characterAfterDelete).isNull();
     }
 
-    @Order(5)
-    @Test
-    void shouldReturnListOfAllCharacterFromDB(){
-        DataInitializer.addAllData(em);
-        List<HPCharacter> allCharacters = characterRepository.getAllCharacters();
-
-        assertThat(allCharacters.size()).isEqualTo(5);
-    }
 }

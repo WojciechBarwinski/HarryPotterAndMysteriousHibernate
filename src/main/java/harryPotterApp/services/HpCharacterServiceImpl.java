@@ -5,20 +5,28 @@ import harryPotterApp.entities.HPCharacter;
 import harryPotterApp.repositories.CharacterRepository;
 import harryPotterApp.mappers.HPCharacterMapper;
 import harryPotterApp.repositories.CharacterRepositoryImpl;
+import harryPotterApp.startingData.SingletonEntityManagerFactory;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 public class HpCharacterServiceImpl implements HpCharacterService {
-    private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("ORM");
-    private EntityManager em = emf.createEntityManager();
+    //private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("ORM");
+    private EntityManager em = SingletonEntityManagerFactory.getEmf().createEntityManager();
     private CharacterRepository characterRepository = new CharacterRepositoryImpl(em);
 
     @Override
     public List<HPCharacterDto> getAllCharacters() {
+       /* EntityTransaction transaction = em.getTransaction();
+        transaction.begin();
+        characterRepository.add(new HPCharacter("Hermiona", "Granger", LocalDate.of(1979, 9, 19)));
+        transaction.commit();*/
         List<HPCharacter> allCharacters = characterRepository.getAllCharacters();
         List<HPCharacterDto> allCharactersDto = new ArrayList<>();
         for (HPCharacter hpCharacter : allCharacters) {
