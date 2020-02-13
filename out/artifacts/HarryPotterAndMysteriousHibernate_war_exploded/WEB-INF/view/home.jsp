@@ -16,7 +16,7 @@
         <button class="btn btn-light btn-lg mr-5" type="submit">Students</button>
         <button class="btn btn-light btn-lg mr-5" type="submit">Jobs</button>
         <button class="btn btn-light btn-lg mr-5" type="submit">Items</button>
-            <img src="web/image/logo.png" width="60" height="60"/>
+            <img src="/image/logo.png" width="60" height="60"/>
         </div>
     </form>
 </nav>
