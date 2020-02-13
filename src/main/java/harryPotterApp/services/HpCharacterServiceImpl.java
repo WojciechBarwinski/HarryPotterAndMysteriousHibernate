@@ -46,4 +46,14 @@ public class HpCharacterServiceImpl implements HpCharacterService {
         characterRepository.deleteById(id);
         transaction.commit();
     }
+
+    @Override
+    public List<HPCharacterDto> findCharacterById(String id) {
+        List<HPCharacterDto> foundedCharacter = new ArrayList<>();
+        HPCharacter character = characterRepository.findById(Long.valueOf(id));
+        foundedCharacter.add(HPCharacterMapper.mapToHPCharacterDto(character));
+        return foundedCharacter;
+    }
+
+
 }
