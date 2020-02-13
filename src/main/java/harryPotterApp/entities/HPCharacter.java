@@ -1,6 +1,9 @@
 package harryPotterApp.entities;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.*;
 
@@ -12,12 +15,15 @@ public class HPCharacter {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotEmpty
     @Column(nullable = false)
     private String firstName;
 
+    @NotEmpty
     @Column(nullable = false)
     private String lastName;
 
+    @NotNull
     @Column(nullable = false)
     private LocalDate birthDate;
 
