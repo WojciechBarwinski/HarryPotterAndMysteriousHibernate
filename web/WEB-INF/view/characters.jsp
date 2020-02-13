@@ -5,6 +5,11 @@
     <title>Characters</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <style>
+        p.error {
+            color: red;
+        }
+    </style>
 </head>
 <body>
 <%@include file="/WEB-INF/component/header.jsp"%>
@@ -15,9 +20,11 @@
 
             <form action="/find-character" class="form-inline justify-content-center" method="post">
                 <label for="id" class="mr-sm-2">Id to find:</label>
-                <input type="text" class="form-control mb-2 mr-sm-2" placeholder="id" name="idToFind" id="id">
+                    <input type="text" class="form-control mb-2 mr-sm-2" placeholder="id" name="idToFind" id="id">
                 <button type="submit" class="btn btn-primary" name="idToDelete">Find</button>
             </form>
+            <p class="error" align="center">${noId}</p>
+            <p class="error" align="center">${invalidId}</p>
 
             <div class="card bg-warning">
                 <div class="card-header">
