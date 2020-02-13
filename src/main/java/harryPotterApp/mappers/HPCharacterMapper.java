@@ -3,8 +3,11 @@ package harryPotterApp.mappers;
 import harryPotterApp.dto.HPCharacterDto;
 import harryPotterApp.entities.HPCharacter;
 
+import java.util.Objects;
+
 public class HPCharacterMapper {
 
+    private static String altImagePath = "/image/tmpFoto.jpg";
     private HPCharacterMapper() {
 
     }
@@ -18,6 +21,11 @@ public class HPCharacterMapper {
         hpCharacterDto.setBirthDate(hpCharacter.getBirthDate());
         hpCharacterDto.setPet(hpCharacter.getPet());
 
+        if (Objects.isNull(hpCharacter.getImagePath())){
+            hpCharacterDto.setImagePath(altImagePath);
+        } else {
+            hpCharacterDto.setImagePath(hpCharacter.getImagePath());
+        }
         return hpCharacterDto;
     }
 }

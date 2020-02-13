@@ -27,17 +27,19 @@ public class HPCharacter {
     @Column(nullable = false)
     private LocalDate birthDate;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    private String imagePath;
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "location", foreignKey = @ForeignKey(name = "FK_hpcharacter_location_id"))
     private HPLocation location;
 
     @OneToOne(mappedBy = "owner", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Pet pet;
 
-    @ManyToMany(mappedBy = "employees", fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @ManyToMany(mappedBy = "employees", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     Set<HogwartsJob> positions = new HashSet<>();
 
-    @ManyToMany(mappedBy = "itemOwners", fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @ManyToMany(mappedBy = "itemOwners", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     Set<Item> items = new HashSet<>();
 
     protected HPCharacter(
@@ -108,6 +110,14 @@ public class HPCharacter {
 
     public void setPet(Pet pet) {
         this.pet = pet;
+    }
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
     }
 
     @Override

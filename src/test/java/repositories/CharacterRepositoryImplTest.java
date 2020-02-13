@@ -3,28 +3,32 @@ package repositories;
 import harryPotterApp.entities.HPCharacter;
 import harryPotterApp.repositories.CharacterRepository;
 import harryPotterApp.repositories.CharacterRepositoryImpl;
+import harryPotterApp.startingData.DataInitializer;
+import harryPotterApp.startingData.SingletonEntityManagerFactory;
 import org.junit.jupiter.api.*;
 
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
 import java.time.LocalDate;
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class CharacterRepositoryImplTest {
 
-    private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("ORM");
-    private EntityManager em;
+    private static EntityManager em;
     private CharacterRepository characterRepository;
     private static Long personId;
 
+    @BeforeAll
+    static void createData(){
+        em = SingletonEntityManagerFactory.getEmf().createEntityManager();
+        DataInitializer.addAllData(em);
+    }
+
     @BeforeEach
     void setUp() {
-        em = emf.createEntityManager();
+        em = SingletonEntityManagerFactory.getEmf().createEntityManager();
         characterRepository = new CharacterRepositoryImpl(em);
     }
 
@@ -39,13 +43,12 @@ class CharacterRepositoryImplTest {
     void shouldAddCreatedCharacterToDB() {
         EntityTransaction transaction = em.getTransaction();
         LocalDate birthDate = LocalDate.of(1980, 7, 31);
-        HPCharacter harryPotter = new HPCharacter("Harry", "Potter", birthDate);
+        HPCharacter hermionaGranger = new HPCharacter("Hermiona", "Granger", birthDate);
 
         transaction.begin();
-        HPCharacter savedHarryPotter = characterRepository.add(harryPotter);
+        HPCharacter savedHarryPotter = characterRepository.add(hermionaGranger);
         transaction.commit();
         personId = savedHarryPotter.getId();
-
         assertThat(savedHarryPotter.getId()).isGreaterThan(0);
     }
 
@@ -88,13 +91,13 @@ class CharacterRepositoryImplTest {
     @Test
     void shouldDeleteCharacter() {
         EntityTransaction transaction = em.getTransaction();
-        HPCharacter characterToDelete = characterRepository.findById(personId);
+        Long id = 1L;
 
         transaction.begin();
-        characterRepository.delete(characterToDelete);
+        characterRepository.deleteById(id);
         transaction.commit();
 
-        HPCharacter characterAfterDelete = characterRepository.findById(personId);
+        HPCharacter characterAfterDelete = characterRepository.findById(id);
         assertThat(characterAfterDelete).isNull();
     }
 
