@@ -1,9 +1,11 @@
 package harryPotterApp.repositories;
 
+import harryPotterApp.entities.HogwartsJob;
 import harryPotterApp.entities.House;
 import harryPotterApp.entities.Student;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import java.util.List;
@@ -57,5 +59,13 @@ public class StudentRepositoryImpl implements StudentRepository {
                 " WHERE hpc.lastName = ?1").setParameter(1, searchedLastName);
         List <Student> resultList = nativeQuery.getResultList();
         return resultList;
+    }
+
+    @Override
+    public List <Student> findStudentByIdCharacter(Long id) {
+        Long characterId = id;
+        Query query = em.createQuery("SELECT s FROM Student as s JOIN s.hpCharacter e where e.id =:id").setParameter("id", characterId);
+        List<Student> students= query.getResultList();
+        return students;
     }
 }

@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <html>
 <head>
@@ -17,7 +18,29 @@
         <div class="col-md-4 col-md-offset-3">
             <h3>${character.firstName} ${character.lastName}</h3>
             <h5>Birth date: ${character.birthDate}</h5>
-            <h5>Pet: ${character.pet.species} - ${character.pet.name}</h5>
+
+            <c:if test="${fn:length(character.pet.name) > 0}">
+                <h5>Pet: ${character.pet.species} - ${character.pet.name}</h5>
+            </c:if>
+
+            <c:if test="${character.student.yearOfStudy > 0}">
+                <h5>Student: ${character.student.house} : ${character.student.yearOfStudy}</h5>
+            </c:if>
+
+            <c:if test="${fn:length(character.hogwartsJob) > 0}">
+            <h5>Job/s:
+                <ul>
+                    <c:forEach items="${character.hogwartsJob}" var="job">
+                        <li>${job.positionName}: ${job.salary}</li>
+                    </c:forEach>
+                </ul>
+            </c:if>
+
+
+
+
+
+            </h5>
         </div>
         <div class="col-md-3 col-md-offset-3"></div>
     </div>
