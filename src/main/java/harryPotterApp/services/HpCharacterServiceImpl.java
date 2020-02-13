@@ -8,11 +8,8 @@ import harryPotterApp.repositories.CharacterRepositoryImpl;
 import harryPotterApp.startingData.SingletonEntityManagerFactory;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,4 +35,14 @@ public class HpCharacterServiceImpl implements HpCharacterService {
         characterRepository.add(new HPCharacter(firstName, lastName, birthDate));
         transaction.commit();
     }
+
+    @Override
+    public List<HPCharacterDto> findCharacterById(String id) {
+        List<HPCharacterDto> foundedCharacter = new ArrayList<>();
+        HPCharacter character = characterRepository.findById(Long.valueOf(id));
+        foundedCharacter.add(HPCharacterMapper.mapToHPCharacterDto(character));
+        return foundedCharacter;
+    }
+
+
 }

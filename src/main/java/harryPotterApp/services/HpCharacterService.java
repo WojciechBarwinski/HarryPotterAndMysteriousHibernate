@@ -10,4 +10,5 @@ public interface HpCharacterService {
 
     List<HPCharacterDto> getAllCharacters();
     void addCharacter(String firstName, String lastName, LocalDate birthDate);
+    List<HPCharacterDto> findCharacterById(String id);
 }
