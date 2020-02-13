@@ -15,5 +15,7 @@ public interface CharacterRepository {
 
     void delete(HPCharacter characterToDelete);
 
+    void deleteById(Long id);
+
     List<HPCharacter> getAllCharacters();
 }

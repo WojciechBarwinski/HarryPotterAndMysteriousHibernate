@@ -43,6 +43,11 @@ public class CharacterRepositoryImpl implements CharacterRepository {
     }
 
     @Override
+    public void deleteById(Long id) {
+        em.remove(findById(id));
+    }
+
+    @Override
     public List<HPCharacter> getAllCharacters() {
         TypedQuery<HPCharacter> allHpCharactersFromDB = em.createQuery("SELECT hpc FROM HPCharacter hpc", HPCharacter.class);
         return allHpCharactersFromDB.getResultList();

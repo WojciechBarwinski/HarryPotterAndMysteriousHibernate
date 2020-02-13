@@ -41,6 +41,9 @@ public class HpCharacterServiceImpl implements HpCharacterService {
 
     @Override
     public void deleteCharacterById(Long id) {
-
+        EntityTransaction transaction = em.getTransaction();
+        transaction.begin();
+        characterRepository.deleteById(id);
+        transaction.commit();
     }
 }
