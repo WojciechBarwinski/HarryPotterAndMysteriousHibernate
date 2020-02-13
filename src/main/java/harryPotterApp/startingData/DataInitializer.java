@@ -3,7 +3,6 @@ package harryPotterApp.startingData;
 
 import harryPotterApp.entities.*;
 import harryPotterApp.repositories.*;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import java.math.BigDecimal;
