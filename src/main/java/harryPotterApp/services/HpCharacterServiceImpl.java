@@ -23,15 +23,19 @@ public class HpCharacterServiceImpl implements HpCharacterService {
 
     @Override
     public List<HPCharacterDto> getAllCharacters() {
-        /*EntityTransaction transaction = em.getTransaction();
-        transaction.begin();
-        characterRepository.add(new HPCharacter("Nevile", "Longbottom", LocalDate.of(1980, 2, 22)));
-        transaction.commit();*/
         List<HPCharacter> allCharacters = characterRepository.getAllCharacters();
         List<HPCharacterDto> allCharactersDto = new ArrayList<>();
         for (HPCharacter hpCharacter : allCharacters) {
             allCharactersDto.add(HPCharacterMapper.mapToHPCharacterDto(hpCharacter));
         }
         return allCharactersDto;
+    }
+
+    @Override
+    public void addCharacter(String firstName, String lastName, LocalDate birthDate) {
+        EntityTransaction transaction = em.getTransaction();
+        transaction.begin();
+        characterRepository.add(new HPCharacter(firstName, lastName, birthDate));
+        transaction.commit();
     }
 }
