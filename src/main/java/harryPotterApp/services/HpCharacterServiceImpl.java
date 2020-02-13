@@ -38,4 +38,9 @@ public class HpCharacterServiceImpl implements HpCharacterService {
         characterRepository.add(new HPCharacter(firstName, lastName, birthDate));
         transaction.commit();
     }
+
+    @Override
+    public void deleteCharacterById(Long id) {
+
+    }
 }
