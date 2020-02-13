@@ -42,7 +42,7 @@
         </div>
     </div>
 </div>
-<form class="form-inline" action="/add-character" method="get">
+<form class="form-inline" action="/add-character" method="post">
    <p> <label for="firstName" class="mr-sm-2">First Name:</label>
     <input type="email" class="form-control mb-2 mr-sm-2" placeholder="First name" id="firstName"></p>
     <p> <label for="lastName" class="mr-sm-2">Last Name:</label>
