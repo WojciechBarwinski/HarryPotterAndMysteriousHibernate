@@ -10,6 +10,7 @@ public class HPCharacterDto {
     private String lastName;
     private LocalDate birthDate;
     private Pet pet;
+    private String imagePath;
 
     public Long getId() {
         return id;
@@ -49,5 +50,13 @@ public class HPCharacterDto {
 
     public void setPet(Pet pet) {
         this.pet = pet;
+    }
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
     }
 }

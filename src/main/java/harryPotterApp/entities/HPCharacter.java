@@ -27,6 +27,8 @@ public class HPCharacter {
     @Column(nullable = false)
     private LocalDate birthDate;
 
+    private String imagePath;
+
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "location", foreignKey = @ForeignKey(name = "FK_hpcharacter_location_id"))
     private HPLocation location;
@@ -108,6 +110,14 @@ public class HPCharacter {
 
     public void setPet(Pet pet) {
         this.pet = pet;
+    }
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
     }
 
     @Override

@@ -62,6 +62,14 @@ public class DataInitializer {
             characterRepository.add(georgeWeasley);
             characterRepository.add(dracoMalfoy);
 
+            characterRepository.findById(1L).setImagePath("https://r-scale-60.dcs.redcdn.pl/scale/o2/tvn/web-content/m/p1/i/3e313b9badf12632cdae5452d20e1af6/f5d73034-6af1-11e3-9197-0025b511229e.jpg?type=1&srcmode=0&srcx=1/1&srcy=1/1&srcw=1/1&srch=1/1&dstw=970&dsth=724&quality=80");
+            characterRepository.findById(2L).setImagePath("https://static.independent.co.uk/s3fs-public/thumbnails/image/2014/07/24/17/Albus-Dumbledore.jpg");
+            characterRepository.findById(3L).setImagePath("https://vignette.wikia.nocookie.net/harrypotter/images/5/58/Severus-Snape-severus-snape-1972318-359-481.jpeg/revision/latest?cb=20131225182034&path-prefix=pl");
+            characterRepository.findById(4L).setImagePath("https://samequizy.pl/wp-content/uploads/2017/08/filing_images_0c7c5b9e6db5.jpg");
+            characterRepository.findById(5L).setImagePath("https://vignette.wikia.nocookie.net/harrypotter/images/f/ff/HAGRID_RUBEUS_HAGRID.jpg/revision/latest/top-crop/width/360/height/450?cb=20110517140811&path-prefix=pl");
+            characterRepository.findById(6L).setImagePath("https://vignette.wikia.nocookie.net/harrypotter/images/6/6a/McGonagallaward.png/revision/latest?cb=20161112125656&path-prefix=pl");
+            characterRepository.findById(8L).setImagePath("https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRKBpDDBss_bUrrGof_skULm5i62aZQ9jJHmAICMg5aLsfFZxzQ");
+
             hogwartsJobRepository.add(teacher);
             hogwartsJobRepository.add(headmaster);
             hogwartsJobRepository.add(houseHead);

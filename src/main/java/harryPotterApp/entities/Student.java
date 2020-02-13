@@ -1,5 +1,8 @@
 package harryPotterApp.entities;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -13,7 +16,9 @@ public class Student {
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "character_id", foreignKey = @ForeignKey(name = "FK_student_character_id"))
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private HPCharacter hpCharacter;
+
     private Integer yearOfStudy;
 
     @Enumerated(EnumType.STRING)
