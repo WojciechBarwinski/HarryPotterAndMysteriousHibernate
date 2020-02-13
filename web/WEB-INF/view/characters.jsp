@@ -10,11 +10,18 @@
 <%@include file="/WEB-INF/component/header.jsp"%>
 <div class="container-fluid" style="margin-top: 20px">
     <div class="row">
+        <div class="col-md-3 col-md-offset-3"></div>
         <div class="col-md-6 col-md-offset-3">
-            <div class="card bg-warning">
 
+            <form action="/find-character" class="form-inline justify-content-center" method="post">
+                <label for="id" class="mr-sm-2">Id to find:</label>
+                <input type="text" class="form-control mb-2 mr-sm-2" placeholder="id" name="idToFind" id="id">
+                <button type="submit" class="btn btn-primary" name="idToDelete">Find</button>
+            </form>
+
+            <div class="card bg-warning">
                 <div class="card-header">
-                    <h1 class="card-title">Harry Potter Characters</h1>
+                    <h1 class="card-title" align="center">Harry Potter Characters</h1>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -25,6 +32,8 @@
                                 <th>First name</th>
                                 <th>Last name</th>
                                 <th>Birth date</th>
+                                <th>View</th>
+                                <th>Delete</th>
                             </tr>
                             </thead>
                             <c:forEach items="${charactersList}" var="character">
@@ -33,25 +42,44 @@
                                     <td>${character.firstName}</td>
                                     <td>${character.lastName}</td>
                                     <td>${character.birthDate}</td>
+
+                                    <td>
+                                        <form action="/view-character" method="post">
+                                            <button type="submit" class="btn btn-primary" name="idToView" value=${character.id} >View</button>
+                                        </form>
+                                    </td>
+
+                                    <td>
+                                        <form action="/delete-character" method="post">
+                                            <button type="submit" class="btn btn-danger" name="idToDelete" value=${character.id} >Delete</button>
+                                        </form>
+                                    </td>
+
                                 </tr>
                             </c:forEach>
                         </table>
                     </div>
                 </div>
             </div>
+
+            <form class="form-inline justify-content-center" action="/add-character" method="post">
+                <p> <label for="firstName" class="mr-sm-2">First Name:</label>
+                    <input type="text" class="form-control mb-2 mr-sm-2" placeholder="First name" name="firstName" id="firstName"></p>
+
+                <p> <label for="lastName" class="mr-sm-2">Last Name:</label>
+                    <input type="text" class="form-control mb-2 mr-sm-2" placeholder="Last name" name="lastName" id="lastName"></p>
+
+                <p><label for="birthDate" class="mr-sm-2">BirthDate:</label>
+                    <input type="date" class="form-control mb-2 mr-sm-2" placeholder="YYYY-MM-DD" name="birthDate" id="birthDate"></p>
+
+                <button type="submit" class="btn btn-primary mb-2">Add</button>
+            </form>
+
         </div>
+        <div class="col-md-3 col-md-offset-3"></div>
     </div>
 </div>
-<form class="form-inline" action="/add-character" method="get">
-   <p> <label for="firstName" class="mr-sm-2">First Name:</label>
-    <input type="email" class="form-control mb-2 mr-sm-2" placeholder="First name" id="firstName"></p>
-    <p> <label for="lastName" class="mr-sm-2">Last Name:</label>
-    <input type="password" class="form-control mb-2 mr-sm-2" placeholder="Last name" id="lastName"></p>
-    <p><label for="birthDate" class="mr-sm-2">BirthDate:</label>
-    <input type="password" class="form-control mb-2 mr-sm-2" placeholder="YYYY-MM-DD" id="birthDate"></p>
-    <button type="submit" class="btn btn-primary mb-2">Add</button>
-</form>
-</body>
+
 
 
 <script src="webjars/bootstrap/4.4.1-1.4.0/js/bootstrap.min.js"/>

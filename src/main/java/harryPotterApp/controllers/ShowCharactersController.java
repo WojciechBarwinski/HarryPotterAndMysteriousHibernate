@@ -23,8 +23,13 @@ public class ShowCharactersController extends HttpServlet {
     private HpCharacterService hpCharacterService = new HpCharacterServiceImpl();
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        List<HPCharacterDto> allCharacters = hpCharacterService.getAllCharacters();
+        req.setAttribute("charactersList", allCharacters);
+        req.getRequestDispatcher("WEB-INF/view/characters.jsp").forward(req,resp);
+    }
 
-        EntityTransaction transaction = entityManager.getTransaction();
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         List<HPCharacterDto> allCharacters = hpCharacterService.getAllCharacters();
         req.setAttribute("charactersList", allCharacters);
         req.getRequestDispatcher("WEB-INF/view/characters.jsp").forward(req,resp);
