@@ -12,9 +12,27 @@
 <div class="container-fluid" style="margin-top: 20px">
     <div class="row">
         <div class="col-md-3 col-md-offset-3"></div>
-        <div class="col-md-2 col-md-offset-3">
+
+        <div class="col-md-2 col-md-offset-3" align="center">
             <img src="${character.imagePath}" class="img-fluid" alt="">
+
+            <c:set value="/image/tmpFoto.jpg" var="noImg"/>
+            <c:set value="${character.imagePath}" var="imagePath"/>
+
+            <c:if test="${noImg == imagePath}">
+
+                <form action="" class="justify-content-center" method="post">
+                    <label for="id" class="mr-sm-2">Link to image</label>
+                    <input type="text" class="form-control mb-2 mr-sm-2" placeholder="link to image" name="imagesPath" id="id">
+                    <button type="submit" class="btn btn-primary" name="idToDelete">Add image</button>
+                </form>
+
+            </c:if>
+
+
+
         </div>
+
         <div class="col-md-4 col-md-offset-3">
             <h3>${character.firstName} ${character.lastName}</h3>
             <h5>Birth date: ${character.birthDate}</h5>
@@ -34,13 +52,9 @@
                         <li>${job.positionName}: ${job.salary}</li>
                     </c:forEach>
                 </ul>
+            </h5>
             </c:if>
 
-
-
-
-
-            </h5>
         </div>
         <div class="col-md-3 col-md-offset-3"></div>
     </div>
