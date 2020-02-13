@@ -55,5 +55,11 @@ public class HpCharacterServiceImpl implements HpCharacterService {
         return foundedCharacter;
     }
 
+    @Override
+    public HPCharacterDto findCharacterToView(Long id) {
+        HPCharacter character = characterRepository.findById(id);
+        return  HPCharacterMapper.mapToHPCharacterDto(character);
+    }
+
 
 }

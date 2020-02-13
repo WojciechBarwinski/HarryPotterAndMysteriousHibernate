@@ -44,9 +44,14 @@
                                     <td>${character.birthDate}</td>
 
                                     <td>
-                                        <form action="/view-character" method="post">
-                                            <button type="submit" class="btn btn-primary" name="idToView" value=${character.id} >View</button>
-                                        </form>
+                                        <%--<form action="/view-character?id=${character.id}" method="post">--%>
+                                            <a href="/view-character?idToView=${character.id}">
+                                                <button type="submit" class="btn btn-primary" name="idToView">View</button>
+                                            </a>
+
+
+
+                                       <%-- </form>--%>
                                     </td>
 
                                     <td>
