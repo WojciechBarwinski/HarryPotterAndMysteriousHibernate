@@ -7,9 +7,7 @@ import harryPotterApp.startingData.DataInitializer;
 import harryPotterApp.startingData.SingletonEntityManagerFactory;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,18 +16,17 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet("/home")
-public class HomeController extends HttpServlet {
-    //EntityManagerFactory emf = Persistence.createEntityManagerFactory("ORM");
-
+@WebServlet("/show-characters")
+public class ShowCharactersController extends HttpServlet {
     EntityManager entityManager = SingletonEntityManagerFactory.getEmf().createEntityManager();
 
-    //private HpCharacterService hpCharacterService = new HpCharacterServiceImpl();
-
-
+    private HpCharacterService hpCharacterService = new HpCharacterServiceImpl();
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        DataInitializer.addAllData(entityManager);
-        req.getRequestDispatcher("WEB-INF/view/home.jsp").forward(req, resp);
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        EntityTransaction transaction = entityManager.getTransaction();
+        List<HPCharacterDto> allCharacters = hpCharacterService.getAllCharacters();
+        req.setAttribute("charactersList", allCharacters);
+        req.getRequestDispatcher("WEB-INF/view/characters.jsp").forward(req,resp);
     }
 }

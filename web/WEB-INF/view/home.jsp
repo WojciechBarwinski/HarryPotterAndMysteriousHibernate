@@ -6,20 +6,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
 <body>
-<nav class="navbar navbar-dark bg-dark justify-content-center">
-    <form class="form-inline">
-        <div class="navbar-brand mr-5 font-weight-bold font-italic">Harry Potter Application</div>
-        <div class="text-center">
-        <button class="btn btn-light btn-lg mr-5" type="submit">Characters</button>
-        <button class="btn btn-light btn-lg mr-5" type="submit">Locations</button>
-        <button class="btn btn-light btn-lg mr-5" type="submit">Pets</button>
-        <button class="btn btn-light btn-lg mr-5" type="submit">Students</button>
-        <button class="btn btn-light btn-lg mr-5" type="submit">Jobs</button>
-        <button class="btn btn-light btn-lg mr-5" type="submit">Items</button>
-            <img src="/image/logo.png" width="60" height="60"/>
-        </div>
-    </form>
-</nav>
+<%@include file="/WEB-INF/component/header.jsp"%>
 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ligula magna, rhoncus sit amet quam sit amet,
     tempus posuere nibh. Fusce molestie tempor leo. Maecenas volutpat gravida diam id porta. Nam at est nisi. Nunc
     eu dui tempor, scelerisque ligula nec, luctus ipsum. Vivamus varius ligula eget orci condimentum, a lacinia
