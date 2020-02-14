@@ -17,11 +17,10 @@ import java.util.Map;
 @WebServlet("/find-pet")
 public class FindPetController extends HttpServlet {
     private PetService petService = new PetServiceImpl();
-    private ValidationService validationService = new ValidationService();
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String idToFind = req.getParameter("idToFind");
-        Map<String, String> errorsMap = validationService.validateSearch(idToFind);
+        Map<String, String> errorsMap = ValidationService.searchValidate(idToFind);
         if (errorsMap.isEmpty()){
             List<PetDto> foundPets = petService.findById(idToFind);
             req.setAttribute("petsList",foundPets);
