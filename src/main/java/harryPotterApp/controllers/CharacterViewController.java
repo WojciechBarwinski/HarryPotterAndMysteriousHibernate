@@ -17,7 +17,7 @@ public class CharacterViewController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Long idToView = Long.valueOf(req.getParameter("idToView"));
-        HPCharacterDto characterToView = characterService.findCharacterToView(idToView);
+        HPCharacterDto characterToView = characterService.prepareCharacterToView(idToView);
         req.setAttribute("character", characterToView);
         req.getRequestDispatcher("/WEB-INF/view/character-view.jsp").forward(req, resp);
     }

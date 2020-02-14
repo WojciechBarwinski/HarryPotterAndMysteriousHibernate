@@ -26,6 +26,7 @@ public class HPCharacterMapper {
         } else {
             hpCharacterDto.setImagePath(hpCharacter.getImagePath());
         }
+        
         return hpCharacterDto;
     }
 }

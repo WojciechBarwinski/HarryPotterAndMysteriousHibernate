@@ -12,5 +12,5 @@ public interface HpCharacterService {
     void addCharacter(String firstName, String lastName, LocalDate birthDate);
     void deleteCharacterById(Long id);
     List<HPCharacterDto> findCharacterById(String id);
-    HPCharacterDto findCharacterToView(Long id);
+    HPCharacterDto prepareCharacterToView(Long id);
 }

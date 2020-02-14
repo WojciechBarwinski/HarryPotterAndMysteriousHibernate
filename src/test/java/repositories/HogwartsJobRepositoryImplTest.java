@@ -57,19 +57,6 @@ class HogwartsJobRepositoryImplTest {
     }
 
 
-    @Order(10)
-    @Test
-    public void shouldDeleteJob(){
-        EntityTransaction transaction = em.getTransaction();
-        Long idJobDelete = 1L;
-
-        transaction.begin();
-        hogwartsJobRepository.deleteById(idJobDelete);
-        transaction.commit();
-
-        HogwartsJob hogwartsDeletedJob = hogwartsJobRepository.findById(idJobDelete);
-        assertThat(hogwartsDeletedJob).isNull();
-    }
     }
 
 

@@ -6,9 +6,10 @@ import harryPotterApp.entities.HPLocation;
 import java.util.List;
 
 public interface HPLocationRepository {
-    HPLocation addLocation(HPLocation hpLocation);
-    HPLocation findLocationById(Long id);
-    HPLocation updateLocationById(Long id);
-    void deleteLocationById(Long id);
+    HPLocation add(HPLocation hpLocation);
+    HPLocation findById(Long id);
+    HPLocation updateById(Long id);
+    void deleteById(Long id);
     List<HPCharacter> getAllResidents(Long id);
+    HPLocation findByCharacterId(Long id);
 }

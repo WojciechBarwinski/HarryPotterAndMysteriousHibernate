@@ -16,6 +16,15 @@ public class HPCharacterDto {
     private String imagePath;
     private List <HogwartsJob> hogwartsJob;
     private Student student;
+    private String location;
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
 
     public Long getId() {
         return id;
