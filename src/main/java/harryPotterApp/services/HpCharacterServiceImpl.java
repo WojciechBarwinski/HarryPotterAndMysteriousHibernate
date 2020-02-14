@@ -2,6 +2,7 @@ package harryPotterApp.services;
 
 import harryPotterApp.dto.HPCharacterDto;
 import harryPotterApp.entities.HPCharacter;
+import harryPotterApp.entities.HPLocation;
 import harryPotterApp.entities.Student;
 import harryPotterApp.repositories.*;
 import harryPotterApp.mappers.HPCharacterMapper;
@@ -17,11 +18,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HpCharacterServiceImpl implements HpCharacterService {
-    //private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("ORM");
+
     private EntityManager em = SingletonEntityManagerFactory.getEmf().createEntityManager();
     private CharacterRepository characterRepository = new CharacterRepositoryImpl(em);
     private HogwartsJobRepository hogwartsJobRepository = new HogwartsJobRepositoryImpl(em);
     private StudentRepository studentRepository = new StudentRepositoryImpl(em);
+    private HPLocationRepository locationRepository = new HPLocationRepositoryImpl(em);
 
     @Override
     public List<HPCharacterDto> getAllCharacters() {
@@ -49,6 +51,8 @@ public class HpCharacterServiceImpl implements HpCharacterService {
         transaction.commit();
     }
 
+    /* TODO
+    * It's list because we add find by name/last name, and there it will by list.*/
     @Override
     public List<HPCharacterDto> findCharacterById(String id) {
         List<HPCharacterDto> foundedCharacter = new ArrayList<>();
@@ -58,23 +62,21 @@ public class HpCharacterServiceImpl implements HpCharacterService {
     }
 
     @Override
-    public HPCharacterDto findCharacterToView(Long id) {
+    public HPCharacterDto prepareCharacterToView(Long id) {
         HPCharacter character = characterRepository.findById(id);
         HPCharacterDto hpCharacterDto = HPCharacterMapper.mapToHPCharacterDto(character);
 
-
-
         List<Student> studentByIdCharacter = studentRepository.findStudentByIdCharacter(id);
-        if (studentByIdCharacter.isEmpty()){
-            hpCharacterDto.setHogwartsJob(hogwartsJobRepository.findJobByIdCharacter(id));
-        } else {
+        if (!studentByIdCharacter.isEmpty()){
             hpCharacterDto.setStudent(studentByIdCharacter.get(0));
+        } else {
+            hpCharacterDto.setHogwartsJob(hogwartsJobRepository.findJobByIdCharacter(id));
         }
-
-
-
+        HPLocation location = locationRepository.findByCharacterId(id);
+        if (!(location == null)){
+            hpCharacterDto.setLocation(location.getLocationName());
+        }
         return hpCharacterDto;
     }
-
 
 }

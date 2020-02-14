@@ -81,10 +81,10 @@ public class DataInitializer {
             petRepository.add(new Pet("Max", characterRepository.findById(6L), "Cat"));
             petRepository.add(new Pet("Fang", characterRepository.findById(5L), "Dog"));
 
-            locationRepository.addLocation(hogwarts);
-            locationRepository.addLocation(hagridsHouse);
-            locationRepository.addLocation(malfoyManor);
-            locationRepository.addLocation(shriekingShack);
+            locationRepository.add(hogwarts);
+            locationRepository.add(hagridsHouse);
+            locationRepository.add(malfoyManor);
+            locationRepository.add(shriekingShack);
 
             hogwartsJobRepository.findById(1L).setCharactersAsEmployee(characterRepository.findById(3L));
             hogwartsJobRepository.findById(1L).setCharactersAsEmployee(characterRepository.findById(6L));
@@ -96,16 +96,16 @@ public class DataInitializer {
             hogwartsJobRepository.updateById(3L);
             hogwartsJobRepository.updateById(4L);
 
-            characterRepository.findById(1L).setLocation(locationRepository.findLocationById(4L));
-            characterRepository.findById(2L).setLocation(locationRepository.findLocationById(1L));
-            characterRepository.findById(3L).setLocation(locationRepository.findLocationById(1L));
-            characterRepository.findById(4L).setLocation(locationRepository.findLocationById(4L));
-            characterRepository.findById(5L).setLocation(locationRepository.findLocationById(2L));
-            characterRepository.findById(6L).setLocation(locationRepository.findLocationById(1L));
-            locationRepository.updateLocationById(1L);
-            locationRepository.updateLocationById(2L);
-            locationRepository.updateLocationById(3L);
-            locationRepository.updateLocationById(4L);
+            characterRepository.findById(1L).setLocation(locationRepository.findById(4L));
+            characterRepository.findById(2L).setLocation(locationRepository.findById(1L));
+            characterRepository.findById(3L).setLocation(locationRepository.findById(1L));
+            characterRepository.findById(4L).setLocation(locationRepository.findById(4L));
+            characterRepository.findById(5L).setLocation(locationRepository.findById(2L));
+            characterRepository.findById(6L).setLocation(locationRepository.findById(1L));
+            locationRepository.updateById(1L);
+            locationRepository.updateById(2L);
+            locationRepository.updateById(3L);
+            locationRepository.updateById(4L);
 
             studentRepository.add(new Student(characterRepository.findById(1L), 1, House.GRYFFINDOR));
             studentRepository.add(new Student(characterRepository.findById(4L), 1, House.GRYFFINDOR));

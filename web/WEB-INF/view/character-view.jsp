@@ -55,6 +55,10 @@
             </h5>
             </c:if>
 
+            <c:if test="${fn:length(character.location) > 0}">
+                <h5>Location: ${character.location}</h5>
+            </c:if>
+
         </div>
         <div class="col-md-3 col-md-offset-3"></div>
     </div>

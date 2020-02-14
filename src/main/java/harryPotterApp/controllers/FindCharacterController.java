@@ -17,12 +17,12 @@ import java.util.Map;
 @WebServlet("/find-character")
 public class FindCharacterController extends HttpServlet {
     HpCharacterService characterService = new HpCharacterServiceImpl();
-    private ValidationService validationService = new ValidationService();
+
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String idToFind = req.getParameter("idToFind");
-        Map<String, String> errorsMap = validationService.validateSearch(idToFind);
+        Map<String, String> errorsMap = ValidationService.searchValidate(idToFind);
         if (errorsMap.isEmpty()){
             List<HPCharacterDto> allCharacters = characterService.findCharacterById(idToFind);
             req.setAttribute("charactersList", allCharacters);

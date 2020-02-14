@@ -83,9 +83,12 @@
 
                 <p><label for="birthDate" class="mr-sm-2">BirthDate:</label>
                     <input type="date" class="form-control mb-2 mr-sm-2" placeholder="YYYY-MM-DD" name="birthDate" id="birthDate"></p>
-
                 <button type="submit" class="btn btn-primary mb-2">Add</button>
             </form>
+            <p class="error" align="center">${noValue}</p>
+            <p class="error" align="center">${wrongName}</p>
+            <p class="error" align="center">${wrongLastName}</p>
+            <p class="error" align="center">${wrongData}</p>
 
         </div>
         <div class="col-md-3 col-md-offset-3"></div>
