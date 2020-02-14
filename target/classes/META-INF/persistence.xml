@@ -45,7 +45,7 @@
 
             <!--WARNING-->
             <property name="hibernate.hbm2ddl.auto"
-                      value="create"/>
+                      value="validate"/>
 
 
             <property name="hibernate.archive.autodetection"

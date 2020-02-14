@@ -21,6 +21,8 @@ public class Pet {
     @Column(nullable = false)
     private String species;
 
+    private String imagePath;
+
     protected Pet(){
     }
 
@@ -56,6 +58,14 @@ public class Pet {
 
     public void setSpecies(String species) {
         this.species = species;
+    }
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
     }
 
     @Override
