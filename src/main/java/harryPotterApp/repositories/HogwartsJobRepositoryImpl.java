@@ -39,6 +39,14 @@ public class HogwartsJobRepositoryImpl implements HogwartsJobRepository {
     }
 
     @Override
+    public List <HogwartsJob> findJobByIdCharacter(Long id) {
+        Long characterId = id;
+        Query query = em.createQuery("SELECT job FROM HogwartsJob as job JOIN job.employees e where e.id =:id").setParameter("id", characterId);
+        List resultList = query.getResultList();
+        return resultList;
+    }
+
+    @Override
     public HogwartsJob findJobByName(String jobName) {
         String x = "Elixir Master";
         Query nativeQuery = em.createNativeQuery("SELECT hj.positionName, hj.salary FROM characters_jobs as cj" +

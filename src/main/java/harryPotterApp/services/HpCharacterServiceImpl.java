@@ -2,9 +2,9 @@ package harryPotterApp.services;
 
 import harryPotterApp.dto.HPCharacterDto;
 import harryPotterApp.entities.HPCharacter;
-import harryPotterApp.repositories.CharacterRepository;
+import harryPotterApp.entities.Student;
+import harryPotterApp.repositories.*;
 import harryPotterApp.mappers.HPCharacterMapper;
-import harryPotterApp.repositories.CharacterRepositoryImpl;
 import harryPotterApp.startingData.SingletonEntityManagerFactory;
 
 import javax.persistence.EntityManager;
@@ -20,6 +20,8 @@ public class HpCharacterServiceImpl implements HpCharacterService {
     //private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("ORM");
     private EntityManager em = SingletonEntityManagerFactory.getEmf().createEntityManager();
     private CharacterRepository characterRepository = new CharacterRepositoryImpl(em);
+    private HogwartsJobRepository hogwartsJobRepository = new HogwartsJobRepositoryImpl(em);
+    private StudentRepository studentRepository = new StudentRepositoryImpl(em);
 
     @Override
     public List<HPCharacterDto> getAllCharacters() {
@@ -58,7 +60,20 @@ public class HpCharacterServiceImpl implements HpCharacterService {
     @Override
     public HPCharacterDto findCharacterToView(Long id) {
         HPCharacter character = characterRepository.findById(id);
-        return  HPCharacterMapper.mapToHPCharacterDto(character);
+        HPCharacterDto hpCharacterDto = HPCharacterMapper.mapToHPCharacterDto(character);
+
+
+
+        List<Student> studentByIdCharacter = studentRepository.findStudentByIdCharacter(id);
+        if (studentByIdCharacter.isEmpty()){
+            hpCharacterDto.setHogwartsJob(hogwartsJobRepository.findJobByIdCharacter(id));
+        } else {
+            hpCharacterDto.setStudent(studentByIdCharacter.get(0));
+        }
+
+
+
+        return hpCharacterDto;
     }
 
 

@@ -1,8 +1,11 @@
 package harryPotterApp.dto;
 
+import harryPotterApp.entities.HogwartsJob;
 import harryPotterApp.entities.Pet;
+import harryPotterApp.entities.Student;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class HPCharacterDto {
     private Long id;
@@ -11,6 +14,8 @@ public class HPCharacterDto {
     private LocalDate birthDate;
     private Pet pet;
     private String imagePath;
+    private List <HogwartsJob> hogwartsJob;
+    private Student student;
 
     public Long getId() {
         return id;
@@ -58,5 +63,21 @@ public class HPCharacterDto {
 
     public void setImagePath(String imagePath) {
         this.imagePath = imagePath;
+    }
+
+    public List<HogwartsJob> getHogwartsJob() {
+        return hogwartsJob;
+    }
+
+    public void setHogwartsJob(List <HogwartsJob> hogwartsJob) {
+        this.hogwartsJob = hogwartsJob;
+    }
+
+    public Student getStudent() {
+        return student;
+    }
+
+    public void setStudent(Student student) {
+        this.student = student;
     }
 }
