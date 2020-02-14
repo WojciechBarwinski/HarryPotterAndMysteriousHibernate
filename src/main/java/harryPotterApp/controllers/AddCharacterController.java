@@ -30,6 +30,8 @@ public class AddCharacterController extends HttpServlet {
         Map<String, String> errorsMap = ValidationService.addValidate(firstName, lastName, birthDate);
         if (errorsMap.isEmpty()){
             characterService.addCharacter(firstName, lastName, birthDate);
+            List<HPCharacterDto> allCharacters = characterService.getAllCharacters();
+            req.setAttribute("charactersList", allCharacters);
         } else {
             req.setAttribute("noValue", errorsMap.get("noValue"));
             req.setAttribute("wrongName", errorsMap.get("wrongName"));

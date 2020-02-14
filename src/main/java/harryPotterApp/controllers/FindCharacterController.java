@@ -29,6 +29,8 @@ public class FindCharacterController extends HttpServlet {
         } else {
             req.setAttribute("noId",errorsMap.get("noId"));
             req.setAttribute("invalidId",errorsMap.get("invalidId"));
+            List<HPCharacterDto> allCharacters = characterService.getAllCharacters();
+            req.setAttribute("charactersList", allCharacters);
         }
         req.getRequestDispatcher("WEB-INF/view/characters.jsp").forward(req, resp);
     }
