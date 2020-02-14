@@ -1,5 +1,6 @@
 package harryPotterApp.services;
 
+import harryPotterApp.dto.HPCharacterDto;
 import harryPotterApp.dto.PetDto;
 import harryPotterApp.entities.Pet;
 
@@ -10,4 +11,6 @@ public interface PetService {
     List<PetDto> getAllPets();
 
     List<PetDto> findById (String id);
+
+    List<HPCharacterDto> getAllCharactersWithoutPet();
 }

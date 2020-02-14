@@ -1,7 +1,10 @@
 package harryPotterApp.services;
 
+import harryPotterApp.dto.HPCharacterDto;
 import harryPotterApp.dto.PetDto;
+import harryPotterApp.entities.HPCharacter;
 import harryPotterApp.entities.Pet;
+import harryPotterApp.mappers.HPCharacterMapper;
 import harryPotterApp.mappers.PetMapper;
 import harryPotterApp.repositories.PetRepository;
 import harryPotterApp.repositories.PetRepositoryImpl;
@@ -29,5 +32,15 @@ public class PetServiceImpl implements PetService {
         Pet foundPet = petRepository.findById(Long.valueOf(id));
         foundPets.add(PetMapper.mapToPetDto(foundPet));
         return foundPets;
+    }
+
+    @Override
+    public List<HPCharacterDto> getAllCharactersWithoutPet() {
+        List<HPCharacter> allCharactersWithoutPet = petRepository.getAllCharactersWithoutPet();
+        List<HPCharacterDto> charactersWithoutPet = allCharactersWithoutPet
+                .stream()
+                .map(HPCharacterMapper::mapToHPCharacterDto)
+                .collect(Collectors.toList());
+        return charactersWithoutPet;
     }
 }

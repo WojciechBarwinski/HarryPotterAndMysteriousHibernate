@@ -1,5 +1,6 @@
 package harryPotterApp.controllers;
 
+import harryPotterApp.dto.HPCharacterDto;
 import harryPotterApp.dto.PetDto;
 import harryPotterApp.services.PetService;
 import harryPotterApp.services.PetServiceImpl;
@@ -19,7 +20,9 @@ public class ShowPetsController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         List<PetDto> allPets = petService.getAllPets();
+        List<HPCharacterDto> charactersWithoutPets = petService.getAllCharactersWithoutPet();
         req.setAttribute("petsList", allPets);
+        req.setAttribute("ownersAvailable", charactersWithoutPets);
         req.getRequestDispatcher("WEB-INF/view/pets.jsp").forward(req, resp);
     }
 }

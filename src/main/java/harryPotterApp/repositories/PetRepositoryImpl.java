@@ -1,8 +1,10 @@
 package harryPotterApp.repositories;
 
+import harryPotterApp.entities.HPCharacter;
 import harryPotterApp.entities.Pet;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import java.util.List;
 import java.util.Objects;
@@ -42,5 +44,12 @@ public class PetRepositoryImpl implements PetRepository {
         TypedQuery<Pet> allPets = em.createQuery("SELECT p FROM Pet p", Pet.class);
         List<Pet> allPetsResultList = allPets.getResultList();
         return allPetsResultList;
+    }
+
+    @Override
+    public List<HPCharacter> getAllCharactersWithoutPet() {
+        Query query = em.createQuery("SELECT hpc FROM HPCharacter hpc LEFT JOIN Pet as p ON hpc.id=p.owner.id WHERE p.owner.id IS NULL");
+        List resultList = query.getResultList();
+        return resultList;
     }
 }
