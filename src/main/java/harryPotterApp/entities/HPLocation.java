@@ -1,5 +1,8 @@
 package harryPotterApp.entities;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
 import java.util.Objects;
 import java.util.Set;
@@ -14,7 +17,8 @@ public class HPLocation {
 
     private String locationName;
 
-    @OneToMany(mappedBy = "location", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "location", fetch = FetchType.LAZY)
+    //@OnDelete(action = OnDeleteAction.CASCADE)
     private Set<HPCharacter> residents;
 
     public HPLocation() {
