@@ -56,6 +56,14 @@ public class PetServiceImpl implements PetService {
         transaction.commit();
     }
 
+    @Override
+    public void deleteById(Long id) {
+        EntityTransaction transaction = em.getTransaction();
+        transaction.begin();
+        petRepository.deletedById(id);
+        transaction.commit();
+    }
+
     public Long getOwnerIdByFirstAndLastName(String ownerData){
         String[] owner = ownerData.split(" ");
         String firstName = owner[0];
