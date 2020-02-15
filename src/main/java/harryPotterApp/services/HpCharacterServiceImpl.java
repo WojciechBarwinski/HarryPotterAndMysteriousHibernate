@@ -77,7 +77,6 @@ public class HpCharacterServiceImpl implements HpCharacterService {
       if (!(location == null)){
           hpCharacterDto.setLocation(location.getLocationName());
       }
-
         return hpCharacterDto;
     }
 

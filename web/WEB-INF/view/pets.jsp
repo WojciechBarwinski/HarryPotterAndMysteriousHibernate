@@ -78,7 +78,7 @@
 
                 <p><label for="owners" class="mr-sm-2">Owners:</label>
                     <select class="form-control mr-sm-2" id="owners" name="owner">
-                        <option value="" disabled selected>Select</option>
+                        <option value="" disabled selected value>Select</option>
                         <c:forEach items="${ownersAvailable}" var="owner">
                             <option>${owner.firstName} ${owner.lastName}</option>
                         </c:forEach>

@@ -26,8 +26,7 @@ public class PetServiceImpl implements PetService {
     @Override
     public List<PetDto> getAllPets() {
         List<Pet> allPets = petRepository.getAllPets();
-        List<PetDto> petsDto = allPets.stream().map(PetMapper::mapToPetDto).collect(Collectors.toList());
-        return petsDto;
+        return allPets.stream().map(PetMapper::mapToPetDto).collect(Collectors.toList());
     }
 
     @Override
@@ -41,19 +40,33 @@ public class PetServiceImpl implements PetService {
     @Override
     public List<HPCharacterDto> getAllCharactersWithoutPet() {
         List<HPCharacter> allCharactersWithoutPet = petRepository.getAllCharactersWithoutPet();
-        List<HPCharacterDto> charactersWithoutPet = allCharactersWithoutPet
-                .stream()
+        return allCharactersWithoutPet.stream()
                 .map(HPCharacterMapper::mapToHPCharacterDto)
                 .collect(Collectors.toList());
-        return charactersWithoutPet;
     }
 
     @Override
-    public void add(String name, String species, Long id) {
+    public void add(String name, String species, String ownerData) {
+        Long ownerId = getOwnerIdByFirstAndLastName(ownerData);
+
         EntityTransaction transaction = em.getTransaction();
         transaction.begin();
-        HPCharacter owner = characterRepository.findById(id);
-        petRepository.add(new Pet(name,owner,species));
+        HPCharacter foundedOwner = characterRepository.findById(ownerId);
+        petRepository.add(new Pet(name,foundedOwner,species));
         transaction.commit();
+    }
+
+    public Long getOwnerIdByFirstAndLastName(String ownerData){
+        String[] owner = ownerData.split(" ");
+        String firstName = owner[0];
+        String lastName = owner[1];
+
+        List<HPCharacter> allCharacters = characterRepository.getAllCharacters();
+        return allCharacters.stream()
+                .filter(hpCharacterDto -> hpCharacterDto.getFirstName().equals(firstName))
+                .filter(hpCharacterDto -> hpCharacterDto.getLastName().equals(lastName))
+                .map(HPCharacter::getId)
+                .findFirst().get();
+
     }
 }
