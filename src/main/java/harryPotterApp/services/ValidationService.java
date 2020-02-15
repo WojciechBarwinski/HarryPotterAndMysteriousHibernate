@@ -3,15 +3,16 @@ package harryPotterApp.services;
 import harryPotterApp.dto.HPCharacterDto;
 
 import java.time.LocalDate;
-import java.time.chrono.ChronoLocalDate;
-import java.time.temporal.TemporalAccessor;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.regex.Matcher;
+
 
 public class ValidationService {
     private static HpCharacterService hpCharacterService = new HpCharacterServiceImpl();
+    private static String firstNameRegex = "^[A-Z][a-z]{2,10}$";// only latter, first big, rest norm, minimum 3 letters, max 10 letters
+    private static String lastNameRegex = "^[A-Z][a-z]{3,15}$";// only latter, first big, rest norm, minimum 2 letters, max 10 letters
+
 
     public static Map<String, String> searchValidate(String userInput) {
         Map<String, String> errorsMap = new HashMap<>();
@@ -28,10 +29,10 @@ public class ValidationService {
         if (firstName.isBlank() || lastName.isBlank() || birthDate == null){
             errorsMap.put("noValue", "You dont entered all necessary");
         } else {
-            if (!firstName.matches("^[A-Z][a-z]{2,10}$")){
+            if (!firstName.matches(firstNameRegex)){
                 errorsMap.put("wrongName", "You put invalid first name");
             }
-            if (!lastName.matches("^[A-Z][a-z]{2,15}$")){
+            if (!lastName.matches(lastNameRegex)){
                 errorsMap.put("wrongLastName", "You put invalid last name");
             }
             if (birthDate.isAfter(LocalDate.now())){

@@ -11,4 +11,8 @@ public enum House {
     House(String name) {
         this.name = name;
     }
+
+    public String getName() {
+        return name;
+    }
 }

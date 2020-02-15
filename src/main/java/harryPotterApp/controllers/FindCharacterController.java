@@ -4,7 +4,6 @@ import harryPotterApp.dto.HPCharacterDto;
 import harryPotterApp.services.HpCharacterService;
 import harryPotterApp.services.HpCharacterServiceImpl;
 import harryPotterApp.services.ValidationService;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -17,7 +16,6 @@ import java.util.Map;
 @WebServlet("/find-character")
 public class FindCharacterController extends HttpServlet {
     HpCharacterService characterService = new HpCharacterServiceImpl();
-
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

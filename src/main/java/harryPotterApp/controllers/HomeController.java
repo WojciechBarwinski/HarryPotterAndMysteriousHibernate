@@ -1,20 +1,15 @@
 package harryPotterApp.controllers;
 
-import harryPotterApp.dto.HPCharacterDto;
-import harryPotterApp.services.HpCharacterService;
-import harryPotterApp.services.HpCharacterServiceImpl;
 import harryPotterApp.startingData.DataInitializer;
 import harryPotterApp.startingData.SingletonEntityManagerFactory;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
 
 @WebServlet("/home")
 public class HomeController extends HttpServlet {

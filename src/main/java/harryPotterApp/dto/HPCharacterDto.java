@@ -14,7 +14,7 @@ public class HPCharacterDto {
     private LocalDate birthDate;
     private Pet pet;
     private String imagePath;
-    private List <HogwartsJob> hogwartsJob;
+    private List<HogwartsJob> hogwartsJob;
     private Student student;
     private String location;
 
@@ -78,7 +78,7 @@ public class HPCharacterDto {
         return hogwartsJob;
     }
 
-    public void setHogwartsJob(List <HogwartsJob> hogwartsJob) {
+    public void setHogwartsJob(List<HogwartsJob> hogwartsJob) {
         this.hogwartsJob = hogwartsJob;
     }
 

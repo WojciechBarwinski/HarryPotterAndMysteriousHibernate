@@ -4,7 +4,6 @@ import harryPotterApp.dto.PetDto;
 import harryPotterApp.services.PetService;
 import harryPotterApp.services.PetServiceImpl;
 import harryPotterApp.services.ValidationService;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;

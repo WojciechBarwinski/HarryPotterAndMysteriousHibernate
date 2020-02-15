@@ -3,7 +3,6 @@ package harryPotterApp.controllers;
 import harryPotterApp.dto.HPCharacterDto;
 import harryPotterApp.services.HpCharacterService;
 import harryPotterApp.services.HpCharacterServiceImpl;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
