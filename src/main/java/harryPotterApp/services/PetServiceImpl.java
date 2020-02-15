@@ -8,7 +8,7 @@ import harryPotterApp.mappers.HPCharacterMapper;
 import harryPotterApp.mappers.PetMapper;
 import harryPotterApp.repositories.PetRepository;
 import harryPotterApp.repositories.PetRepositoryImpl;
-import harryPotterApp.startingData.SingletonEntityManagerFactory;
+import harryPotterApp.startingData.EntityManagerFactory;
 
 import javax.persistence.EntityManager;
 import java.util.ArrayList;
@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class PetServiceImpl implements PetService {
-    private EntityManager em = SingletonEntityManagerFactory.getEmf().createEntityManager();
+    private EntityManager em = EntityManagerFactory.getEmf().createEntityManager();
     private PetRepository petRepository = new PetRepositoryImpl(em);
 
     @Override

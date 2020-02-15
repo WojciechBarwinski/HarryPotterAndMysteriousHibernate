@@ -1,5 +1,6 @@
 package harryPotterApp.repositories;
 
+import harryPotterApp.entities.HPLocation;
 import harryPotterApp.entities.HogwartsJob;
 import harryPotterApp.entities.House;
 import harryPotterApp.entities.Student;
@@ -62,10 +63,13 @@ public class StudentRepositoryImpl implements StudentRepository {
     }
 
     @Override
-    public List <Student> findStudentByIdCharacter(Long id) {
+    public Student findStudentByIdCharacter(Long id) {
         Long characterId = id;
         Query query = em.createQuery("SELECT s FROM Student as s JOIN s.hpCharacter e where e.id =:id").setParameter("id", characterId);
         List<Student> students= query.getResultList();
-        return students;
+        if (query.getResultList().isEmpty()){
+            return null;
+        }
+        return (Student) query.getSingleResult();
     }
 }

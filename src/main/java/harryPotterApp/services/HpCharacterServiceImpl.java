@@ -3,23 +3,21 @@ package harryPotterApp.services;
 import harryPotterApp.dto.HPCharacterDto;
 import harryPotterApp.entities.HPCharacter;
 import harryPotterApp.entities.HPLocation;
+import harryPotterApp.entities.HogwartsJob;
 import harryPotterApp.entities.Student;
 import harryPotterApp.repositories.*;
 import harryPotterApp.mappers.HPCharacterMapper;
-import harryPotterApp.startingData.SingletonEntityManagerFactory;
+import harryPotterApp.startingData.EntityManagerFactory;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 public class HpCharacterServiceImpl implements HpCharacterService {
 
-    private EntityManager em = SingletonEntityManagerFactory.getEmf().createEntityManager();
+    private EntityManager em = EntityManagerFactory.getEmf().createEntityManager();
     private CharacterRepository characterRepository = new CharacterRepositoryImpl(em);
     private HogwartsJobRepository hogwartsJobRepository = new HogwartsJobRepositoryImpl(em);
     private StudentRepository studentRepository = new StudentRepositoryImpl(em);
@@ -66,16 +64,20 @@ public class HpCharacterServiceImpl implements HpCharacterService {
         HPCharacter character = characterRepository.findById(id);
         HPCharacterDto hpCharacterDto = HPCharacterMapper.mapToHPCharacterDto(character);
 
-        List<Student> studentByIdCharacter = studentRepository.findStudentByIdCharacter(id);
-        if (!studentByIdCharacter.isEmpty()){
-            hpCharacterDto.setStudent(studentByIdCharacter.get(0));
-        } else {
-            hpCharacterDto.setHogwartsJob(hogwartsJobRepository.findJobByIdCharacter(id));
-        }
+        Student studentByIdCharacter = studentRepository.findStudentByIdCharacter(id);
+        List<HogwartsJob> jobByIdCharacter = hogwartsJobRepository.findJobByIdCharacter(id);
         HPLocation location = locationRepository.findByCharacterId(id);
-        if (!(location == null)){
-            hpCharacterDto.setLocation(location.getLocationName());
-        }
+
+      if (!(studentByIdCharacter == null)){
+          hpCharacterDto.setStudent(studentByIdCharacter);
+      }
+      if (!jobByIdCharacter.isEmpty()){
+          hpCharacterDto.setHogwartsJob(jobByIdCharacter);
+      }
+      if (!(location == null)){
+          hpCharacterDto.setLocation(location.getLocationName());
+      }
+
         return hpCharacterDto;
     }
 

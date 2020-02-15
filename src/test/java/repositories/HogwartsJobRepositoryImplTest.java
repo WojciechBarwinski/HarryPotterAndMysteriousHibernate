@@ -1,22 +1,15 @@
 package repositories;
 
-import harryPotterApp.entities.HPCharacter;
 import harryPotterApp.entities.HogwartsJob;
 import harryPotterApp.repositories.CharacterRepository;
 import harryPotterApp.repositories.CharacterRepositoryImpl;
 import harryPotterApp.repositories.HogwartsJobRepository;
 import harryPotterApp.repositories.HogwartsJobRepositoryImpl;
 import harryPotterApp.startingData.DataInitializer;
-import harryPotterApp.startingData.SingletonEntityManagerFactory;
+import harryPotterApp.startingData.EntityManagerFactory;
 import org.junit.jupiter.api.*;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
-import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -30,12 +23,12 @@ class HogwartsJobRepositoryImplTest {
 
     @BeforeAll
     static void createData(){
-        em = SingletonEntityManagerFactory.getEmf().createEntityManager();
+        em = EntityManagerFactory.getEmf().createEntityManager();
         DataInitializer.addAllData(em);
     }
     @BeforeEach
     public void setUp() {
-        em = SingletonEntityManagerFactory.getEmf().createEntityManager();
+        em = EntityManagerFactory.getEmf().createEntityManager();
         characterRepository = new CharacterRepositoryImpl(em);
         hogwartsJobRepository = new HogwartsJobRepositoryImpl(em);
     }

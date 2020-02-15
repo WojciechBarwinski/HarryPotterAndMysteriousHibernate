@@ -1,21 +1,16 @@
 package repositories;
 
 import harryPotterApp.entities.HPCharacter;
-import harryPotterApp.entities.Pet;
 import harryPotterApp.repositories.CharacterRepository;
 import harryPotterApp.repositories.CharacterRepositoryImpl;
 import harryPotterApp.repositories.PetRepository;
 import harryPotterApp.repositories.PetRepositoryImpl;
 import harryPotterApp.startingData.DataInitializer;
-import harryPotterApp.startingData.SingletonEntityManagerFactory;
+import harryPotterApp.startingData.EntityManagerFactory;
 import org.junit.jupiter.api.*;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -29,13 +24,13 @@ class PetRepositoryImplTest {
 
     @BeforeAll
     static void createData(){
-        em = SingletonEntityManagerFactory.getEmf().createEntityManager();
+        em = EntityManagerFactory.getEmf().createEntityManager();
         DataInitializer.addAllData(em);
     }
 
     @BeforeEach
     public void setUp() {
-        em = SingletonEntityManagerFactory.getEmf().createEntityManager();
+        em = EntityManagerFactory.getEmf().createEntityManager();
         petRepository = new PetRepositoryImpl(em);
         characterRepository = new CharacterRepositoryImpl(em);
     }

@@ -4,7 +4,7 @@ import harryPotterApp.entities.HPCharacter;
 import harryPotterApp.repositories.CharacterRepository;
 import harryPotterApp.repositories.CharacterRepositoryImpl;
 import harryPotterApp.startingData.DataInitializer;
-import harryPotterApp.startingData.SingletonEntityManagerFactory;
+import harryPotterApp.startingData.EntityManagerFactory;
 import org.junit.jupiter.api.*;
 
 
@@ -22,13 +22,13 @@ class CharacterRepositoryImplTest {
 
     @BeforeAll
     static void createData(){
-        em = SingletonEntityManagerFactory.getEmf().createEntityManager();
+        em = EntityManagerFactory.getEmf().createEntityManager();
         DataInitializer.addAllData(em);
     }
 
     @BeforeEach
     void setUp() {
-        em = SingletonEntityManagerFactory.getEmf().createEntityManager();
+        em = EntityManagerFactory.getEmf().createEntityManager();
         characterRepository = new CharacterRepositoryImpl(em);
     }
 

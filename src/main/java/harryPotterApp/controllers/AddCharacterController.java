@@ -36,6 +36,8 @@ public class AddCharacterController extends HttpServlet {
             req.setAttribute("wrongLastName", errorsMap.get("wrongLastName"));
             req.setAttribute("wrongData", errorsMap.get("wrongData"));
         }
-        req.getRequestDispatcher("WEB-INF/view/characters.jsp").forward(req, resp);
+        //resp.sendRedirect(req.getHeader("referer"));
+        req.getRequestDispatcher("/show-characters").forward(req, resp);
+        //req.getRequestDispatcher("WEB-INF/view/characters.jsp").forward(req, resp);
     }
 }

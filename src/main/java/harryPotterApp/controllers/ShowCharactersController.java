@@ -25,8 +25,6 @@ public class ShowCharactersController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<HPCharacterDto> allCharacters = hpCharacterService.getAllCharacters();
-        req.setAttribute("charactersList", allCharacters);
-        req.getRequestDispatcher("WEB-INF/view/characters.jsp").forward(req, resp);
+       doPost(req, resp);
     }
 }

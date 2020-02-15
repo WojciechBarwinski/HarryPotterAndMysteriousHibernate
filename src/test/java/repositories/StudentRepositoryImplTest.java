@@ -1,22 +1,14 @@
 package repositories;
 
-import harryPotterApp.entities.HPCharacter;
-import harryPotterApp.entities.House;
-import harryPotterApp.entities.Student;
 import harryPotterApp.repositories.CharacterRepository;
 import harryPotterApp.repositories.CharacterRepositoryImpl;
 import harryPotterApp.repositories.StudentRepository;
 import harryPotterApp.repositories.StudentRepositoryImpl;
 import harryPotterApp.startingData.DataInitializer;
-import harryPotterApp.startingData.SingletonEntityManagerFactory;
+import harryPotterApp.startingData.EntityManagerFactory;
 import org.junit.jupiter.api.*;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
-import java.time.LocalDate;
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -30,13 +22,13 @@ class StudentRepositoryImplTest {
 
     @BeforeAll
     static void createData(){
-        em = SingletonEntityManagerFactory.getEmf().createEntityManager();
+        em = EntityManagerFactory.getEmf().createEntityManager();
         DataInitializer.addAllData(em);
     }
 
     @BeforeEach
     void setUp() {
-        em = SingletonEntityManagerFactory.getEmf().createEntityManager();
+        em = EntityManagerFactory.getEmf().createEntityManager();
         studentRepository = new StudentRepositoryImpl(em);
         characterRepository = new CharacterRepositoryImpl(em);
     }
