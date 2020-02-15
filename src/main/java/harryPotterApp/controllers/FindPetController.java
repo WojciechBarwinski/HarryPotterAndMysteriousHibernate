@@ -1,5 +1,6 @@
 package harryPotterApp.controllers;
 
+import harryPotterApp.dto.HPCharacterDto;
 import harryPotterApp.dto.PetDto;
 import harryPotterApp.services.PetService;
 import harryPotterApp.services.PetServiceImpl;
@@ -26,6 +27,11 @@ public class FindPetController extends HttpServlet {
         } else {
             req.setAttribute("noId",errorsMap.get("noId"));
             req.setAttribute("invalidId",errorsMap.get("invalidId"));
+            List<PetDto> allPets = petService.getAllPets();
+            List<HPCharacterDto> charactersWithoutPets = petService.getAllCharactersWithoutPet();
+            req.setAttribute("petsList", allPets);
+            req.setAttribute("ownersAvailable", charactersWithoutPets);
+            req.getRequestDispatcher("WEB-INF/view/pets.jsp").forward(req, resp);
         }
         req.getRequestDispatcher("WEB-INF/view/pets.jsp").forward(req, resp);
 

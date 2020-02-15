@@ -1,6 +1,7 @@
 package harryPotterApp.controllers;
 
 import harryPotterApp.dto.HPCharacterDto;
+import harryPotterApp.dto.PetDto;
 import harryPotterApp.services.HpCharacterService;
 import harryPotterApp.services.HpCharacterServiceImpl;
 import harryPotterApp.services.PetService;
@@ -38,6 +39,12 @@ public class AddPetController extends HttpServlet {
         petService.add(name,species, ownerId);
         req.setAttribute("name",name);
         req.setAttribute("species", species);
+
+        List<PetDto> allPets = petService.getAllPets();
+        List<HPCharacterDto> charactersWithoutPets = petService.getAllCharactersWithoutPet();
+        req.setAttribute("petsList", allPets);
+        req.setAttribute("ownersAvailable", charactersWithoutPets);
+        req.getRequestDispatcher("WEB-INF/view/pets.jsp").forward(req, resp);
 
         req.getRequestDispatcher("WEB-INF/view/pets.jsp").forward(req, resp);
 
