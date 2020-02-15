@@ -4,8 +4,8 @@
     DONE - doPost in doGet
     
 ####HpCharacterServiceImpl:
-    - prepareCharacterToView(Long id) - od if() to student and position List
-    - "List<HPCharacterDto> allCharacters" as variable in controller where its use more then 1
+    DONE - prepareCharacterToView(Long id) - od if() to student and position List
+    DONE - "List<HPCharacterDto> allCharacters" as variable in controller where its use more then 1
     DONE - in view, as house use house name
     - handl exeption when delete character what was deleted in another web
     
@@ -15,7 +15,7 @@
 ####ValidationService
      DONE - all pattern as property
 ####SingletonEntityManagerFactory
-    - refactor and rename, it's not singleton  
+    DONE - refactor and rename, it's not singleton  
     
 ##___________________
 ##2. Test  

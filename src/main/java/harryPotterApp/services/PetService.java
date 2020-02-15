@@ -10,10 +10,8 @@ import java.util.List;
 public interface PetService {
 
     List<PetDto> getAllPets();
-
     List<PetDto> findById (String id);
-
     List<HPCharacterDto> getAllCharactersWithoutPet();
-
-    void add(String name, String species, Long id);
+    void add(String name, String species, String ownerData);
+    Long getOwnerIdByFirstAndLastName(String ownerData);
 }

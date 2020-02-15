@@ -22,23 +22,22 @@ public class AddPetController extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String name = req.getParameter("name");
         String species = req.getParameter("species");
-        String[] ownerData = req.getParameter("owner").split(" ");
-        String firstName = ownerData[0];
-        String lastName = ownerData[1];
+        String owner = req.getParameter("owner");
 
+
+
+
+
+        petService.add(name,species, owner);
         Map<String, String> errorsMap = ValidationService.validateAddingPet(name, species, lastName);
         if (errorsMap.isEmpty()) {
             List<HPCharacterDto> allCharacters = hpCharacterService.getAllCharacters();
 
-            Long ownerId = allCharacters.stream()
-                    .filter(hpCharacterDto -> hpCharacterDto.getFirstName().equals(firstName))
-                    .filter(hpCharacterDto -> hpCharacterDto.getLastName().equals(lastName))
-                    .map(HPCharacterDto::getId)
-                    .findFirst().get();
 
-            petService.add(name, species, ownerId);
-            req.setAttribute("name", name);
-            req.setAttribute("species", species);
+
+
+        req.setAttribute("name",name);
+        req.setAttribute("species", species);
 
             List<PetDto> allPets = petService.getAllPets();
             List<HPCharacterDto> charactersWithoutPets = petService.getAllCharactersWithoutPet();
@@ -55,4 +54,5 @@ public class AddPetController extends HttpServlet {
         req.getRequestDispatcher("WEB-INF/view/pets.jsp").forward(req, resp);
     }
 
+    }
 }
