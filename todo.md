@@ -1,24 +1,19 @@
 ##1. To Change
 ####ShowCharacterController:
-    - delete factory
-    - doPost in doGet
+    DONE - delete factory
+    DONE - doPost in doGet
     
 ####HpCharacterServiceImpl:
-    - static method with privet constructor
     - prepareCharacterToView(Long id) - od if() to student and position List
     - "List<HPCharacterDto> allCharacters" as variable in controller where its use more then 1
     DONE - in view, as house use house name
     - handl exeption when delete character what was deleted in another web
     
-####PetServiceImpl:
-    - static method with privet constructor
-    
 ####HomeController
-    - delete unnecessary code
+    DONE - delete unnecessary code
       
 ####ValidationService
-     - refactoring: one method to each input data type (one for name, one for lastName etc)
-     - all pattern as property
+     DONE - all pattern as property
 ####SingletonEntityManagerFactory
     - refactor and rename, it's not singleton  
     
@@ -33,6 +28,7 @@
     test all small validator 
     
 ###3. New feat
+
 #####Character
     when create character, check name and lastName and block create when character is in DB
     option to find character by firstName and/or(?) lastName
@@ -49,5 +45,8 @@
 #####Another
     login
     register
+    add option to filtr data in view ASD/DCS
+    add "next page" of data
+    add view only for example 10 position in table
     
     

@@ -1,7 +1,7 @@
 package harryPotterApp.controllers;
 
 import harryPotterApp.startingData.DataInitializer;
-import harryPotterApp.startingData.SingletonEntityManagerFactory;
+import harryPotterApp.startingData.EntityManagerFactory;
 
 import javax.persistence.EntityManager;
 import javax.servlet.ServletException;
@@ -13,12 +13,7 @@ import java.io.IOException;
 
 @WebServlet("/home")
 public class HomeController extends HttpServlet {
-    //EntityManagerFactory emf = Persistence.createEntityManagerFactory("ORM");
-
-    EntityManager entityManager = SingletonEntityManagerFactory.getEmf().createEntityManager();
-
-    //private HpCharacterService hpCharacterService = new HpCharacterServiceImpl();
-
+    EntityManager entityManager = EntityManagerFactory.getEmf().createEntityManager();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

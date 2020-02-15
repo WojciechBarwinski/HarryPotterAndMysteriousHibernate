@@ -14,5 +14,5 @@ public interface StudentRepository  {
     void delete(Student student);
     List<Student> findAllStudentsFromHouse(House house);
     List<Student> findStudentsByLastName(String lastName);
-    List <Student> findStudentByIdCharacter(Long id);
+    Student findStudentByIdCharacter(Long id);
 }

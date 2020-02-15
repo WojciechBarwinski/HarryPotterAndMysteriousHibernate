@@ -24,9 +24,14 @@ public class ValidationService {
         return errorsMap;
     }
 
+    private static boolean isIdPresent(String id) {
+        List<HPCharacterDto> allCharacters = hpCharacterService.getAllCharacters();
+        return allCharacters.stream().map(HPCharacterDto::getId).anyMatch(x -> x.equals(Long.valueOf(id)));
+    }
+
     public static Map<String, String> addValidate(String firstName, String lastName, LocalDate birthDate){
         Map<String, String> errorsMap = new HashMap<>();
-        if (firstName.isBlank() || lastName.isBlank() || birthDate == null){
+        if (firstName.isBlank() || lastName.isBlank() || birthDate.toString().isEmpty()){
             errorsMap.put("noValue", "You dont entered all necessary");
         } else {
             if (!firstName.matches(firstNameRegex)){
@@ -40,10 +45,5 @@ public class ValidationService {
             }
         }
         return errorsMap;
-    }
-
-    private static boolean isIdPresent(String id) {
-        List<HPCharacterDto> allCharacters = hpCharacterService.getAllCharacters();
-        return allCharacters.stream().map(HPCharacterDto::getId).anyMatch(x -> x.equals(Long.valueOf(id)));
     }
 }

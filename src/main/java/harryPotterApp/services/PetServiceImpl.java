@@ -10,7 +10,7 @@ import harryPotterApp.repositories.CharacterRepository;
 import harryPotterApp.repositories.CharacterRepositoryImpl;
 import harryPotterApp.repositories.PetRepository;
 import harryPotterApp.repositories.PetRepositoryImpl;
-import harryPotterApp.startingData.SingletonEntityManagerFactory;
+import harryPotterApp.startingData.EntityManagerFactory;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class PetServiceImpl implements PetService {
-    private EntityManager em = SingletonEntityManagerFactory.getEmf().createEntityManager();
+    private EntityManager em = EntityManagerFactory.getEmf().createEntityManager();
     private PetRepository petRepository = new PetRepositoryImpl(em);
     CharacterRepository characterRepository = new CharacterRepositoryImpl(em);
 

@@ -21,9 +21,10 @@ public class FindCharacterController extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String idToFind = req.getParameter("idToFind");
         Map<String, String> errorsMap = ValidationService.searchValidate(idToFind);
+
         if (errorsMap.isEmpty()){
-            List<HPCharacterDto> allCharacters = characterService.findCharacterById(idToFind);
-            req.setAttribute("charactersList", allCharacters);
+            List<HPCharacterDto> foundedCharacter = characterService.findCharacterById(idToFind);
+            req.setAttribute("charactersList", foundedCharacter);
         } else {
             req.setAttribute("noId",errorsMap.get("noId"));
             req.setAttribute("invalidId",errorsMap.get("invalidId"));
