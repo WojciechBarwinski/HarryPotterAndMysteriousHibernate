@@ -17,4 +17,6 @@ public interface PetService {
 
     void add(String name, String species, Long id);
 
+    void deleteById(Long id);
+
 }

@@ -56,4 +56,12 @@ public class PetServiceImpl implements PetService {
         petRepository.add(new Pet(name,owner,species));
         transaction.commit();
     }
+
+    @Override
+    public void deleteById(Long id) {
+        EntityTransaction transaction = em.getTransaction();
+        transaction.begin();
+        petRepository.deletedById(id);
+        transaction.commit();
+    }
 }

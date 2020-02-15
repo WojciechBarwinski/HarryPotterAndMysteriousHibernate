@@ -54,9 +54,7 @@
                                     </td>
                                     <td>
                                         <form action="/delete-pet" method="post">
-                                            <button type="submit" class="btn btn-danger" name="idToDelete"
-                                                    value=${pet.id}>Delete
-                                            </button>
+                                            <button type="submit" class="btn btn-danger" name="idToDelete" value=${pet.id}>Delete</button>
                                         </form>
                                     </td>
                                 </tr>
