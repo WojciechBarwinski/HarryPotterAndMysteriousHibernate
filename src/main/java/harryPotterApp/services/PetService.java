@@ -16,4 +16,5 @@ public interface PetService {
     List<HPCharacterDto> getAllCharactersWithoutPet();
 
     void add(String name, String species, Long id);
+
 }
