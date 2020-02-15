@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
@@ -23,7 +22,7 @@ public class AddCharacterController extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String firstName = req.getParameter("firstName");
         String lastName = req.getParameter("lastName");
-        LocalDate birthDate = LocalDate.parse(req.getParameter("birthDate")); // data must by in "2016-08-16"
+        String birthDate = req.getParameter("birthDate");
 
         Map<String, String> errorsMap = ValidationService.addValidate(firstName, lastName, birthDate);
         if (errorsMap.isEmpty()){
@@ -37,7 +36,6 @@ public class AddCharacterController extends HttpServlet {
             req.setAttribute("wrongData", errorsMap.get("wrongData"));
         }
         req.getRequestDispatcher("WEB-INF/view/characters.jsp").forward(req, resp);
-
     }
 
     @Override

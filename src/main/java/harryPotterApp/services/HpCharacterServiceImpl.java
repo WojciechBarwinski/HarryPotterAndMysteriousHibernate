@@ -34,10 +34,10 @@ public class HpCharacterServiceImpl implements HpCharacterService {
     }
 
     @Override
-    public void addCharacter(String firstName, String lastName, LocalDate birthDate) {
+    public void addCharacter(String firstName, String lastName, String birthDate) {
         EntityTransaction transaction = em.getTransaction();
         transaction.begin();
-        characterRepository.add(new HPCharacter(firstName, lastName, birthDate));
+        characterRepository.add(new HPCharacter(firstName, lastName, LocalDate.parse(birthDate)));
         transaction.commit();
     }
 

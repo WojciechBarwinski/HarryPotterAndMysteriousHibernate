@@ -78,7 +78,7 @@
                     <input type="text" class="form-control mb-2 mr-sm-2" placeholder="Last name" name="lastName" id="lastName"></p>
 
                 <p><label for="birthDate" class="mr-sm-2">BirthDate:</label>
-                    <input type="date" class="form-control mb-2 mr-sm-2" placeholder="YYYY-MM-DD" name="birthDate" id="birthDate"></p>
+                    <input type="date" class="form-control mb-2 mr-sm-2" placeholder="YYYY-MM-DD" name="birthDate" id="birthDate" value=""></p>
                 <button type="submit" class="btn btn-primary mb-2">Add</button>
             </form>
             <p class="error" align="center">${noValue}</p>

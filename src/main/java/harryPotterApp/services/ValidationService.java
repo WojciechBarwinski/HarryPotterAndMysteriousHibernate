@@ -29,9 +29,9 @@ public class ValidationService {
         return allCharacters.stream().map(HPCharacterDto::getId).anyMatch(x -> x.equals(Long.valueOf(id)));
     }
 
-    public static Map<String, String> addValidate(String firstName, String lastName, LocalDate birthDate){
+    public static Map<String, String> addValidate(String firstName, String lastName, String birthDate){
         Map<String, String> errorsMap = new HashMap<>();
-        if (firstName.isBlank() || lastName.isBlank() || birthDate.toString().isEmpty()){
+        if (firstName.isBlank() || lastName.isBlank() || birthDate.isBlank()){
             errorsMap.put("noValue", "You dont entered all necessary");
         } else {
             if (!firstName.matches(firstNameRegex)){
@@ -40,7 +40,7 @@ public class ValidationService {
             if (!lastName.matches(lastNameRegex)){
                 errorsMap.put("wrongLastName", "You put invalid last name");
             }
-            if (birthDate.isAfter(LocalDate.now())){
+            if (LocalDate.parse(birthDate).isAfter(LocalDate.now())){
                 errorsMap.put("wrongData", "You must put date before today");
             }
         }
