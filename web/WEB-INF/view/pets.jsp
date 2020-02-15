@@ -72,6 +72,7 @@
                 <p><label for="name" class="mr-sm-2">Name:</label>
                     <input type="text" class="form-control mb-2 mr-sm-2" placeholder="Name" name="name" id="name"></p>
 
+
                 <p><label for="species" class="mr-sm-2">Species:</label>
                     <input type="text" class="form-control mb-2 mr-sm-2" placeholder="Species" name="species" id="species"></p>
 
@@ -88,6 +89,9 @@
 
                 <button type="submit" class="btn btn-primary mb-2">Add</button>
             </form>
+            <p class="error" align="center">${noValue}</p>
+            <p class="error" align="center">${wrongName}</p>
+            <p class="error" align="center">${wrongSpecies}</p>
             <br/>
             <br/>
             <br/>
