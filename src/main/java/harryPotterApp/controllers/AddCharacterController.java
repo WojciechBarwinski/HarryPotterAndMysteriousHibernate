@@ -37,5 +37,11 @@ public class AddCharacterController extends HttpServlet {
             req.setAttribute("wrongData", errorsMap.get("wrongData"));
         }
         req.getRequestDispatcher("WEB-INF/view/characters.jsp").forward(req, resp);
+
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.getRequestDispatcher("/show-characters").forward(req, resp);
     }
 }

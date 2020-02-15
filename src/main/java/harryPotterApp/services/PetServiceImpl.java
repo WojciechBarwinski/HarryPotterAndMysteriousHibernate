@@ -6,11 +6,14 @@ import harryPotterApp.entities.HPCharacter;
 import harryPotterApp.entities.Pet;
 import harryPotterApp.mappers.HPCharacterMapper;
 import harryPotterApp.mappers.PetMapper;
+import harryPotterApp.repositories.CharacterRepository;
+import harryPotterApp.repositories.CharacterRepositoryImpl;
 import harryPotterApp.repositories.PetRepository;
 import harryPotterApp.repositories.PetRepositoryImpl;
 import harryPotterApp.startingData.SingletonEntityManagerFactory;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,6 +21,7 @@ import java.util.stream.Collectors;
 public class PetServiceImpl implements PetService {
     private EntityManager em = SingletonEntityManagerFactory.getEmf().createEntityManager();
     private PetRepository petRepository = new PetRepositoryImpl(em);
+    CharacterRepository characterRepository = new CharacterRepositoryImpl(em);
 
     @Override
     public List<PetDto> getAllPets() {
@@ -42,5 +46,14 @@ public class PetServiceImpl implements PetService {
                 .map(HPCharacterMapper::mapToHPCharacterDto)
                 .collect(Collectors.toList());
         return charactersWithoutPet;
+    }
+
+    @Override
+    public void add(String name, String species, Long id) {
+        EntityTransaction transaction = em.getTransaction();
+        transaction.begin();
+        HPCharacter owner = characterRepository.findById(id);
+        petRepository.add(new Pet(name,owner,species));
+        transaction.commit();
     }
 }

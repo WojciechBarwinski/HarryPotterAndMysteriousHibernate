@@ -73,8 +73,7 @@
                     <input type="text" class="form-control mb-2 mr-sm-2" placeholder="Name" name="name" id="name"></p>
 
                 <p><label for="species" class="mr-sm-2">Species:</label>
-                    <input type="text" class="form-control mb-2 mr-sm-2" placeholder="Species" name="species"
-                           id="species"></p>
+                    <input type="text" class="form-control mb-2 mr-sm-2" placeholder="Species" name="species" id="species"></p>
 
 
                 <p><label for="owners" class="mr-sm-2">Owners:</label>
