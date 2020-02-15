@@ -48,7 +48,7 @@ public class ValidationService {
 
     public static Map<String, String> validateAddingPet(String name, String species, String owner) {
         Map<String, String> errorsMap = new HashMap<>();
-        if (name.isBlank() || species.isBlank() || owner.isBlank()) {
+        if (name.isBlank() || species.isBlank() || owner == null) {
             errorsMap.put("noValue", "You dont entered all necessary data");
         } else {
             if (!name.matches(baseRegex)) {

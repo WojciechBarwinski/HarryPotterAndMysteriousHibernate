@@ -24,29 +24,19 @@ public class AddPetController extends HttpServlet {
         String species = req.getParameter("species");
         String owner = req.getParameter("owner");
 
+        Map<String, String> errorsMap = ValidationService.validateAddingPet(name, species, owner);
+        List<HPCharacterDto> charactersWithoutPets = petService.getAllCharactersWithoutPet();
+        req.setAttribute("ownersAvailable", charactersWithoutPets);
 
-
-
-
-        petService.add(name,species, owner);
-        Map<String, String> errorsMap = ValidationService.validateAddingPet(name, species, lastName);
         if (errorsMap.isEmpty()) {
-            List<HPCharacterDto> allCharacters = hpCharacterService.getAllCharacters();
-
-
-
-
-        req.setAttribute("name",name);
-        req.setAttribute("species", species);
-
+            petService.add(name, species, owner);
+            req.setAttribute("name", name);
+            req.setAttribute("species", species);
             List<PetDto> allPets = petService.getAllPets();
-            List<HPCharacterDto> charactersWithoutPets = petService.getAllCharactersWithoutPet();
             req.setAttribute("petsList", allPets);
-            req.setAttribute("ownersAvailable", charactersWithoutPets);
 
         } else {
-            List<HPCharacterDto> charactersWithoutPets = petService.getAllCharactersWithoutPet();
-            req.setAttribute("ownersAvailable", charactersWithoutPets);
+
             req.setAttribute("noValue", errorsMap.get("noValue"));
             req.setAttribute("wrongName", errorsMap.get("wrongName"));
             req.setAttribute("wrongSpecies", errorsMap.get("wrongSpecies"));
@@ -54,5 +44,4 @@ public class AddPetController extends HttpServlet {
         req.getRequestDispatcher("WEB-INF/view/pets.jsp").forward(req, resp);
     }
 
-    }
 }

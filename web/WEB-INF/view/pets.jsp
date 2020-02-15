@@ -54,9 +54,7 @@
                                     </td>
                                     <td>
                                         <form action="/delete-pet" method="post">
-                                            <button type="submit" class="btn btn-danger" name="idToDelete"
-                                                    value=${pet.id}>Delete
-                                            </button>
+                                            <button type="submit" class="btn btn-danger" name="idToDelete" value=${pet.id}>Delete</button>
                                         </form>
                                     </td>
                                 </tr>
@@ -79,7 +77,7 @@
 
                 <p><label for="owners" class="mr-sm-2">Owners:</label>
                     <select class="form-control mr-sm-2" id="owners" name="owner">
-                        <option value="" disabled selected value>Select</option>
+                        <option value=" " disabled selected value>Select</option>
                         <c:forEach items="${ownersAvailable}" var="owner">
                             <option>${owner.firstName} ${owner.lastName}</option>
                         </c:forEach>
