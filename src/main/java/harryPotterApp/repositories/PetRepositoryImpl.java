@@ -4,6 +4,7 @@ import harryPotterApp.entities.HPCharacter;
 import harryPotterApp.entities.Pet;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import java.util.List;

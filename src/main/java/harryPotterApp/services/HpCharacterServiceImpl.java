@@ -7,6 +7,8 @@ import harryPotterApp.mappers.HPCharacterMapper;
 import harryPotterApp.startingData.EntityManagerFactory;
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
+import org.hibernate.proxy.HibernateProxy;
+import org.hibernate.proxy.HibernateProxyHelper;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
@@ -51,7 +53,7 @@ public class HpCharacterServiceImpl implements HpCharacterService {
     }
 
     /* TODO
-    * It's list because we add find by name/last name, and there it will by list.*/
+     * It's list because we add find by name/last name, and there it will by list.*/
     @Override
     public List<HPCharacterDto> findCharacterById(String id) {
         List<HPCharacterDto> foundedCharacter = new ArrayList<>();
@@ -62,31 +64,27 @@ public class HpCharacterServiceImpl implements HpCharacterService {
 
     @Override
     public HPCharacterDto prepareCharacterToView(Long id) {
+        em.clear();
         HPCharacter character = characterRepository.findById(id);
-        em.refresh(character);
         HPCharacterDto hpCharacterDto = HPCharacterMapper.mapToHPCharacterDto(character);
-
+        
         Student studentByIdCharacter = studentRepository.findStudentByIdCharacter(id);
         List<HogwartsJob> jobByIdCharacter = hogwartsJobRepository.findJobByIdCharacter(id);
         HPLocation location = locationRepository.findByCharacterId(id);
-        Pet pet = petRepository.getPetByOwnerId(id);
-        List <Item> itemList = itemRepository.getItemByOwnerID(id);
+        List<Item> itemList = itemRepository.getItemByOwnerID(id);
 
-      if (!(studentByIdCharacter == null)){
-          hpCharacterDto.setStudent(studentByIdCharacter);
-      }
-      if (!jobByIdCharacter.isEmpty()){
-          hpCharacterDto.setHogwartsJob(jobByIdCharacter);
-      }
-      if (!(location == null)){
-          hpCharacterDto.setLocation(location.getLocationName());
-      }
-      if (!(pet == null)){
-          hpCharacterDto.setPet(pet);
-      }
-      if (!itemList.isEmpty()){
-          hpCharacterDto.setItemList(itemList);
-      }
+        if (!(studentByIdCharacter == null)) {
+            hpCharacterDto.setStudent(studentByIdCharacter);
+        }
+        if (!jobByIdCharacter.isEmpty()) {
+            hpCharacterDto.setHogwartsJob(jobByIdCharacter);
+        }
+        if (!(location == null)) {
+            hpCharacterDto.setLocation(location.getLocationName());
+        }
+        if (!itemList.isEmpty()) {
+            hpCharacterDto.setItemList(itemList);
+        }
         return hpCharacterDto;
     }
 
