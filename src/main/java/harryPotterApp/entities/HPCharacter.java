@@ -1,12 +1,12 @@
 package harryPotterApp.entities;
 
+import lombok.Builder;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.*;
-
 @Entity
 @Table(name = "HPCharacter")
 public class HPCharacter {

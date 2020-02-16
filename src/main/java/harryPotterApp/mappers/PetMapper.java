@@ -13,16 +13,18 @@ public class PetMapper {
     }
 
     public static PetDto mapToPetDto(Pet pet) {
-        PetDto petDto = new PetDto();
-        petDto.setId(pet.getId());
-        petDto.setName(pet.getName());
-        petDto.setSpecies(pet.getSpecies());
-        petDto.setOwner(pet.getOwner());
+        PetDto dto = PetDto.builder()
+                .id(pet.getId())
+                .name(pet.getName())
+                .species(pet.getSpecies())
+                .owner(pet.getOwner())
+                .build();
+
         if (Objects.isNull(pet.getImagePath())) {
-            petDto.setImagePath(altImagePath);
+            dto.setImagePath(altImagePath);
         } else {
-            petDto.setImagePath(pet.getImagePath());
+            dto.setImagePath(pet.getImagePath());
         }
-        return petDto;
+        return dto;
     }
 }
