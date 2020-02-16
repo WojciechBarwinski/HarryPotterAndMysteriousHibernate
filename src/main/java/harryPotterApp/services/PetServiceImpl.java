@@ -61,6 +61,7 @@ public class PetServiceImpl implements PetService {
         EntityTransaction transaction = em.getTransaction();
         transaction.begin();
         petRepository.deletedById(id);
+
         transaction.commit();
     }
 
