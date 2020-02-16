@@ -12,4 +12,6 @@ public interface PetRepository {
     void deletedById(Long id);
     List<Pet> getAllPets();
     List<HPCharacter> getAllCharactersWithoutPet();
+
+    Pet getPetByOwnerId(Long id);
 }

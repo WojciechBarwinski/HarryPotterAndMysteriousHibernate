@@ -34,6 +34,8 @@ public class AddPetController extends HttpServlet {
             req.setAttribute("species", species);
             List<PetDto> allPets = petService.getAllPets();
             req.setAttribute("petsList", allPets);
+/*            Long ownerIdByFirstAndLastName = petService.getOwnerIdByFirstAndLastName(owner);
+            hpCharacterService.prepareCharacterToView(ownerIdByFirstAndLastName);*/
 
         } else {
 

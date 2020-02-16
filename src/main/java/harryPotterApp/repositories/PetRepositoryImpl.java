@@ -52,4 +52,13 @@ public class PetRepositoryImpl implements PetRepository {
         List resultList = query.getResultList();
         return resultList;
     }
+
+    @Override
+    public Pet getPetByOwnerId(Long id) {
+        Query query = em.createQuery("SELECT pet From Pet as pet where pet.owner.id =:id").setParameter("id", id);
+        if (query.getResultList().isEmpty()){
+            return null;
+        }
+        return (Pet) query.getSingleResult();
+    }
 }

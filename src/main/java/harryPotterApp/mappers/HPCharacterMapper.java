@@ -19,8 +19,9 @@ public class HPCharacterMapper {
                 .firstName(hpCharacter.getFirstName())
                 .lastName(hpCharacter.getLastName())
                 .birthDate(hpCharacter.getBirthDate())
-                .pet(hpCharacter.getPet())
+                //.pet(hpCharacter.getPet())
                 .build();
+
         if (Objects.isNull(hpCharacter.getImagePath())) {
             dto.setImagePath(altImagePath);
         } else {

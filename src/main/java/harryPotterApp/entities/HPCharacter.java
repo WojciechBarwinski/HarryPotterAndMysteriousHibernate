@@ -45,7 +45,7 @@ public class HPCharacter {
     private HPLocation location;
 
     @Setter
-    @OneToOne(mappedBy = "owner", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "owner", cascade = CascadeType.ALL)
     private Pet pet;
 
 

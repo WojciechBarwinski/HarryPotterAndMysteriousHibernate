@@ -1,10 +1,7 @@
 package harryPotterApp.services;
 
 import harryPotterApp.dto.HPCharacterDto;
-import harryPotterApp.entities.HPCharacter;
-import harryPotterApp.entities.HPLocation;
-import harryPotterApp.entities.HogwartsJob;
-import harryPotterApp.entities.Student;
+import harryPotterApp.entities.*;
 import harryPotterApp.repositories.*;
 import harryPotterApp.mappers.HPCharacterMapper;
 import harryPotterApp.startingData.EntityManagerFactory;
@@ -22,6 +19,7 @@ public class HpCharacterServiceImpl implements HpCharacterService {
     private HogwartsJobRepository hogwartsJobRepository = new HogwartsJobRepositoryImpl(em);
     private StudentRepository studentRepository = new StudentRepositoryImpl(em);
     private HPLocationRepository locationRepository = new HPLocationRepositoryImpl(em);
+    private PetRepository petRepository = new PetRepositoryImpl(em);
 
     @Override
     public List<HPCharacterDto> getAllCharacters() {
@@ -67,6 +65,7 @@ public class HpCharacterServiceImpl implements HpCharacterService {
         Student studentByIdCharacter = studentRepository.findStudentByIdCharacter(id);
         List<HogwartsJob> jobByIdCharacter = hogwartsJobRepository.findJobByIdCharacter(id);
         HPLocation location = locationRepository.findByCharacterId(id);
+        Pet pet = petRepository.getPetByOwnerId(id);
 
       if (!(studentByIdCharacter == null)){
           hpCharacterDto.setStudent(studentByIdCharacter);
@@ -76,6 +75,9 @@ public class HpCharacterServiceImpl implements HpCharacterService {
       }
       if (!(location == null)){
           hpCharacterDto.setLocation(location.getLocationName());
+      }
+      if (!(pet == null)){
+          hpCharacterDto.setPet(pet);
       }
         return hpCharacterDto;
     }
