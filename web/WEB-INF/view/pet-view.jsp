@@ -5,6 +5,11 @@
     <title>${pet.name}</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <style>
+        p.error {
+            color: red;
+        }
+    </style>
 </head>
 <body>
 <%@include file="/WEB-INF/component/header.jsp" %>
@@ -18,12 +23,14 @@
             <c:set var="noImg" value="/image/tmpFoto.jpg" />
             <c:set var="imagePath" value="${pet.imagePath}"/>
             <c:if test="${noImg == imagePath}">
-            <form action="" class="justify-content-center" method="post">
-                <label for="id" class="mr-sm-2">Link to image</label>
-                <input type="text" class="form-control mb-2 mr-sm-2" placeholder="link to image" name="imagesPath" id="id">
-                <button type="submit" class="btn btn-primary" name="idToDelete">Add image</button>
-            </form>
+                <form action="/add-photo-to-pet" class="justify-content-center" method="post" name="petId" value="${pet.id}">
+                    <label for="id" class="mr-sm-2">Link to image</label>
+                    <input type="text" class="form-control mb-2 mr-sm-2" placeholder="https: ... .jpg/.png" name="imagesPath" id="id">
+                    <button type="submit" class="btn btn-primary" name="petId" value=${pet.id}>Add image</button>
+                </form>
             </c:if>
+            <p class="error" align="center">${noValue}</p>
+            <p class="error" align="center">${wrongPath}</p>
         </div>
         <div class="col-md-4 col-md-offset-3">
             <h3>${pet.name}</h3>

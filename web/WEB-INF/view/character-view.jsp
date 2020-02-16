@@ -24,7 +24,7 @@
                 <c:set var="noImg" value="/image/tmpFoto.jpg" />
                 <c:set var="imagePath" value="${character.imagePath}"/>
             <c:if test="${noImg == imagePath}">
-                <form action="/add-photo" class="justify-content-center" method="post" name="characterId" value="${character.id}">
+                <form action="/add-photo-to-character" class="justify-content-center" method="post" name="characterId" value="${character.id}">
                     <label for="id" class="mr-sm-2">Link to image</label>
                     <input type="text" class="form-control mb-2 mr-sm-2" placeholder="https: ... .jpg/.png" name="imagesPath" id="id">
                     <button type="submit" class="btn btn-primary" name="characterId" value=${character.id}>Add image</button>

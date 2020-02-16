@@ -67,7 +67,7 @@ public class HpCharacterServiceImpl implements HpCharacterService {
         em.clear();
         HPCharacter character = characterRepository.findById(id);
         HPCharacterDto hpCharacterDto = HPCharacterMapper.mapToHPCharacterDto(character);
-        
+
         Student studentByIdCharacter = studentRepository.findStudentByIdCharacter(id);
         List<HogwartsJob> jobByIdCharacter = hogwartsJobRepository.findJobByIdCharacter(id);
         HPLocation location = locationRepository.findByCharacterId(id);

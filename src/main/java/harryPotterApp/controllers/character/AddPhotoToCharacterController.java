@@ -1,6 +1,7 @@
 package harryPotterApp.controllers.character;
 
 import harryPotterApp.dto.HPCharacterDto;
+import harryPotterApp.entities.EntityType;
 import harryPotterApp.services.*;
 
 import javax.servlet.ServletException;
@@ -11,10 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Map;
 
-@WebServlet("/add-photo")
-public class AddPhotoController extends HttpServlet {
+@WebServlet("/add-photo-to-character")
+public class AddPhotoToCharacterController extends HttpServlet {
     HpCharacterService characterService = new HpCharacterServiceImpl();
-    PhotoService photoService = new PhotoServiceImpl();
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -23,7 +23,7 @@ public class AddPhotoController extends HttpServlet {
         Map<String, String> errorsMap = ValidationService.validateImagePath(imagePath);
 
         if (errorsMap.isEmpty()){
-            photoService.addPhotoToCharacter(imagePath, characterId);
+            PhotoService.addPhoto(imagePath, characterId, EntityType.CHARACTER);
         } else {
             req.setAttribute("noValue", errorsMap.get("noValue"));
             req.setAttribute("wrongPath", errorsMap.get("wrongPath"));

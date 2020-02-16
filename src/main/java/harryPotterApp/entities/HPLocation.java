@@ -24,6 +24,8 @@ public class HPLocation {
     @OneToMany(mappedBy = "location", fetch = FetchType.LAZY)
     //@OnDelete(action = OnDeleteAction.CASCADE)
     private Set<HPCharacter> residents;
+    @Setter
+    private String imagePath;
 
     protected HPLocation() {
     }

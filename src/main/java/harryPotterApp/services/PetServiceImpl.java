@@ -79,6 +79,7 @@ public class PetServiceImpl implements PetService {
 
     @Override
     public PetDto preparePetForViewPage(Long id) {
+        em.clear();
         Pet petFromDB = petRepository.findById(id);
         PetDto petDto = PetMapper.mapToPetDto(petFromDB);
         return petDto;
