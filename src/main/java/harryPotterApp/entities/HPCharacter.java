@@ -48,7 +48,7 @@ public class HPCharacter {
     @OneToOne(mappedBy = "owner", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Pet pet;
 
-    @Setter
+
     @ManyToMany(mappedBy = "employees", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     Set<HogwartsJob> positions = new HashSet<>();
 
@@ -64,5 +64,9 @@ public class HPCharacter {
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthDate = birthDate;
+    }
+
+    public void setCharactersAsEmployee(HogwartsJob hogwartsJob) {
+        this.positions.add(hogwartsJob);
     }
 }

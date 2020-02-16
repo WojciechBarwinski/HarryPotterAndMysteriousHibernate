@@ -31,7 +31,7 @@ public class Item {
     @Column(nullable = false)
     private BigDecimal itemValue;
 
-    @Setter
+
     @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinTable(name = "items_owners", joinColumns = {@JoinColumn(foreignKey = @ForeignKey(name = "FK_item_id"))},
             inverseJoinColumns = {@JoinColumn(foreignKey = @ForeignKey(name = "FK_owner_id"))})
@@ -44,5 +44,9 @@ public class Item {
         this.itemType = itemType;
         this.itemName = itemName;
         this.itemValue = itemValue;
+    }
+
+    public void setItemOwners(HPCharacter hpCharacter) {
+        this.itemOwners.add(hpCharacter);
     }
 }

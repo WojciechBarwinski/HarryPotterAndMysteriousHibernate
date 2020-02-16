@@ -18,7 +18,7 @@ public class HogwartsJob {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Setter
+
     @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinTable(name = "Characters_Jobs", joinColumns = { @JoinColumn(foreignKey = @ForeignKey(name = "FK_job_id")) },
             inverseJoinColumns = { @JoinColumn(foreignKey = @ForeignKey(name = "FK_employee_id")) })
@@ -38,5 +38,9 @@ public class HogwartsJob {
     public HogwartsJob(BigDecimal salary, String positionName) {
         this.salary = salary;
         this.positionName = positionName;
+    }
+
+    public void setCharactersAsEmployee(HPCharacter hpCharacter) {
+        this.employees.add(hpCharacter);
     }
 }
