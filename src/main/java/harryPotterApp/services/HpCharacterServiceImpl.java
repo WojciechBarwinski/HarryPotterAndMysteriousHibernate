@@ -6,6 +6,7 @@ import harryPotterApp.repositories.*;
 import harryPotterApp.mappers.HPCharacterMapper;
 import harryPotterApp.startingData.EntityManagerFactory;
 import org.hibernate.Hibernate;
+import org.hibernate.Session;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
@@ -21,6 +22,7 @@ public class HpCharacterServiceImpl implements HpCharacterService {
     private StudentRepository studentRepository = new StudentRepositoryImpl(em);
     private HPLocationRepository locationRepository = new HPLocationRepositoryImpl(em);
     private PetRepository petRepository = new PetRepositoryImpl(em);
+    private ItemRepository itemRepository = new ItemRepositoryImpl(em);
 
     @Override
     public List<HPCharacterDto> getAllCharacters() {
@@ -61,13 +63,14 @@ public class HpCharacterServiceImpl implements HpCharacterService {
     @Override
     public HPCharacterDto prepareCharacterToView(Long id) {
         HPCharacter character = characterRepository.findById(id);
-
+        em.refresh(character);
         HPCharacterDto hpCharacterDto = HPCharacterMapper.mapToHPCharacterDto(character);
 
         Student studentByIdCharacter = studentRepository.findStudentByIdCharacter(id);
         List<HogwartsJob> jobByIdCharacter = hogwartsJobRepository.findJobByIdCharacter(id);
         HPLocation location = locationRepository.findByCharacterId(id);
         Pet pet = petRepository.getPetByOwnerId(id);
+        List <Item> itemList = itemRepository.getItemByOwnerID(id);
 
       if (!(studentByIdCharacter == null)){
           hpCharacterDto.setStudent(studentByIdCharacter);
@@ -80,6 +83,9 @@ public class HpCharacterServiceImpl implements HpCharacterService {
       }
       if (!(pet == null)){
           hpCharacterDto.setPet(pet);
+      }
+      if (!itemList.isEmpty()){
+          hpCharacterDto.setItemList(itemList);
       }
         return hpCharacterDto;
     }

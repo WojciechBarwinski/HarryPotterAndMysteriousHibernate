@@ -1,6 +1,7 @@
 package harryPotterApp.dto;
 
 import harryPotterApp.entities.HogwartsJob;
+import harryPotterApp.entities.Item;
 import harryPotterApp.entities.Pet;
 import harryPotterApp.entities.Student;
 import lombok.Builder;
@@ -23,4 +24,5 @@ public class HPCharacterDto {
     private List<HogwartsJob> hogwartsJob;
     private Student student;
     private String location;
+    private List<Item> itemList;
 }

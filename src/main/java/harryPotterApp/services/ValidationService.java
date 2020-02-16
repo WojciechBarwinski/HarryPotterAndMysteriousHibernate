@@ -11,6 +11,7 @@ import java.util.Map;
 public class ValidationService {
     private static HpCharacterService hpCharacterService = new HpCharacterServiceImpl();
     private static String baseRegex = "^[A-Z][a-z]{2,15}$";// only latter, first big, rest norm, minimum 3 letters, max 10 letters
+    private static String imagePathRegex = "^https:.*(jpg$)|(png$)";
 
 
     public static Map<String, String> searchValidate(String userInput) {
@@ -57,6 +58,16 @@ public class ValidationService {
             if (!species.matches(baseRegex)) {
                 errorsMap.put("wrongSpecies", "You put invalid species");
             }
+        }
+        return errorsMap;
+    }
+
+    public static Map<String, String> validateImagePath(String imagePath) {
+        Map<String, String> errorsMap = new HashMap<>();
+        if (imagePath.isBlank()){
+            errorsMap.put("noValue", "You dont entered all necessary data");
+        } else if(!imagePath.matches(imagePathRegex)){
+            errorsMap.put("wrongPath", "You put invalid image path");
         }
         return errorsMap;
     }

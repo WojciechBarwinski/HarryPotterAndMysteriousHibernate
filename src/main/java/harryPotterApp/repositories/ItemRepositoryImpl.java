@@ -3,6 +3,8 @@ package harryPotterApp.repositories;
 import harryPotterApp.entities.Item;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
+import java.util.List;
 import java.util.Objects;
 
 public class ItemRepositoryImpl implements ItemRepository {
@@ -35,5 +37,12 @@ public class ItemRepositoryImpl implements ItemRepository {
     public void deleteById(Long id) {
         Item item = findById(id);
         em.remove(item);
+    }
+
+    @Override
+    public List<Item> getItemByOwnerID(Long id) {
+        Query query = em.createQuery("SELECT item FROM Item as item JOIN item.itemOwners as oId where oId.id =:id")
+                .setParameter("id", id);
+        return query.getResultList();
     }
 }

@@ -1,4 +1,4 @@
-package harryPotterApp.controllers;
+package harryPotterApp.controllers.character;
 
 import harryPotterApp.dto.HPCharacterDto;
 import harryPotterApp.services.HpCharacterService;

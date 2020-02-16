@@ -22,14 +22,14 @@ public class Item {
     @Setter
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private ItemType itemType;
+    private ItemType type;
 
     @Setter
-    private String itemName;
+    private String name;
 
     @Setter
     @Column(nullable = false)
-    private BigDecimal itemValue;
+    private BigDecimal value;
 
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
@@ -40,10 +40,10 @@ public class Item {
     protected Item() {
     }
 
-    public Item(ItemType itemType, String itemName, BigDecimal itemValue) {
-        this.itemType = itemType;
-        this.itemName = itemName;
-        this.itemValue = itemValue;
+    public Item(ItemType type, String name, BigDecimal value) {
+        this.type = type;
+        this.name = name;
+        this.value = value;
     }
 
     public void setItemOwners(HPCharacter hpCharacter) {

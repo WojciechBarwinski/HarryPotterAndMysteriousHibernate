@@ -6,6 +6,11 @@
     <title>${character.firstName} ${character.lastName}</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <style>
+        p.error {
+            color: red;
+        }
+    </style>
 </head>
 <body>
 <%@include file="/WEB-INF/component/header.jsp" %>
@@ -19,12 +24,14 @@
                 <c:set var="noImg" value="/image/tmpFoto.jpg" />
                 <c:set var="imagePath" value="${character.imagePath}"/>
             <c:if test="${noImg == imagePath}">
-                <form action="" class="justify-content-center" method="post">
+                <form action="/add-photo" class="justify-content-center" method="post" name="characterId" value="${character.id}">
                     <label for="id" class="mr-sm-2">Link to image</label>
-                    <input type="text" class="form-control mb-2 mr-sm-2" placeholder="link to image" name="imagesPath" id="id">
-                    <button type="submit" class="btn btn-primary" name="idToDelete">Add image</button>
+                    <input type="text" class="form-control mb-2 mr-sm-2" placeholder="https: ... .jpg/.png" name="imagesPath" id="id">
+                    <button type="submit" class="btn btn-primary" name="characterId" value=${character.id}>Add image</button>
                 </form>
             </c:if>
+            <p class="error" align="center">${noValue}</p>
+            <p class="error" align="center">${wrongPath}</p>
         </div>
 
         <div class="col-md-4 col-md-offset-3">
@@ -51,6 +58,16 @@
 
             <c:if test="${fn:length(character.location) > 0}">
                 <h5>Location: ${character.location}</h5>
+            </c:if>
+
+            <c:if test="${fn:length(character.itemList) > 0}">
+                <h5>Items:
+                    <ul>
+                        <c:forEach items="${character.itemList}" var="item">
+                            <li>${item.type}: ${item.name}</li>
+                        </c:forEach>
+                    </ul>
+                </h5>
             </c:if>
         </div>
 

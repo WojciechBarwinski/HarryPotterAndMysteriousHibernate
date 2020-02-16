@@ -1,4 +1,4 @@
-package harryPotterApp.controllers;
+package harryPotterApp.controllers.pet;
 
 import harryPotterApp.dto.HPCharacterDto;
 import harryPotterApp.dto.PetDto;

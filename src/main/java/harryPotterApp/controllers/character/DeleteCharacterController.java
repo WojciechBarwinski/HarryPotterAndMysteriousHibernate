@@ -1,4 +1,4 @@
-package harryPotterApp.controllers;
+package harryPotterApp.controllers.character;
 
 import harryPotterApp.services.HpCharacterService;
 import harryPotterApp.services.HpCharacterServiceImpl;
