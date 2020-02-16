@@ -14,5 +14,4 @@ public class PetDto {
     private String species;
     private HPCharacter owner;
     private String imagePath;
-
 }

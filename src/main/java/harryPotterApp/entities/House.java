@@ -1,10 +1,10 @@
 package harryPotterApp.entities;
 
 public enum House {
-    GRYFFINDOR ("Gryffindor"),
-    RAVENCLAW ("Ravenclaw"),
-    HUFFLEPUFF ("Hufflepuff"),
-    SLYTHERIN ("Slytherin");
+    GRYFFINDOR("Gryffindor"),
+    RAVENCLAW("Ravenclaw"),
+    HUFFLEPUFF("Hufflepuff"),
+    SLYTHERIN("Slytherin");
 
     private String name;
 

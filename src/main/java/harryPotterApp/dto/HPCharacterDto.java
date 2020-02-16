@@ -9,6 +9,7 @@ import lombok.Setter;
 
 import java.time.LocalDate;
 import java.util.List;
+
 @Builder
 @Getter
 @Setter
@@ -22,5 +23,4 @@ public class HPCharacterDto {
     private List<HogwartsJob> hogwartsJob;
     private Student student;
     private String location;
-
 }

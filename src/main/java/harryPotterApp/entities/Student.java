@@ -1,11 +1,16 @@
 package harryPotterApp.entities;
 
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.util.Objects;
 
+@EqualsAndHashCode
+@Getter
 @Entity
 @Table(name = "Students")
 public class Student {
@@ -14,13 +19,16 @@ public class Student {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Setter
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "character_id", foreignKey = @ForeignKey(name = "FK_student_character_id"))
     @OnDelete(action = OnDeleteAction.CASCADE)
     private HPCharacter hpCharacter;
 
+    @Setter
     private Integer yearOfStudy;
 
+    @Setter
     @Enumerated(EnumType.STRING)
     private House house;
 
@@ -32,48 +40,5 @@ public class Student {
         this.hpCharacter = hpCharacter;
         this.yearOfStudy = yearOfStudy;
         this.house = house;
-    }
-
-    public Long getId() {
-        return id;
-    }
-    public HPCharacter getHpCharacter() {
-        return hpCharacter;
-    }
-
-    public void setHpCharacter(HPCharacter hpCharacter) {
-        this.hpCharacter = hpCharacter;
-    }
-
-    public Integer getYearOfStudy() {
-        return yearOfStudy;
-    }
-
-    public void setYearOfStudy(Integer yearOfStudy) {
-        this.yearOfStudy = yearOfStudy;
-    }
-
-    public House getHouse() {
-        return house;
-    }
-
-    public void setHouse(House house) {
-        this.house = house;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Student student = (Student) o;
-        return Objects.equals(id, student.id) &&
-                Objects.equals(hpCharacter, student.hpCharacter) &&
-                Objects.equals(yearOfStudy, student.yearOfStudy) &&
-                house == student.house;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, hpCharacter, yearOfStudy, house);
     }
 }
