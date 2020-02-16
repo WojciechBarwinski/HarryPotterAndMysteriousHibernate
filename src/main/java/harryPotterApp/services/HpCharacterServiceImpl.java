@@ -5,6 +5,7 @@ import harryPotterApp.entities.*;
 import harryPotterApp.repositories.*;
 import harryPotterApp.mappers.HPCharacterMapper;
 import harryPotterApp.startingData.EntityManagerFactory;
+import org.hibernate.Hibernate;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
@@ -60,6 +61,7 @@ public class HpCharacterServiceImpl implements HpCharacterService {
     @Override
     public HPCharacterDto prepareCharacterToView(Long id) {
         HPCharacter character = characterRepository.findById(id);
+
         HPCharacterDto hpCharacterDto = HPCharacterMapper.mapToHPCharacterDto(character);
 
         Student studentByIdCharacter = studentRepository.findStudentByIdCharacter(id);
