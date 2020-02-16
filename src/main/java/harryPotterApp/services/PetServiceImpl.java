@@ -75,6 +75,12 @@ public class PetServiceImpl implements PetService {
                 .filter(hpCharacterDto -> hpCharacterDto.getLastName().equals(lastName))
                 .map(HPCharacter::getId)
                 .findFirst().get();
+    }
 
+    @Override
+    public PetDto preparePetForViewPage(Long id) {
+        Pet petFromDB = petRepository.findById(id);
+        PetDto petDto = PetMapper.mapToPetDto(petFromDB);
+        return petDto;
     }
 }

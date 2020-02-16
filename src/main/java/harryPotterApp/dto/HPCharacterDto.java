@@ -3,10 +3,11 @@ package harryPotterApp.dto;
 import harryPotterApp.entities.HogwartsJob;
 import harryPotterApp.entities.Pet;
 import harryPotterApp.entities.Student;
+import lombok.Builder;
 
 import java.time.LocalDate;
 import java.util.List;
-
+@Builder
 public class HPCharacterDto {
     private Long id;
     private String firstName;
