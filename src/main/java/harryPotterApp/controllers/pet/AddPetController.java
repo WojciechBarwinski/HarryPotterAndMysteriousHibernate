@@ -16,7 +16,6 @@ import java.util.Map;
 @WebServlet("/add-pet")
 public class AddPetController extends HttpServlet {
     private PetService petService = new PetServiceImpl();
-    private HpCharacterService hpCharacterService = new HpCharacterServiceImpl();
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -27,18 +26,13 @@ public class AddPetController extends HttpServlet {
         Map<String, String> errorsMap = ValidationService.validateAddingPet(name, species, owner);
         List<HPCharacterDto> charactersWithoutPets = petService.getAllCharactersWithoutPet();
         req.setAttribute("ownersAvailable", charactersWithoutPets);
-
         if (errorsMap.isEmpty()) {
             petService.add(name, species, owner);
             req.setAttribute("name", name);
             req.setAttribute("species", species);
             List<PetDto> allPets = petService.getAllPets();
             req.setAttribute("petsList", allPets);
-/*            Long ownerIdByFirstAndLastName = petService.getOwnerIdByFirstAndLastName(owner);
-            hpCharacterService.prepareCharacterToView(ownerIdByFirstAndLastName);*/
-
         } else {
-
             req.setAttribute("noValue", errorsMap.get("noValue"));
             req.setAttribute("wrongName", errorsMap.get("wrongName"));
             req.setAttribute("wrongSpecies", errorsMap.get("wrongSpecies"));
@@ -48,6 +42,6 @@ public class AddPetController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("/show-pets").forward(req,resp);
+        req.getRequestDispatcher("/show-pets").forward(req, resp);
     }
 }

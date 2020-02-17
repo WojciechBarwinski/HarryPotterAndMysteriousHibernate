@@ -9,7 +9,7 @@ public class HPCharacterMapper {
 
     private static String altImagePath = "/image/tmpFoto.jpg";
 
-    private HPCharacterMapper() {
+    private HPCharacterMapper(){
 
     }
 

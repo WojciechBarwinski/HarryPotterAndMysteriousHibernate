@@ -16,16 +16,18 @@ public class PhotoService {
     private static HPLocationRepository locationRepository = new HPLocationRepositoryImpl(em);
     private static PetRepository petRepository = new PetRepositoryImpl(em);
 
-
-
     public static void addPhoto(String path, Long objectId, EntityType entityType) {
         EntityTransaction transaction = em.getTransaction();
-        switch (entityType){
-            case CHARACTER: addPhotoToCharacter(path, objectId, transaction);
+        switch (entityType) {
+            case CHARACTER:
+                addPhotoToCharacter(path, objectId, transaction);
                 break;
-            case PET: addPhotoToPet(path, objectId, transaction);
+            case PET:
+                addPhotoToPet(path, objectId, transaction);
                 break;
-            case LOCATION: addPhotoToLocation(path, objectId, transaction);
+            case LOCATION:
+                addPhotoToLocation(path, objectId, transaction);
+                break;
         }
     }
 
@@ -45,7 +47,7 @@ public class PhotoService {
         transaction.commit();
     }
 
-    private static void addPhotoToCharacter(String path, Long characterId, EntityTransaction transaction){
+    private static void addPhotoToCharacter(String path, Long characterId, EntityTransaction transaction) {
         HPCharacter character = characterRepository.findById(characterId);
         character.setImagePath(path);
         transaction.begin();

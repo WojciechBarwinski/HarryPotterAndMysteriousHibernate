@@ -5,7 +5,6 @@ import harryPotterApp.entities.HPLocation;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -50,7 +49,7 @@ public class HPLocationRepositoryImpl implements HPLocationRepository {
     @Override
     public HPLocation findByCharacterId(Long id) {
         Query query = em.createQuery("SELECT location FROM HPLocation as location JOIN location.residents res where res.id =:id").setParameter("id", id);
-        if (query.getResultList().isEmpty()){
+        if (query.getResultList().isEmpty()) {
             return null;
         }
         return (HPLocation) query.getSingleResult();

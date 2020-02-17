@@ -10,7 +10,7 @@ import java.util.Map;
 
 public class ValidationService {
     private static HpCharacterService hpCharacterService = new HpCharacterServiceImpl();
-    private static String baseRegex = "^[A-Z][a-z]{2,15}$";// only latter, first big, rest norm, minimum 3 letters, max 10 letters
+    private static String baseRegex = "^[A-Z][a-z]{2,15}$";
     private static String imagePathRegex = "^https:.*(jpg$)|(png$)";
 
 
@@ -25,8 +25,10 @@ public class ValidationService {
     }
 
     private static boolean isIdPresent(String id) {
-        List<HPCharacterDto> allCharacters = hpCharacterService.getAllCharacters();
-        return allCharacters.stream().map(HPCharacterDto::getId).anyMatch(x -> x.equals(Long.valueOf(id)));
+        return hpCharacterService.getAllCharacters()
+                .stream()
+                .map(HPCharacterDto::getId)
+                .anyMatch(characterId -> characterId.equals(Long.valueOf(id)));
     }
 
     public static Map<String, String> addValidate(String firstName, String lastName, String birthDate) {
@@ -43,8 +45,18 @@ public class ValidationService {
             if (LocalDate.parse(birthDate).isAfter(LocalDate.now())) {
                 errorsMap.put("wrongData", "You must put date before today");
             }
+            if (characterExists(firstName, lastName)) {
+                errorsMap.put("characterExists", "Character already exists");
+            }
         }
         return errorsMap;
+    }
+
+    private static boolean characterExists(String firstName, String lastName) {
+        return hpCharacterService.getAllCharacters()
+                .stream()
+                .anyMatch(hpCharacterDto -> hpCharacterDto.getFirstName().equals(firstName)
+                        && hpCharacterDto.getLastName().equals(lastName));
     }
 
     public static Map<String, String> validateAddingPet(String name, String species, String owner) {
@@ -64,9 +76,9 @@ public class ValidationService {
 
     public static Map<String, String> validateImagePath(String imagePath) {
         Map<String, String> errorsMap = new HashMap<>();
-        if (imagePath.isBlank()){
+        if (imagePath.isBlank()) {
             errorsMap.put("noValue", "You dont entered all necessary data");
-        } else if(!imagePath.matches(imagePathRegex)){
+        } else if (!imagePath.matches(imagePathRegex)) {
             errorsMap.put("wrongPath", "You put invalid image path");
         }
         return errorsMap;

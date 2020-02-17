@@ -27,6 +27,7 @@ public class CharacterRepositoryImpl implements CharacterRepository {
     public HPCharacter findById(Long id) {
         return em.find(HPCharacter.class, id);
     }
+
     @Override
     public HPCharacter update(HPCharacter characterToModify) {
         return em.merge(characterToModify);

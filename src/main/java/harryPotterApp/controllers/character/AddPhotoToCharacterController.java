@@ -2,7 +2,10 @@ package harryPotterApp.controllers.character;
 
 import harryPotterApp.dto.HPCharacterDto;
 import harryPotterApp.entities.EntityType;
-import harryPotterApp.services.*;
+import harryPotterApp.services.HpCharacterService;
+import harryPotterApp.services.HpCharacterServiceImpl;
+import harryPotterApp.services.PhotoService;
+import harryPotterApp.services.ValidationService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -22,7 +25,7 @@ public class AddPhotoToCharacterController extends HttpServlet {
         Long characterId = Long.valueOf(req.getParameter("characterId"));
         Map<String, String> errorsMap = ValidationService.validateImagePath(imagePath);
 
-        if (errorsMap.isEmpty()){
+        if (errorsMap.isEmpty()) {
             PhotoService.addPhoto(imagePath, characterId, EntityType.CHARACTER);
         } else {
             req.setAttribute("noValue", errorsMap.get("noValue"));

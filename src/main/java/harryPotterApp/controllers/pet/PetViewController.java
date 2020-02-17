@@ -19,7 +19,7 @@ public class PetViewController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String idToView = req.getParameter("idToView");
         PetDto petForView = petService.preparePetForViewPage(Long.parseLong(idToView));
-        req.setAttribute("pet",petForView);
-        req.getRequestDispatcher("WEB-INF/view/pet-view.jsp").forward(req,resp);
+        req.setAttribute("pet", petForView);
+        req.getRequestDispatcher("WEB-INF/view/pet-view.jsp").forward(req, resp);
     }
 }

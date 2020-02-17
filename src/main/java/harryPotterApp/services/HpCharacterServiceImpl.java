@@ -2,19 +2,16 @@ package harryPotterApp.services;
 
 import harryPotterApp.dto.HPCharacterDto;
 import harryPotterApp.entities.*;
-import harryPotterApp.repositories.*;
 import harryPotterApp.mappers.HPCharacterMapper;
+import harryPotterApp.repositories.*;
 import harryPotterApp.startingData.EntityManagerFactory;
-import org.hibernate.Hibernate;
-import org.hibernate.Session;
-import org.hibernate.proxy.HibernateProxy;
-import org.hibernate.proxy.HibernateProxyHelper;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class HpCharacterServiceImpl implements HpCharacterService {
 
@@ -23,17 +20,14 @@ public class HpCharacterServiceImpl implements HpCharacterService {
     private HogwartsJobRepository hogwartsJobRepository = new HogwartsJobRepositoryImpl(em);
     private StudentRepository studentRepository = new StudentRepositoryImpl(em);
     private HPLocationRepository locationRepository = new HPLocationRepositoryImpl(em);
-    private PetRepository petRepository = new PetRepositoryImpl(em);
     private ItemRepository itemRepository = new ItemRepositoryImpl(em);
 
     @Override
     public List<HPCharacterDto> getAllCharacters() {
-        List<HPCharacter> allCharacters = characterRepository.getAllCharacters();
-        List<HPCharacterDto> allCharactersDto = new ArrayList<>();
-        for (HPCharacter hpCharacter : allCharacters) {
-            allCharactersDto.add(HPCharacterMapper.mapToHPCharacterDto(hpCharacter));
-        }
-        return allCharactersDto;
+        return characterRepository.getAllCharacters()
+                .stream()
+                .map(HPCharacterMapper::mapToHPCharacterDto)
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -62,6 +56,7 @@ public class HpCharacterServiceImpl implements HpCharacterService {
         return foundedCharacter;
     }
 
+    //TODO w wolnej chwili jak wszystko inne działa XD
     @Override
     public HPCharacterDto prepareCharacterToView(Long id) {
         em.clear();
@@ -87,5 +82,4 @@ public class HpCharacterServiceImpl implements HpCharacterService {
         }
         return hpCharacterDto;
     }
-
 }

@@ -13,7 +13,7 @@ import java.io.IOException;
 
 @WebServlet("/home")
 public class HomeController extends HttpServlet {
-    EntityManager entityManager = EntityManagerFactory.getEmf().createEntityManager();
+    private EntityManager entityManager = EntityManagerFactory.getEmf().createEntityManager();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

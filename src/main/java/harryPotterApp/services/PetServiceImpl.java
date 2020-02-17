@@ -21,12 +21,11 @@ import java.util.stream.Collectors;
 public class PetServiceImpl implements PetService {
     private EntityManager em = EntityManagerFactory.getEmf().createEntityManager();
     private PetRepository petRepository = new PetRepositoryImpl(em);
-    CharacterRepository characterRepository = new CharacterRepositoryImpl(em);
+    private CharacterRepository characterRepository = new CharacterRepositoryImpl(em);
 
     @Override
     public List<PetDto> getAllPets() {
-        List<Pet> allPets = petRepository.getAllPets();
-        return allPets.stream().map(PetMapper::mapToPetDto).collect(Collectors.toList());
+        return petRepository.getAllPets().stream().map(PetMapper::mapToPetDto).collect(Collectors.toList());
     }
 
     @Override
@@ -39,20 +38,19 @@ public class PetServiceImpl implements PetService {
 
     @Override
     public List<HPCharacterDto> getAllCharactersWithoutPet() {
-        List<HPCharacter> allCharactersWithoutPet = petRepository.getAllCharactersWithoutPet();
-        return allCharactersWithoutPet.stream()
+        return petRepository.getAllCharactersWithoutPet()
+                .stream()
                 .map(HPCharacterMapper::mapToHPCharacterDto)
                 .collect(Collectors.toList());
     }
 
     @Override
     public void add(String name, String species, String ownerData) {
-        Long ownerId = getOwnerIdByFirstAndLastName(ownerData);
-
         EntityTransaction transaction = em.getTransaction();
+        Long ownerId = getOwnerIdByFirstAndLastName(ownerData);
         transaction.begin();
         HPCharacter foundedOwner = characterRepository.findById(ownerId);
-        petRepository.add(new Pet(name,foundedOwner,species));
+        petRepository.add(new Pet(name, foundedOwner, species));
         transaction.commit();
     }
 
@@ -64,13 +62,12 @@ public class PetServiceImpl implements PetService {
         transaction.commit();
     }
 
-    public Long getOwnerIdByFirstAndLastName(String ownerData){
+    public Long getOwnerIdByFirstAndLastName(String ownerData) {
         String[] owner = ownerData.split(" ");
         String firstName = owner[0];
         String lastName = owner[1];
-
-        List<HPCharacter> allCharacters = characterRepository.getAllCharacters();
-        return allCharacters.stream()
+        return characterRepository.getAllCharacters()
+                .stream()
                 .filter(hpCharacterDto -> hpCharacterDto.getFirstName().equals(firstName))
                 .filter(hpCharacterDto -> hpCharacterDto.getLastName().equals(lastName))
                 .map(HPCharacter::getId)
@@ -81,7 +78,6 @@ public class PetServiceImpl implements PetService {
     public PetDto preparePetForViewPage(Long id) {
         em.clear();
         Pet petFromDB = petRepository.findById(id);
-        PetDto petDto = PetMapper.mapToPetDto(petFromDB);
-        return petDto;
+        return PetMapper.mapToPetDto(petFromDB);
     }
 }

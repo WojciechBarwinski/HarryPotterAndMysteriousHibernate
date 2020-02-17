@@ -6,6 +6,7 @@ import harryPotterApp.entities.HPLocation;
 import java.util.List;
 
 public interface HPLocationRepository {
+
     HPLocation add(HPLocation hpLocation);
     HPLocation findById(Long id);
     HPLocation updateById(Long id);

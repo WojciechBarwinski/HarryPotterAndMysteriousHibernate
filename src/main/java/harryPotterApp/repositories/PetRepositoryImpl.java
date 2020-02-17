@@ -4,14 +4,13 @@ import harryPotterApp.entities.HPCharacter;
 import harryPotterApp.entities.Pet;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import java.util.List;
 import java.util.Objects;
 
 public class PetRepositoryImpl implements PetRepository {
-    EntityManager em;
+    private EntityManager em;
 
     public PetRepositoryImpl(EntityManager em) {
         this.em = em;
@@ -43,23 +42,12 @@ public class PetRepositoryImpl implements PetRepository {
     @Override
     public List<Pet> getAllPets() {
         TypedQuery<Pet> allPets = em.createQuery("SELECT p FROM Pet p", Pet.class);
-        List<Pet> allPetsResultList = allPets.getResultList();
-        return allPetsResultList;
+        return allPets.getResultList();
     }
 
     @Override
     public List<HPCharacter> getAllCharactersWithoutPet() {
         Query query = em.createQuery("SELECT hpc FROM HPCharacter hpc LEFT JOIN Pet as p ON hpc.id=p.owner.id WHERE p.owner.id IS NULL");
-        List resultList = query.getResultList();
-        return resultList;
-    }
-
-    @Override
-    public Pet getPetByOwnerId(Long id) {
-        Query query = em.createQuery("SELECT pet From Pet as pet where pet.owner.id =:id").setParameter("id", id);
-        if (query.getResultList().isEmpty()){
-            return null;
-        }
-        return (Pet) query.getSingleResult();
+        return query.getResultList();
     }
 }

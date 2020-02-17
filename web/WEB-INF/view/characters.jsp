@@ -85,6 +85,7 @@
             <p class="error" align="center">${wrongName}</p>
             <p class="error" align="center">${wrongLastName}</p>
             <p class="error" align="center">${wrongData}</p>
+            <p class="error" align="center">${characterExists}</p>
 
         </div>
         <div class="col-md-3 col-md-offset-3"></div>

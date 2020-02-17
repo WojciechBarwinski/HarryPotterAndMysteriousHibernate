@@ -17,7 +17,7 @@ public class ItemRepositoryImpl implements ItemRepository {
 
     @Override
     public Item add(Item item) {
-        if (Objects.isNull(item.getId())){
+        if (Objects.isNull(item.getId())) {
             em.persist(item);
         }
         return item;

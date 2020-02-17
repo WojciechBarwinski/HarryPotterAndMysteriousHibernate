@@ -1,10 +1,7 @@
 package harryPotterApp.controllers.pet;
 
-import harryPotterApp.dto.HPCharacterDto;
 import harryPotterApp.dto.PetDto;
 import harryPotterApp.entities.EntityType;
-import harryPotterApp.repositories.PetRepository;
-import harryPotterApp.repositories.PetRepositoryImpl;
 import harryPotterApp.services.PetService;
 import harryPotterApp.services.PetServiceImpl;
 import harryPotterApp.services.PhotoService;
@@ -20,15 +17,15 @@ import java.util.Map;
 
 @WebServlet("/add-photo-to-pet")
 public class AddPhotoToPetController extends HttpServlet {
+    private PetService petService = new PetServiceImpl();
 
-    PetService petService = new PetServiceImpl();
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String imagePath = req.getParameter("imagesPath");
         Long petId = Long.valueOf(req.getParameter("petId"));
         Map<String, String> errorsMap = ValidationService.validateImagePath(imagePath);
 
-        if (errorsMap.isEmpty()){
+        if (errorsMap.isEmpty()) {
             PhotoService.addPhoto(imagePath, petId, EntityType.PET);
         } else {
             req.setAttribute("noValue", errorsMap.get("noValue"));

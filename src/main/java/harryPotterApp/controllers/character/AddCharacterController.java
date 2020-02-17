@@ -4,6 +4,7 @@ import harryPotterApp.dto.HPCharacterDto;
 import harryPotterApp.services.HpCharacterService;
 import harryPotterApp.services.HpCharacterServiceImpl;
 import harryPotterApp.services.ValidationService;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,8 +16,7 @@ import java.util.Map;
 
 @WebServlet("/add-character")
 public class AddCharacterController extends HttpServlet {
-
-    HpCharacterService characterService = new HpCharacterServiceImpl();
+    private HpCharacterService characterService = new HpCharacterServiceImpl();
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -34,6 +34,7 @@ public class AddCharacterController extends HttpServlet {
             req.setAttribute("wrongName", errorsMap.get("wrongName"));
             req.setAttribute("wrongLastName", errorsMap.get("wrongLastName"));
             req.setAttribute("wrongData", errorsMap.get("wrongData"));
+            req.setAttribute("characterExists", errorsMap.get("characterExists"));
         }
         req.getRequestDispatcher("WEB-INF/view/characters.jsp").forward(req, resp);
     }
