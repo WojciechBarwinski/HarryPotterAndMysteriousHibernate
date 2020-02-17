@@ -5,6 +5,7 @@ import harryPotterApp.entities.HPLocation;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -53,5 +54,17 @@ public class HPLocationRepositoryImpl implements HPLocationRepository {
             return null;
         }
         return (HPLocation) query.getSingleResult();
+    }
+
+    @Override
+    public List<HPLocation> getAllLocation() {
+        TypedQuery<HPLocation> allHpLocationFromDB = em.createQuery("SELECT location FROM HPLocation location", HPLocation.class);
+        return allHpLocationFromDB.getResultList();
+    }
+
+    @Override
+    public List<HPCharacter> getAllCharactersWithoutLocation() {
+        TypedQuery<HPCharacter> query = em.createQuery("SELECT character FROM HPCharacter as character WHERE character.location IS NULL", HPCharacter.class);
+        return query.getResultList();
     }
 }

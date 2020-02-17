@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @EqualsAndHashCode(exclude = {"residents"})
@@ -23,7 +24,7 @@ public class HPLocation {
     @Setter
     @OneToMany(mappedBy = "location", fetch = FetchType.LAZY)
     //@OnDelete(action = OnDeleteAction.CASCADE)
-    private Set<HPCharacter> residents;
+    private Set<HPCharacter> residents= new HashSet<>();
     @Setter
     private String imagePath;
 

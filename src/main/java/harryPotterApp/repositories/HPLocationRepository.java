@@ -13,4 +13,6 @@ public interface HPLocationRepository {
     void deleteById(Long id);
     List<HPCharacter> getAllResidents(Long id);
     HPLocation findByCharacterId(Long id);
+    List<HPLocation> getAllLocation();
+    List<HPCharacter> getAllCharactersWithoutLocation();
 }
