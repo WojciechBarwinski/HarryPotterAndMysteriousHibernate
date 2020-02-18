@@ -7,4 +7,5 @@ import java.util.List;
 public interface ItemService {
 
     List<Item> getAllItemsByType(String type);
+    void add(String name, String value, String type);
 }

@@ -23,7 +23,13 @@ public class ShowItemsController extends HttpServlet {
 
         List<Item> items = itemService.getAllItemsByType(itemType);
         req.setAttribute("itemList", items);
+        req.setAttribute("type", itemType);
 
         req.getRequestDispatcher("WEB-INF/view/items.jsp").forward(req,resp);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        doGet(req, resp);
     }
 }

@@ -14,7 +14,7 @@
             </form>
 
             <div class="dropdown">
-                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Items</button>
+                <button type="button" class="btn btn-light btn-lg mr-5 dropdown-toggle" data-toggle="dropdown">Items</button>
                 <div class="dropdown-menu">
                     <a class="dropdown-item" href="/view-item?itemType=WANDS">Wands</a>
                     <a class="dropdown-item" href="/view-item?itemType=WEAPONS">Weapon</a>

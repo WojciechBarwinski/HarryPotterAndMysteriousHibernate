@@ -12,6 +12,7 @@ public class ValidationService {
     private static HpCharacterService hpCharacterService = new HpCharacterServiceImpl();
     private static String baseRegex = "^[A-Z][a-z]{2,15}$";
     private static String imagePathRegex = "^https:.*(jpg$)|(png$)";
+    private static String itemRegex = "^[A-Z].{2,20}$";
 
 
     public static Map<String, String> searchValidate(String userInput) {
@@ -89,6 +90,16 @@ public class ValidationService {
         if (input == null){
             errorsMap.put("noSelect", "You didn't select any resident");
         }
+        return errorsMap;
+    }
+
+    public static Map<String, String> validateAddItem(String itemName, String itemValue) {
+        Map<String, String> errorsMap = new HashMap<>();
+        if (itemName.isBlank() || itemValue.isBlank()) {
+            errorsMap.put("noValue", "You did not enter all necessary date");
+        } else if (!itemName.matches(itemRegex)){
+                errorsMap.put("wrongName", "You put invalid item name");
+            }
         return errorsMap;
     }
 }

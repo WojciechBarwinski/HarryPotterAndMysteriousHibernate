@@ -7,6 +7,8 @@ import harryPotterApp.repositories.ItemRepositoryImpl;
 import harryPotterApp.startingData.EntityManagerFactory;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
+import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.List;
 
@@ -27,5 +29,27 @@ public class ItemServiceImpl implements ItemService {
                 return itemRepository.getAllItemsByType(ItemType.ROBE);
         }
         return Collections.emptyList();
+    }
+
+    @Override
+    public void add(String name, String value, String type) {
+        long itemValue = Long.parseLong(value);
+        EntityTransaction transaction = em.getTransaction();
+        transaction.begin();
+        switch (type) {
+            case "WANDS":
+                itemRepository.add(new Item(ItemType.WAND, name, BigDecimal.valueOf(itemValue)));
+                break;
+            case "WEAPONS":
+                itemRepository.add(new Item(ItemType.WEAPON, name, BigDecimal.valueOf(itemValue)));
+                break;
+            case "BROOMSTICKS":
+                itemRepository.add(new Item(ItemType.BROOMSTICK, name, BigDecimal.valueOf(itemValue)));
+                break;
+            case "ROBES":
+                itemRepository.add(new Item(ItemType.ROBE, name, BigDecimal.valueOf(itemValue)));
+                break;
+        }
+        transaction.commit();
     }
 }
