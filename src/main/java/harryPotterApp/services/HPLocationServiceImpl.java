@@ -44,4 +44,14 @@ public class HPLocationServiceImpl implements HPLocationService {
         characterRepository.update(residentToAdd);
         transaction.commit();
     }
+
+    @Override
+    public void removeResident(Long characterId) {
+        EntityTransaction transaction = em.getTransaction();
+        HPCharacter character = characterRepository.findById(characterId);
+        character.setLocation(null);
+        transaction.begin();
+        characterRepository.update(character);
+        transaction.commit();
+    }
 }

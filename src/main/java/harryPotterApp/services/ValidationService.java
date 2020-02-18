@@ -83,4 +83,12 @@ public class ValidationService {
         }
         return errorsMap;
     }
+
+    public static Map<String, String> validateSelectInput(String input){
+        Map<String, String> errorsMap = new HashMap<>();
+        if (input == null){
+            errorsMap.put("noSelect", "You didn't select any resident");
+        }
+        return errorsMap;
+    }
 }

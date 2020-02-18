@@ -1,9 +1,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java"  isELIgnored="false"%>
 <html>
 <head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <title>Locations</title>
+    <style>
+        p.error {
+            color: red;
+        }
+    </style>
 </head>
 <body>
 <%@include file="/WEB-INF/component/header.jsp"%>
@@ -55,11 +60,13 @@
                                     <c:forEach items="${location.residents}" var="resident">
                                         <option>${resident.firstName} ${resident.lastName}</option>
                                     </c:forEach>
+
                                 </select>
                                 <button type="submit" class="btn btn-primary mb-2">Remove</button>
                             </p>
-                        </form>
 
+                        </form>
+                            <p class="error" align="center">${noSelect}</p>
                         </div>
 
                     </div>
