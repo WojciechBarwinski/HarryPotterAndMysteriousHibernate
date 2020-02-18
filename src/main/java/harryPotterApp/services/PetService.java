@@ -14,6 +14,5 @@ public interface PetService {
     void deleteById(Long id);
     List<HPCharacterDto> getAllCharactersWithoutPet();
     void add(String name, String species, String ownerData);
-    Long getOwnerIdByFirstAndLastName(String ownerData);
     PetDto preparePetForViewPage(Long id);
 }

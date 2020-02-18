@@ -21,10 +21,9 @@ public class HPLocation {
     @Setter
     private String locationName;
 
-    @Setter
     @OneToMany(mappedBy = "location", fetch = FetchType.LAZY)
     //@OnDelete(action = OnDeleteAction.CASCADE)
-    private Set<HPCharacter> residents= new HashSet<>();
+    private Set<HPCharacter> residents = new HashSet<>();
     @Setter
     private String imagePath;
 
@@ -33,5 +32,9 @@ public class HPLocation {
 
     public HPLocation(String locationName) {
         this.locationName = locationName;
+    }
+
+    public void setResidents(HPCharacter hpCharacter) {
+        this.residents.add(hpCharacter);
     }
 }

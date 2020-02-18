@@ -15,4 +15,5 @@ public interface HPLocationRepository {
     HPLocation findByCharacterId(Long id);
     List<HPLocation> getAllLocation();
     List<HPCharacter> getAllCharactersWithoutLocation();
+
 }

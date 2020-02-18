@@ -82,4 +82,17 @@ public class HpCharacterServiceImpl implements HpCharacterService {
         }
         return hpCharacterDto;
     }
+
+    @Override
+    public Long getCharacterIdByFirstAndLastName(String characterData) {
+        String[] character = characterData.split(" ");
+        String firstName = character[0];
+        String lastName = character[1];
+        return characterRepository.getAllCharacters()
+                .stream()
+                .filter(hpCharacterDto -> hpCharacterDto.getFirstName().equals(firstName))
+                .filter(hpCharacterDto -> hpCharacterDto.getLastName().equals(lastName))
+                .map(HPCharacter::getId)
+                .findFirst().get();
+    }
 }

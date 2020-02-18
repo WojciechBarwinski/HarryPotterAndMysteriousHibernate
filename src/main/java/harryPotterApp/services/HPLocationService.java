@@ -8,4 +8,6 @@ import java.util.List;
 public interface HPLocationService {
     List<HPLocationDto> getAllLocations();
     List<HPCharacter> getAllCharactersWithoutLocation();
+    void addResidentToLocation(String characterId, String locationId);
+
 }

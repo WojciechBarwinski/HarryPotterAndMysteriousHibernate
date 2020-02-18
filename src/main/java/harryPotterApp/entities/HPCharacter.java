@@ -42,7 +42,7 @@ public class HPCharacter {
     private String imagePath;
 
     @Setter
-    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "location", foreignKey = @ForeignKey(name = "FK_hpcharacter_location_id"))
     private HPLocation location;
 

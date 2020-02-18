@@ -22,6 +22,7 @@ public class PetServiceImpl implements PetService {
     private EntityManager em = EntityManagerFactory.getEmf().createEntityManager();
     private PetRepository petRepository = new PetRepositoryImpl(em);
     private CharacterRepository characterRepository = new CharacterRepositoryImpl(em);
+    private HpCharacterService hpCharacterService = new HpCharacterServiceImpl();
 
     @Override
     public List<PetDto> getAllPets() {
@@ -47,7 +48,7 @@ public class PetServiceImpl implements PetService {
     @Override
     public void add(String name, String species, String ownerData) {
         EntityTransaction transaction = em.getTransaction();
-        Long ownerId = getOwnerIdByFirstAndLastName(ownerData);
+        Long ownerId = hpCharacterService.getCharacterIdByFirstAndLastName(ownerData);
         transaction.begin();
         HPCharacter foundedOwner = characterRepository.findById(ownerId);
         petRepository.add(new Pet(name, foundedOwner, species));
@@ -62,17 +63,6 @@ public class PetServiceImpl implements PetService {
         transaction.commit();
     }
 
-    public Long getOwnerIdByFirstAndLastName(String ownerData) {
-        String[] owner = ownerData.split(" ");
-        String firstName = owner[0];
-        String lastName = owner[1];
-        return characterRepository.getAllCharacters()
-                .stream()
-                .filter(hpCharacterDto -> hpCharacterDto.getFirstName().equals(firstName))
-                .filter(hpCharacterDto -> hpCharacterDto.getLastName().equals(lastName))
-                .map(HPCharacter::getId)
-                .findFirst().get();
-    }
 
     @Override
     public PetDto preparePetForViewPage(Long id) {

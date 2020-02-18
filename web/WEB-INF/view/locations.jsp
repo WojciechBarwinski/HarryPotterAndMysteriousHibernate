@@ -1,11 +1,4 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%--
-  Created by IntelliJ IDEA.
-  User: Maja
-  Date: 2020-02-17
-  Time: 11:48
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -36,18 +29,24 @@
                             </ul>
                         </div>
                         <div class="col-md-5 col-md-offset-3" style="padding-top: 30px">
+
                             <form class="form-inline justify-content-center" action="/add-resident" method="post">
                             <p>
+
                                 <label for="residentToAdd" class="mr-sm-2">Add residents</label>
+
                                 <select class="form-control mr-sm-2" id="residentToAdd" name="residentToAdd">
                                     <option value=" " disabled selected value>Select</option>
                                     <c:forEach items="${residentsAvailable}" var="resident">
                                         <option>${resident.firstName} ${resident.lastName}</option>
                                     </c:forEach>
                                 </select>
-                                <button type="submit" class="btn btn-primary mb-2">Add</button>
+
+
+                                    <button type="submit" class="btn btn-primary mb-2" value="${location.id}" name="locationId">Add</button>
                             </p>
                         </form>
+
                         <form class="form-inline justify-content-center" action="/delete-resident" method="post">
                             <p>
                                 <label for="residentToDelete" class="mr-sm-2">Remove residents</label>

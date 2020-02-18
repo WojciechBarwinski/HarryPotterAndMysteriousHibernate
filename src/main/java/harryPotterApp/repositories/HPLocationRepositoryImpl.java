@@ -13,6 +13,7 @@ import java.util.Objects;
 public class HPLocationRepositoryImpl implements HPLocationRepository {
 
     private EntityManager em;
+    private CharacterRepository characterRepository = new CharacterRepositoryImpl(em);
 
     public HPLocationRepositoryImpl(EntityManager em) {
         this.em = em;
