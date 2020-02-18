@@ -16,7 +16,7 @@
     <div class="row">
         <div class="col-md-2 col-md-offset-3"></div>
         <div class="col-md-8 col-md-offset-3">
-
+            <p class="error" align="center">${noSelect}</p>
             <c:forEach items="${locationsList}" var="location">
                 <div class="container-fluid" style="margin: 10px">
                     <div class="row">
@@ -66,7 +66,7 @@
                             </p>
 
                         </form>
-                            <p class="error" align="center">${noSelect}</p>
+
                         </div>
 
                     </div>
