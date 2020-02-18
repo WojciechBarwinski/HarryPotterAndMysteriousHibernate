@@ -2,8 +2,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <html>
 <head>
+
     <title>Home Page</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+
 </head>
 <body>
 <%@include file="/WEB-INF/component/header.jsp"%>
@@ -13,6 +16,7 @@
         <div class="col-md-3 col-md-offset-3"></div>
         
         <div class="col-md-6 col-md-offset-3">
+
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ligula magna, rhoncus sit amet quam sit amet,
                 tempus posuere nibh. Fusce molestie tempor leo. Maecenas volutpat gravida diam id porta. Nam at est nisi. Nunc
                 eu dui tempor, scelerisque ligula nec, luctus ipsum. Vivamus varius ligula eget orci condimentum, a lacinia
@@ -31,10 +35,8 @@
         <div class="col-md-3 col-md-offset-3"></div>
     </div>
 </div>
-
-
-
-<script src="webjars/bootstrap/4.4.1-1.4.0/js/bootstrap.min.js"/>
-<script src="webjars/jquery/3.4.1/jquery.min.js"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 </body>
 </html>
