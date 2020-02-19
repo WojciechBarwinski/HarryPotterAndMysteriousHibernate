@@ -131,4 +131,31 @@ public class ValidationService {
             }
         return errorsMap;
     }
+
+    public static Map<String, String> valideteDateToUpdate(String firstName, String lastName, String birthDate) {
+        Map<String, String> errorsMap = new HashMap<>();
+        if (firstName.isBlank() && lastName.isBlank() && birthDate.isBlank()) {
+            errorsMap.put("noValue", "You dont entered any necessary date");
+        } else {
+            if (!firstName.isBlank()){
+                if (!firstName.matches(baseRegex)){
+                    errorsMap.put("wrongName", "You put invalid first name");
+                }
+            }
+
+            if (!lastName.isBlank()){
+                if (!lastName.matches(baseRegex)){
+                    errorsMap.put("wrongLastName", "You put invalid last name");
+                }
+            }
+
+            if (!birthDate.isBlank()){
+                if (LocalDate.parse(birthDate).isAfter(LocalDate.now())) {
+                    errorsMap.put("wrongData", "You must put date before today");
+                }
+            }
+        }
+
+        return errorsMap;
+    }
 }

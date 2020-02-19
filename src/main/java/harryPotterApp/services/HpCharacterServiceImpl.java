@@ -24,6 +24,7 @@ public class HpCharacterServiceImpl implements HpCharacterService {
 
     @Override
     public List<HPCharacterDto> getAllCharacters() {
+        em.clear();
         return characterRepository.getAllCharacters()
                 .stream()
                 .map(HPCharacterMapper::mapToHPCharacterDto)
@@ -104,5 +105,25 @@ public class HpCharacterServiceImpl implements HpCharacterService {
                 .filter(hpCharacterDto -> hpCharacterDto.getLastName().equals(lastName))
                 .map(HPCharacter::getId)
                 .findFirst().get();
+    }
+
+    @Override
+    public void updateCharacter(String characterId, String firstName, String lastName, String birthDate) {
+        EntityTransaction transaction = em.getTransaction();
+        Long id = Long.valueOf(characterId);
+        HPCharacter characterToUpdate = characterRepository.findById(id);
+
+        transaction.begin();
+        if (!firstName.isBlank()){
+            characterToUpdate.setFirstName(firstName);
+        }
+        if (!lastName.isBlank()){
+            characterToUpdate.setLastName(lastName);
+        }
+        if (!birthDate.isBlank()){
+           characterToUpdate.setBirthDate( LocalDate.parse(birthDate));
+        }
+        characterRepository.updateById(id);
+        transaction.commit();
     }
 }

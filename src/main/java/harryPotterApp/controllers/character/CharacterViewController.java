@@ -22,4 +22,9 @@ public class CharacterViewController extends HttpServlet {
         req.setAttribute("character", characterToView);
         req.getRequestDispatcher("/WEB-INF/view/character-view.jsp").forward(req, resp);
     }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        doGet(req, resp);
+    }
 }
