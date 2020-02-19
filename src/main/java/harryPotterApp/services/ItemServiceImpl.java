@@ -9,8 +9,10 @@ import harryPotterApp.startingData.EntityManagerFactory;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 public class ItemServiceImpl implements ItemService {
     private EntityManager em = EntityManagerFactory.getEmf().createEntityManager();
@@ -65,5 +67,19 @@ public class ItemServiceImpl implements ItemService {
         transaction.begin();
         itemRepository.deleteById(Long.parseLong(itemId));
         transaction.commit();
+    }
+
+    @Override
+    public List<Item> getAllItemsByCharacterId(String id) {
+        return itemRepository.getItemByOwnerID(Long.parseLong(id));
+    }
+
+    @Override
+    public List<Item> getAllItemsWhichAreNotOwnedByCharacter(String id) {
+        List<Item> allItems = itemRepository.getAllItems();
+        List<Item> charactersItems = itemRepository.getItemByOwnerID(Long.valueOf(id));
+        List<Item> resultList = new ArrayList<>(allItems);
+        resultList.removeAll(charactersItems);
+        return resultList;
     }
 }

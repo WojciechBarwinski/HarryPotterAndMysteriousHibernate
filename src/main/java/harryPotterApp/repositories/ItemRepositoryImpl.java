@@ -6,8 +6,10 @@ import harryPotterApp.entities.ItemType;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 public class ItemRepositoryImpl implements ItemRepository {
 
@@ -51,6 +53,12 @@ public class ItemRepositoryImpl implements ItemRepository {
     @Override
     public List<Item> getAllItemsByType(ItemType type) {
         TypedQuery<Item> query = em.createQuery("SELECT item FROM Item as item WHERE item.type = :type", Item.class).setParameter("type", type);
+        return query.getResultList();
+    }
+
+    @Override
+    public List<Item> getAllItems() {
+        TypedQuery<Item> query = em.createQuery("SELECT item FROM Item as item", Item.class);
         return query.getResultList();
     }
 }

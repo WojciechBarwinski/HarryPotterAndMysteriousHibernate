@@ -106,33 +106,36 @@
             </div>
             <div align="center">
                 <h4>Dodaj usuń wyposażenie</h4>
-                <form class="form-inline justify-content-center" action="/add-resident" method="post">
+                <form class="form-inline justify-content-center" action="/update-character-items" method="post">
                     <p>
-                        <label for="residentToAdd" class="mr-sm-2">Add item</label>
+                        <label for="itemToAdd" class="mr-sm-2">Add item</label>
 
-                        <select class="form-control mr-sm-2" id="residentToAdd" name="residentToAdd">
+                        <select class="form-control mr-sm-2" id="itemToAdd" name="itemToAdd">
                             <option value=" " disabled selected value>Select</option>
-                            <c:forEach items="${residentsAvailable}" var="resident">
-                                <option>${resident.firstName} ${resident.lastName}</option>
+                            <c:forEach items="${itemsAvailable}" var="item">
+                                <option>${item.name}</option>
                             </c:forEach>
                         </select>
 
-                        <button type="submit" class="btn btn-primary mb-2" value="${location.id}" name="locationId">Add</button>
+                        <button type="submit" class="btn btn-primary mb-2" value="${item.id}" name="itemIdToAdd">Add</button>
 
                 </form>
 
-                <form class="form-inline justify-content-center" action="/add-resident" method="post">
+                <form class="form-inline justify-content-center" action="/update-character-items" method="post">
 
-                        <label for="residentToAdd" class="mr-sm-2">Remove item</label>
+                        <label for="itemToDelete" class="mr-sm-2">Remove item</label>
 
-                        <select class="form-control mr-sm-2" id="residentToAdd2" name="residentToAdd">
+                        <select class="form-control mr-sm-2" id="itemToDelete" name="itemToDelete">
                             <option value=" " disabled selected value>Select</option>
-                            <c:forEach items="${residentsAvailable}" var="resident">
-                                <option>${resident.firstName} ${resident.lastName}</option>
+                            <c:forEach items="${character.itemList}" var="item">
+                            <option>${item.name}</option>
                             </c:forEach>
+                            <%--<c:forEach items="${residentsAvailable}" var="resident">
+                                ${resident.firstName} ${resident.lastName}
+                            </c:forEach>--%>
                         </select>
 
-                        <button type="submit" class="btn btn-primary mb-2" value="${location.id}" name="locationId">Add</button>
+                        <button type="submit" class="btn btn-primary mb-2" value="${item.id}" name="itemIdToDelete">Add</button>
                     </p>
                 </form>
             </div>
