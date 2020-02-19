@@ -15,6 +15,7 @@
 <div class="container-fluid" style="margin-top: 20px">
     <div class="row">
         <div class="col-md-2 col-md-offset-3"></div>
+
         <div class="col-md-8 col-md-offset-3">
             <p class="error" align="center">${noSelect}</p>
             <c:forEach items="${locationsList}" var="location">
@@ -37,7 +38,6 @@
 
                             <form class="form-inline justify-content-center" action="/add-resident" method="post">
                             <p>
-
                                 <label for="residentToAdd" class="mr-sm-2">Add residents</label>
 
                                 <select class="form-control mr-sm-2" id="residentToAdd" name="residentToAdd">
@@ -47,10 +47,9 @@
                                     </c:forEach>
                                 </select>
 
-
                                     <button type="submit" class="btn btn-primary mb-2" value="${location.id}" name="locationId">Add</button>
                             </p>
-                        </form>
+                            </form>
 
                         <form class="form-inline justify-content-center" action="/delete-resident" method="post">
                             <p>
