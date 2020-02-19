@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 
 public class ValidationService {
@@ -15,7 +16,36 @@ public class ValidationService {
     private static String itemRegex = "^[A-Z].{2,20}$";
 
 
-    public static Map<String, String> searchValidate(String userInput) {
+    public static Map<String, String> searchValidate(String userInput, String searchFilter) {
+        Map<String, String> errorsMap = new HashMap<>();
+        if (userInput.isBlank() || Objects.isNull(searchFilter)) {
+            errorsMap.put("noInput", "You have not entered all input");
+        } else {
+            if (searchFilter.equals("firstName") && !isFirstNamePresent(userInput)){
+                errorsMap.put("invalidData", "Searched first name doesn't exist");
+            }
+            if (searchFilter.equals("lastName") && !isLastNamePresent(userInput)){
+                errorsMap.put("invalidData", "Searched last name doesn't exist");
+            }
+        }
+        return errorsMap;
+    }
+
+    private static boolean isLastNamePresent(String lastName) {
+        return hpCharacterService.getAllCharacters()
+                .stream()
+                .map(HPCharacterDto::getLastName)
+                .anyMatch(characterLastName -> characterLastName.equalsIgnoreCase(lastName));
+    }
+
+    private static boolean isFirstNamePresent(String firstName) {
+        return hpCharacterService.getAllCharacters()
+                .stream()
+                .map(HPCharacterDto::getFirstName)
+                .anyMatch(characterFirstName -> characterFirstName.equalsIgnoreCase(firstName));
+    }
+
+    public static Map<String, String> searchByIdValidate(String userInput) {
         Map<String, String> errorsMap = new HashMap<>();
         if (userInput.isBlank()) {
             errorsMap.put("noId", "You have not entered any Id");
@@ -24,7 +54,6 @@ public class ValidationService {
         }
         return errorsMap;
     }
-
     private static boolean isIdPresent(String id) {
         return hpCharacterService.getAllCharacters()
                 .stream()

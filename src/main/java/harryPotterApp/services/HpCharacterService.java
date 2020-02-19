@@ -16,6 +16,8 @@ public interface HpCharacterService {
 
     List<HPCharacterDto> findCharacterById(String id);
 
+    List<HPCharacterDto> findCharacterByFirstNameOrLastName(String name);
+
     HPCharacterDto prepareCharacterToView(Long id);
 
     Long getCharacterIdByFirstAndLastName(String characterData);
