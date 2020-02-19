@@ -19,22 +19,25 @@
         <div class="col-md-6 col-md-offset-3">
 
             <div align="center">
-                <form action="/find-character" class="justify-content-center form-check-inline " method="post">
+
+                <form action="/find-character" class="form-inline justify-content-center" method="post">
+                    <label for="id" class="mr-sm-2">Search:</label>
+                    <input type="text" class="form-control mb-2 mr-sm-2" name="characterToFind" id="id">
 
                     <div style="margin: 10px">
-                        <label for="id" class="mr-sm-2">Search:</label>
-                        <input type="text" class="form-control mb-2 mr-sm-2" name="characterToFind" id="id">
-                    </div>
-
-                    <div  style="margin: 10px">
                         <input type="radio" name="searchFilter" value="firstName" id="filter1"/>
                         <label for="filter1">first name</label>
+                    </div>
+
+                    <div style="margin: 10px">
                         <input type="radio" name="searchFilter" value="lastName" id="filter2"/>
                         <label for="filter2">last name</label>
                     </div>
 
-                    <button type="submit" class="btn btn-primary" name="idToDelete"  style="margin: 10px">Find</button>
+                    <button type="submit" class="btn btn-primary" name="idToDelete">Find</button>
                 </form>
+
+
             </div>
 
 
