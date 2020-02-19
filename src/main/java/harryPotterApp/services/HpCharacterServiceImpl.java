@@ -56,6 +56,16 @@ public class HpCharacterServiceImpl implements HpCharacterService {
         return foundedCharacter;
     }
 
+    @Override
+    public List<HPCharacterDto> findCharacterByFirstNameOrLastName(String name) {
+        List<HPCharacter> allCharacters = characterRepository.getAllCharacters();
+        return allCharacters
+                .stream()
+                .filter(hpCharacter -> hpCharacter.getFirstName().equalsIgnoreCase(name) || hpCharacter.getLastName().equalsIgnoreCase(name))
+                .map(HPCharacterMapper::mapToHPCharacterDto)
+                .collect(Collectors.toList());
+    }
+
     //TODO w wolnej chwili jak wszystko inne działa XD
     @Override
     public HPCharacterDto prepareCharacterToView(Long id) {

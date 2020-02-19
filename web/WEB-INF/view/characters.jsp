@@ -6,25 +6,29 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <style>
-    p.error {
-        color: red;
-    }
-</style>
+        p.error {
+            color: red;
+        }
+    </style>
 </head>
 <body>
-<%@include file="/WEB-INF/component/header.jsp"%>
+<%@include file="/WEB-INF/component/header.jsp" %>
 <div class="container-fluid" style="margin-top: 20px">
     <div class="row">
         <div class="col-md-3 col-md-offset-3"></div>
         <div class="col-md-6 col-md-offset-3">
 
             <form action="/find-character" class="form-inline justify-content-center" method="post">
-                <label for="id" class="mr-sm-2">Id to find:</label>
-                    <input type="text" class="form-control mb-2 mr-sm-2" placeholder="id" name="idToFind" id="id">
+                <label for="id" class="mr-sm-2">Search:</label>
+                <input type="text" class="form-control mb-2 mr-sm-2" name="characterToFind" id="id">
+                <input type="radio" name="searchFilter" value="firstName" id="filter1"/>
+                <label for="filter1">first name</label>
+                <input type="radio" name="searchFilter" value="lastName" id="filter2"/>
+                <label for="filter2">last name</label>
                 <button type="submit" class="btn btn-primary" name="idToDelete">Find</button>
             </form>
-            <p class="error" align="center">${noId}</p>
-            <p class="error" align="center">${invalidId}</p>
+            <p class="error" align="center">${noInput}</p>
+            <p class="error" align="center">${invalidData}</p>
 
             <div class="card bg-warning">
                 <div class="card-header">
@@ -51,15 +55,17 @@
                                     <td>${character.birthDate}</td>
 
                                     <td>
-                                            <a href="/view-character?idToView=${character.id}">
-                                                <button type="submit" class="btn btn-primary" name="idToView">View</button>
-                                            </a>
+                                        <a href="/view-character?idToView=${character.id}">
+                                            <button type="submit" class="btn btn-primary" name="idToView">View</button>
+                                        </a>
 
                                     </td>
 
                                     <td>
                                         <form action="/delete-character" method="post">
-                                            <button type="submit" class="btn btn-danger" name="idToDelete" value=${character.id} >Delete</button>
+                                            <button type="submit" class="btn btn-danger" name="idToDelete"
+                                                    value=${character.id}>Delete
+                                            </button>
                                         </form>
                                     </td>
 
@@ -71,14 +77,17 @@
             </div>
 
             <form class="form-inline justify-content-center" action="/add-character" method="post">
-                <p> <label for="firstName" class="mr-sm-2">First Name:</label>
-                    <input type="text" class="form-control mb-2 mr-sm-2" placeholder="First name" name="firstName" id="firstName"></p>
+                <p><label for="firstName" class="mr-sm-2">First Name:</label>
+                    <input type="text" class="form-control mb-2 mr-sm-2" placeholder="First name" name="firstName"
+                           id="firstName"></p>
 
-                <p> <label for="lastName" class="mr-sm-2">Last Name:</label>
-                    <input type="text" class="form-control mb-2 mr-sm-2" placeholder="Last name" name="lastName" id="lastName"></p>
+                <p><label for="lastName" class="mr-sm-2">Last Name:</label>
+                    <input type="text" class="form-control mb-2 mr-sm-2" placeholder="Last name" name="lastName"
+                           id="lastName"></p>
 
                 <p><label for="birthDate" class="mr-sm-2">BirthDate:</label>
-                    <input type="date" class="form-control mb-2 mr-sm-2" placeholder="YYYY-MM-DD" name="birthDate" id="birthDate" value=""></p>
+                    <input type="date" class="form-control mb-2 mr-sm-2" placeholder="YYYY-MM-DD" name="birthDate"
+                           id="birthDate" value=""></p>
                 <button type="submit" class="btn btn-primary mb-2">Add</button>
             </form>
             <p class="error" align="center">${noValue}</p>
@@ -91,7 +100,6 @@
         <div class="col-md-3 col-md-offset-3"></div>
     </div>
 </div>
-
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>

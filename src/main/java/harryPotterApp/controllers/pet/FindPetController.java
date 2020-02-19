@@ -22,7 +22,7 @@ public class FindPetController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String idToFind = req.getParameter("idToFind");
-        Map<String, String> errorsMap = ValidationService.searchValidate(idToFind);
+        Map<String, String> errorsMap = ValidationService.searchByIdValidate(idToFind);
         if (errorsMap.isEmpty()) {
             List<PetDto> foundPets = petService.findById(idToFind);
             req.setAttribute("petsList", foundPets);
