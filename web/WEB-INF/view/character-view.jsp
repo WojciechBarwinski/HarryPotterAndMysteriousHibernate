@@ -80,20 +80,24 @@
                 </div>
             </div>
 
+
+
+
             <div align="center">
                 <h4>Zmień dane postaci</h4>
                 <form class="form-inline justify-content-center" action="/update-character" method="post">
-                    <p><label for="firstName" class="mr-sm-2">First Name:</label>
-                        <input type="text" class="form-control mb-2 mr-sm-2" placeholder="First name" name="firstName"
-                               id="firstName"></p>
-
-                    <p><label for="lastName" class="mr-sm-2">Last Name:</label>
-                        <input type="text" class="form-control mb-2 mr-sm-2" placeholder="Last name" name="lastName"
-                               id="lastName"></p>
-
-                    <p><label for="birthDate" class="mr-sm-2">BirthDate:</label>
-                        <input type="date" class="form-control mb-2 mr-sm-2" placeholder="YYYY-MM-DD" name="birthDate"
-                               id="birthDate" value=""></p>
+                    <p>
+                        <label for="firstName" class="mr-sm-2">First Name:</label>
+                        <input type="text" class="form-control mb-2 mr-sm-2" placeholder="First name" name="firstName" id="firstName">
+                    </p>
+                    <p>
+                        <label for="lastName" class="mr-sm-2">Last Name:</label>
+                        <input type="text" class="form-control mb-2 mr-sm-2" placeholder="Last name" name="lastName" id="lastName">
+                    </p>
+                    <p>
+                        <label for="birthDate" class="mr-sm-2">BirthDate:</label>
+                        <input type="date" class="form-control mb-2 mr-sm-2" placeholder="YYYY-MM-DD" name="birthDate" id="birthDate" value="">
+                    </p>
 
                     <button type="submit" class="btn btn-primary mb-2" value="${character.id}">Update</button>
                 </form>
@@ -104,38 +108,44 @@
                 <p class="error" align="center">${wrongData}</p>
                 <p class="error" align="center">${characterExists}</p>
             </div>
+
+
+
+
             <div align="center">
                 <h4>Dodaj usuń wyposarzenie</h4>
-                <form class="form-inline" action="/add-resident" method="post">
-                    <p>
+                <form class="form-inline justify-content-center" action="/update-character" method="post">
+
                         <label for="residentToAdd" class="mr-sm-2">Add item</label>
 
-                        <select class="form-control mr-sm-2" id="residentToAdd" name="residentToAdd">
+                        <select class="form-control mr-sm-2" id="residentToAdd" name="itemToAdd">
                             <option value=" " disabled selected value>Select</option>
-                            <c:forEach items="${residentsAvailable}" var="resident">
-                                <option>${resident.firstName} ${resident.lastName}</option>
+                            <c:forEach items="${itemsToAdd}" var="item">
+                                <option>${item.name}</option>
                             </c:forEach>
                         </select>
 
-                        <button type="submit" class="btn btn-primary mb-2" value="${location.id}" name="locationId">Add</button>
+                        <button type="submit" class="btn btn-primary mb-2" value="!!!!!!!!!!!!!!!" name="locationId">Add item</button>
 
                 </form>
-
-                <form class="form-inline" action="/add-resident" method="post">
-
+                    <form class="form-inline justify-content-center" action="/update-character" method="post">
                         <label for="residentToAdd" class="mr-sm-2">Remove item</label>
 
-                        <select class="form-control mr-sm-2" id="residentToAdd2" name="residentToAdd">
+                        <select class="form-control mr-sm-2" id="residentToAdd2" name="itemToRemove">
                             <option value=" " disabled selected value>Select</option>
-                            <c:forEach items="${residentsAvailable}" var="resident">
-                                <option>${resident.firstName} ${resident.lastName}</option>
+                            <c:forEach items="${itemsToRemove}" var="item">
+                                <option>${item.name}</option>
                             </c:forEach>
                         </select>
 
-                        <button type="submit" class="btn btn-primary mb-2" value="${location.id}" name="locationId">Add</button>
-                    </p>
+                        <button type="submit" class="btn btn-primary mb-2" value="!!!!!!!!!!!!!" name="locationId">Remove item</button>
                 </form>
             </div>
+
+
+
+
+
         </div>
     </div>
 
