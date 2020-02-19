@@ -39,7 +39,7 @@
                                     <td style="color: white"><fmt:formatNumber type="currency" minFractionDigits="2"> ${item.value}</fmt:formatNumber></td>
                                     <td>
                                         <form action="/delete-item" method="post">
-                                            <button type="submit" class="btn btn-danger" name="itemToDelete" value=${item.id} >Delete</button>
+                                            <button type="submit" class="btn btn-danger" name="itemIdToDelete" value=${item.id}>Delete</button>
                                         </form>
                                     </td>
                                 </tr>

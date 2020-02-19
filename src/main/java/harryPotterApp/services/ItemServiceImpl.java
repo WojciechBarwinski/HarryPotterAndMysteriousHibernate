@@ -18,14 +18,15 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public List<Item> getAllItemsByType(String type) {
+        em.clear();
         switch (type) {
-            case "WANDS":
+            case "WAND":
                 return itemRepository.getAllItemsByType(ItemType.WAND);
-            case "WEAPONS":
+            case "WEAPON":
                 return itemRepository.getAllItemsByType(ItemType.WEAPON);
-            case "BROOMSTICKS":
+            case "BROOMSTICK":
                 return itemRepository.getAllItemsByType(ItemType.BROOMSTICK);
-            case "ROBES":
+            case "ROBE":
                 return itemRepository.getAllItemsByType(ItemType.ROBE);
         }
         return Collections.emptyList();
@@ -37,19 +38,32 @@ public class ItemServiceImpl implements ItemService {
         EntityTransaction transaction = em.getTransaction();
         transaction.begin();
         switch (type) {
-            case "WANDS":
+            case "WAND":
                 itemRepository.add(new Item(ItemType.WAND, name, BigDecimal.valueOf(itemValue)));
                 break;
-            case "WEAPONS":
+            case "WEAPON":
                 itemRepository.add(new Item(ItemType.WEAPON, name, BigDecimal.valueOf(itemValue)));
                 break;
-            case "BROOMSTICKS":
+            case "BROOMSTICK":
                 itemRepository.add(new Item(ItemType.BROOMSTICK, name, BigDecimal.valueOf(itemValue)));
                 break;
-            case "ROBES":
+            case "ROBE":
                 itemRepository.add(new Item(ItemType.ROBE, name, BigDecimal.valueOf(itemValue)));
                 break;
         }
+        transaction.commit();
+    }
+
+    @Override
+    public Item findById(String id) {
+        return itemRepository.findById(Long.valueOf(id));
+    }
+
+    @Override
+    public void deleteById(String itemId) {
+        EntityTransaction transaction = em.getTransaction();
+        transaction.begin();
+        itemRepository.deleteById(Long.parseLong(itemId));
         transaction.commit();
     }
 }

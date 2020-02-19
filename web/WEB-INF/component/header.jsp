@@ -16,10 +16,10 @@
             <div class="dropdown">
                 <button type="button" class="btn btn-light btn-lg mr-5 dropdown-toggle" data-toggle="dropdown">Items</button>
                 <div class="dropdown-menu">
-                    <a class="dropdown-item" href="/view-item?itemType=WANDS">Wands</a>
-                    <a class="dropdown-item" href="/view-item?itemType=WEAPONS">Weapon</a>
-                    <a class="dropdown-item" href="/view-item?itemType=BROOMSTICKS">Broomstick</a>
-                    <a class="dropdown-item" href="/view-item?itemType=ROBES">Robes</a>
+                    <a class="dropdown-item" href="/view-item?itemType=WAND">Wands</a>
+                    <a class="dropdown-item" href="/view-item?itemType=WEAPON">Weapon</a>
+                    <a class="dropdown-item" href="/view-item?itemType=BROOMSTICK">Broomstick</a>
+                    <a class="dropdown-item" href="/view-item?itemType=ROBE">Robes</a>
 
 
                     <c:forEach items="${itemTypes}" var="type">
