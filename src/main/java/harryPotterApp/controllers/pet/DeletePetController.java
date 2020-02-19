@@ -1,4 +1,4 @@
-package harryPotterApp.controllers;
+package harryPotterApp.controllers.pet;
 
 import harryPotterApp.services.PetService;
 import harryPotterApp.services.PetServiceImpl;

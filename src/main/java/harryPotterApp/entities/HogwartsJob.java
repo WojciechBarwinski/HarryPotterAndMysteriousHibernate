@@ -1,9 +1,15 @@
 package harryPotterApp.entities;
 
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.*;
 
+@EqualsAndHashCode(exclude = {"employees"})
+@Getter
 @Entity
 @Table(name = "Hogwarts_Jobs")
 public class HogwartsJob {
@@ -18,13 +24,15 @@ public class HogwartsJob {
             inverseJoinColumns = { @JoinColumn(foreignKey = @ForeignKey(name = "FK_employee_id")) })
     private Set<HPCharacter> employees = new HashSet<>();
 
+    @Setter
     @Column(nullable = false)
     private BigDecimal salary;
 
+    @Setter
     @Column(nullable = false)
     private String positionName;
 
-    public HogwartsJob() {
+    protected HogwartsJob() {
     }
 
     public HogwartsJob(BigDecimal salary, String positionName) {
@@ -32,46 +40,7 @@ public class HogwartsJob {
         this.positionName = positionName;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public Set<HPCharacter> getCharactersInJob() {
-        return employees;
-    }
-
     public void setCharactersAsEmployee(HPCharacter hpCharacter) {
         this.employees.add(hpCharacter);
-    }
-
-    public BigDecimal getSalary() {
-        return salary;
-    }
-
-    public void setSalary(BigDecimal salary) {
-        this.salary = salary;
-    }
-
-    public String getPositionName() {
-        return positionName;
-    }
-
-    public void setPositionName(String positionName) {
-        this.positionName = positionName;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        HogwartsJob that = (HogwartsJob) o;
-        return Objects.equals(id, that.id) &&
-                Objects.equals(salary, that.salary) &&
-                Objects.equals(positionName, that.positionName);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, salary, positionName);
     }
 }

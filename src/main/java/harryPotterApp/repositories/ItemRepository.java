@@ -1,6 +1,9 @@
 package harryPotterApp.repositories;
 
 import harryPotterApp.entities.Item;
+import harryPotterApp.entities.ItemType;
+
+import java.util.List;
 
 public interface ItemRepository {
 
@@ -8,4 +11,6 @@ public interface ItemRepository {
     Item updateById(Long id);
     Item findById(Long id);
     void deleteById(Long id);
+    List<Item> getItemByOwnerID(Long id);
+    List<Item> getAllItemsByType(ItemType type);
 }

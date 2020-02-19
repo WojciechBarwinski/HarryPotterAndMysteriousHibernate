@@ -12,15 +12,25 @@
             <form action="/show-pets" method="post">
                 <button class="btn btn-light btn-lg mr-5" type="submit">Pets</button>
             </form>
-            <form action="/show-students" method="post">
-                <button class="btn btn-light btn-lg mr-5" type="submit">Students</button>
-            </form>
-            <form action="/show-jobs" method="post">
-                <button class="btn btn-light btn-lg mr-5" type="submit">Jobs</button>
-            </form>
-            <form action="/show-items" method="post">
-                <button class="btn btn-light btn-lg mr-5" type="submit">Items</button>
-            </form>
+
+            <div class="dropdown">
+                <button type="button" class="btn btn-light btn-lg mr-5 dropdown-toggle" data-toggle="dropdown">Items</button>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="/view-item?itemType=WAND">Wands</a>
+                    <a class="dropdown-item" href="/view-item?itemType=WEAPON">Weapon</a>
+                    <a class="dropdown-item" href="/view-item?itemType=BROOMSTICK">Broomstick</a>
+                    <a class="dropdown-item" href="/view-item?itemType=ROBE">Robes</a>
+
+
+                    <c:forEach items="${itemTypes}" var="type">
+                    <a class="dropdown-item" href="/view-item?itemType=${type}">${type}</a>
+                    </c:forEach>
+
+
+                </div>
+            </div>
+
+        </div>
             <img src="/image/logo.png" width="60" height="60"/>
         </div>
     </div>

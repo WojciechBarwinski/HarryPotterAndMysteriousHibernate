@@ -8,25 +8,25 @@ import java.util.Objects;
 public class HPCharacterMapper {
 
     private static String altImagePath = "/image/tmpFoto.jpg";
-    private HPCharacterMapper() {
+
+    private HPCharacterMapper(){
 
     }
 
     public static HPCharacterDto mapToHPCharacterDto(HPCharacter hpCharacter) {
-        HPCharacterDto hpCharacterDto = new HPCharacterDto();
+        HPCharacterDto dto = HPCharacterDto.builder()
+                .id(hpCharacter.getId())
+                .firstName(hpCharacter.getFirstName())
+                .lastName(hpCharacter.getLastName())
+                .birthDate(hpCharacter.getBirthDate())
+                .pet(hpCharacter.getPet())
+                .build();
 
-        hpCharacterDto.setId(hpCharacter.getId());
-        hpCharacterDto.setFirstName(hpCharacter.getFirstName());
-        hpCharacterDto.setLastName(hpCharacter.getLastName());
-        hpCharacterDto.setBirthDate(hpCharacter.getBirthDate());
-        hpCharacterDto.setPet(hpCharacter.getPet());
-
-        if (Objects.isNull(hpCharacter.getImagePath())){
-            hpCharacterDto.setImagePath(altImagePath);
+        if (Objects.isNull(hpCharacter.getImagePath())) {
+            dto.setImagePath(altImagePath);
         } else {
-            hpCharacterDto.setImagePath(hpCharacter.getImagePath());
+            dto.setImagePath(hpCharacter.getImagePath());
         }
-        
-        return hpCharacterDto;
+        return dto;
     }
 }

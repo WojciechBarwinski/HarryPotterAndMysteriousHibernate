@@ -1,8 +1,9 @@
-package harryPotterApp.controllers;
+package harryPotterApp.controllers.character;
 
 import harryPotterApp.dto.HPCharacterDto;
 import harryPotterApp.services.HpCharacterService;
 import harryPotterApp.services.HpCharacterServiceImpl;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,7 +13,8 @@ import java.io.IOException;
 
 @WebServlet("/view-character")
 public class CharacterViewController extends HttpServlet {
-    HpCharacterService characterService = new HpCharacterServiceImpl();
+    private HpCharacterService characterService = new HpCharacterServiceImpl();
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Long idToView = Long.valueOf(req.getParameter("idToView"));

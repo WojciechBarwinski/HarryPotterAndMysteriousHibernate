@@ -3,13 +3,15 @@ package harryPotterApp.startingData;
 
 import harryPotterApp.entities.*;
 import harryPotterApp.repositories.*;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public class DataInitializer {
-    private DataInitializer(){}
+    private DataInitializer() {
+    }
 
 
     static private CharacterRepository characterRepository;
@@ -39,8 +41,7 @@ public class DataInitializer {
     static private HPLocation shriekingShack = new HPLocation("Shrieking Shack");
 
 
-
-    public static void addAllData(EntityManager em){
+    public static void addAllData(EntityManager em) {
 
         characterRepository = new CharacterRepositoryImpl(em);
         hogwartsJobRepository = new HogwartsJobRepositoryImpl(em);
@@ -49,7 +50,7 @@ public class DataInitializer {
         studentRepository = new StudentRepositoryImpl(em);
         itemRepository = new ItemRepositoryImpl(em);
 
-        if (characterRepository.getAllCharacters().isEmpty()){
+        if (characterRepository.getAllCharacters().isEmpty()) {
             EntityTransaction transaction = em.getTransaction();
             transaction.begin();
 
@@ -81,6 +82,10 @@ public class DataInitializer {
             petRepository.add(new Pet("Max", characterRepository.findById(6L), "Cat"));
             petRepository.add(new Pet("Fang", characterRepository.findById(5L), "Dog"));
 
+            hogwarts.setImagePath("https://vignette.wikia.nocookie.net/harrypotter/images/b/bd/Dhogwarts.jpg");
+            hagridsHouse.setImagePath("https://www.shemazing.net/wp-content/uploads/2019/04/1556285270_hagrid-656x438.png");
+            malfoyManor.setImagePath("https://vignette.wikia.nocookie.net/harrypotter/images/a/ae/Malfoy_Manor_Pottermore.png");
+            shriekingShack.setImagePath("https://i.pinimg.com/originals/a2/b4/21/a2b42165e1b9acc82be0982064758b7f.jpg");
             locationRepository.add(hogwarts);
             locationRepository.add(hagridsHouse);
             locationRepository.add(malfoyManor);

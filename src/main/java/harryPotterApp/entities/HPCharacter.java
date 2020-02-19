@@ -1,12 +1,20 @@
 package harryPotterApp.entities;
 
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
-import java.util.*;
-
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
+@EqualsAndHashCode(exclude = {"imagePath","location","pet","positions","items"})
+@Getter
 @Entity
 @Table(name = "HPCharacter")
 public class HPCharacter {
@@ -15,30 +23,38 @@ public class HPCharacter {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Setter
     @NotEmpty
     @Column(nullable = false)
     private String firstName;
 
+    @Setter
     @NotEmpty
     @Column(nullable = false)
     private String lastName;
 
+    @Setter
     @NotNull
     @Column(nullable = false)
     private LocalDate birthDate;
 
+    @Setter
     private String imagePath;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @Setter
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "location", foreignKey = @ForeignKey(name = "FK_hpcharacter_location_id"))
     private HPLocation location;
 
-    @OneToOne(mappedBy = "owner", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @Setter
+    @OneToOne(mappedBy = "owner", cascade = CascadeType.ALL)
     private Pet pet;
+
 
     @ManyToMany(mappedBy = "employees", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     Set<HogwartsJob> positions = new HashSet<>();
 
+    @Setter
     @ManyToMany(mappedBy = "itemOwners", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     Set<Item> items = new HashSet<>();
 
@@ -52,87 +68,7 @@ public class HPCharacter {
         this.birthDate = birthDate;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public LocalDate getBirthDate() {
-        return birthDate;
-    }
-
-    public void setBirthDate(LocalDate birthDate) {
-        this.birthDate = birthDate;
-    }
-
-    public Set<HogwartsJob> getPositions() {
-        return positions;
-    }
-
-    public void setPositions(HogwartsJob hogwartsJob) {
+    public void setCharactersAsEmployee(HogwartsJob hogwartsJob) {
         this.positions.add(hogwartsJob);
-    }
-
-    public Set<Item> getItems() {
-        return items;
-    }
-
-    public void setItems(Item item) {
-        this.items.add(item);
-    }
-
-    public HPLocation getLocation() {
-        return location;
-    }
-
-    public void setLocation(HPLocation location) {
-        this.location = location;
-    }
-
-    public Pet getPet() {
-        return pet;
-    }
-
-    public void setPet(Pet pet) {
-        this.pet = pet;
-    }
-
-    public String getImagePath() {
-        return imagePath;
-    }
-
-    public void setImagePath(String imagePath) {
-        this.imagePath = imagePath;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        HPCharacter that = (HPCharacter) o;
-        return Objects.equals(id, that.id) &&
-                Objects.equals(firstName, that.firstName) &&
-                Objects.equals(lastName, that.lastName) &&
-                Objects.equals(birthDate, that.birthDate);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, firstName, lastName, birthDate);
     }
 }

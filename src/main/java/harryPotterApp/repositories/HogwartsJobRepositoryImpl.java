@@ -39,7 +39,7 @@ public class HogwartsJobRepositoryImpl implements HogwartsJobRepository {
     }
 
     @Override
-    public List <HogwartsJob> findJobByIdCharacter(Long id) {
+    public List<HogwartsJob> findJobByIdCharacter(Long id) {
         Query query = em.createQuery("SELECT job FROM HogwartsJob as job JOIN job.employees e where e.id =:id").setParameter("id", id);
         return query.getResultList();
     }

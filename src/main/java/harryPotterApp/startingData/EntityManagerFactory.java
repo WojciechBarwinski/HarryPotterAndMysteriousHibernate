@@ -12,5 +12,4 @@ public class EntityManagerFactory {
     public static javax.persistence.EntityManagerFactory getEmf(){
         return emf;
     }
-
 }
