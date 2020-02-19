@@ -105,8 +105,8 @@
                 <p class="error" align="center">${characterExists}</p>
             </div>
             <div align="center">
-                <h4>Dodaj usuń wyposarzenie</h4>
-                <form class="form-inline" action="/add-resident" method="post">
+                <h4>Dodaj usuń wyposażenie</h4>
+                <form class="form-inline justify-content-center" action="/add-resident" method="post">
                     <p>
                         <label for="residentToAdd" class="mr-sm-2">Add item</label>
 
@@ -121,7 +121,7 @@
 
                 </form>
 
-                <form class="form-inline" action="/add-resident" method="post">
+                <form class="form-inline justify-content-center" action="/add-resident" method="post">
 
                         <label for="residentToAdd" class="mr-sm-2">Remove item</label>
 
