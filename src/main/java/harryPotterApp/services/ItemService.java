@@ -3,6 +3,7 @@ package harryPotterApp.services;
 import harryPotterApp.entities.Item;
 
 import java.util.List;
+import java.util.Set;
 
 public interface ItemService {
 
@@ -13,4 +14,11 @@ public interface ItemService {
     void deleteById(String itemId);
 
     Item findById(String id);
+
+    Item findByName(String name);
+
+    List<Item> getAllItemsByCharacterId(String id);
+
+
+    List<Item> getAllItemsWhichAreNotOwnedByCharacter(String id);
 }

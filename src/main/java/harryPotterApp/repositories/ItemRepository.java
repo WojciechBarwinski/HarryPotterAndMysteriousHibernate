@@ -4,6 +4,7 @@ import harryPotterApp.entities.Item;
 import harryPotterApp.entities.ItemType;
 
 import java.util.List;
+import java.util.Set;
 
 public interface ItemRepository {
 
@@ -13,4 +14,5 @@ public interface ItemRepository {
     void deleteById(Long id);
     List<Item> getItemByOwnerID(Long id);
     List<Item> getAllItemsByType(ItemType type);
+    List<Item> getAllItems();
 }

@@ -49,4 +49,9 @@ public class Item {
     public void setItemOwners(HPCharacter hpCharacter) {
         this.itemOwners.add(hpCharacter);
     }
+
+    public void removeCharacterFromItemSet(HPCharacter hpCharacter) {
+        itemOwners.remove(hpCharacter);
+        hpCharacter.getItems().remove(this);
+    }
 }
