@@ -106,7 +106,7 @@
                 <p class="error" align="center">${wrongName}</p>
                 <p class="error" align="center">${wrongLastName}</p>
                 <p class="error" align="center">${wrongData}</p>
-                <p class="error" align="center">${characterExists}</p>
+                <p class="error" align="center">${characterExist}</p>
             </div>
 
 
@@ -135,7 +135,7 @@
                         <select class="form-control mr-sm-2" id="residentToAdd2" name="itemToRemove">
                             <option value=" " disabled selected value>Select</option>
                             <c:forEach items="${itemsToRemove}" var="item">
-                                <option>${item.name}</option>
+                                <option name="itemId" value=${item.id}>${item.name}</option>
                             </c:forEach>
                         </select>
 

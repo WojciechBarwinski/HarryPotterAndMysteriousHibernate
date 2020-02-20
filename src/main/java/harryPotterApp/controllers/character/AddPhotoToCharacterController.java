@@ -23,7 +23,7 @@ public class AddPhotoToCharacterController extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String imagePath = req.getParameter("imagesPath");
         Long characterId = Long.valueOf(req.getParameter("characterId"));
-        Map<String, String> errorsMap = ValidationService.validateImagePath(imagePath);
+        Map<String, String> errorsMap = ValidationService.imagePathValidate(imagePath);
 
         if (errorsMap.isEmpty()) {
             PhotoService.addPhoto(imagePath, characterId, EntityType.CHARACTER);

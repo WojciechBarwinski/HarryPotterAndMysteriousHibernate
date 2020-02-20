@@ -22,7 +22,7 @@ public class AddItemController extends HttpServlet {
         String itemValue = req.getParameter("value");
         String itemType = req.getParameter("type");
 
-        Map<String, String> errorsMap = ValidationService.validateAddItem(itemName, itemValue);
+        Map<String, String> errorsMap = ValidationService.addItemValidate(itemName, itemValue);
         if (errorsMap.isEmpty()){
             itemService.add(itemName, itemValue, itemType);
         } else {

@@ -1,7 +1,5 @@
 package harryPotterApp.controllers.location;
 
-import harryPotterApp.dto.HPLocationDto;
-import harryPotterApp.entities.HPCharacter;
 import harryPotterApp.services.*;
 
 import javax.servlet.ServletException;
@@ -10,7 +8,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
 import java.util.Map;
 
 @WebServlet("/add-resident")
@@ -22,7 +19,7 @@ public class AddResidentController extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String locationId = req.getParameter("locationId");
         String residentToAdd = req.getParameter("residentToAdd");
-        Map<String, String> errorsMap = ValidationService.validateSelectInput(residentToAdd);
+        Map<String, String> errorsMap = ValidationService.selectInputValidate(residentToAdd);
 
         if (errorsMap.isEmpty()){
             Long characterId = hpCharacterService.getCharacterIdByFirstAndLastName(residentToAdd);

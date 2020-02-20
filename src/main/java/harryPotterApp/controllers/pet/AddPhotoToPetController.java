@@ -23,7 +23,7 @@ public class AddPhotoToPetController extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String imagePath = req.getParameter("imagesPath");
         Long petId = Long.valueOf(req.getParameter("petId"));
-        Map<String, String> errorsMap = ValidationService.validateImagePath(imagePath);
+        Map<String, String> errorsMap = ValidationService.imagePathValidate(imagePath);
 
         if (errorsMap.isEmpty()) {
             PhotoService.addPhoto(imagePath, petId, EntityType.PET);

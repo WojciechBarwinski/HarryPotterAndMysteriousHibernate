@@ -87,18 +87,6 @@ class CharacterRepositoryImplTest {
 
     }
 
-    @Order(4)
-    @Test
-    void shouldDeleteCharacter() {
-        EntityTransaction transaction = em.getTransaction();
-        Long id = 1L;
 
-        transaction.begin();
-        characterRepository.deleteById(id);
-        transaction.commit();
-
-        HPCharacter characterAfterDelete = characterRepository.findById(id);
-        assertThat(characterAfterDelete).isNull();
-    }
 
 }

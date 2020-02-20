@@ -42,19 +42,16 @@ public class HpCharacterServiceImpl implements HpCharacterService {
     @Override
     public void deleteCharacterById(Long id) {
         EntityTransaction transaction = em.getTransaction();
+
         transaction.begin();
         characterRepository.deleteById(id);
         transaction.commit();
     }
 
-    /* TODO
-     * It's list because we add find by name/last name, and there it will by list.*/
+
     @Override
-    public List<HPCharacterDto> findCharacterById(String id) {
-        List<HPCharacterDto> foundedCharacter = new ArrayList<>();
-        HPCharacter character = characterRepository.findById(Long.valueOf(id));
-        foundedCharacter.add(HPCharacterMapper.mapToHPCharacterDto(character));
-        return foundedCharacter;
+    public HPCharacter findCharacterById(String id) {
+        return characterRepository.findById(Long.valueOf(id));
     }
 
     @Override

@@ -1,5 +1,6 @@
 package harryPotterApp.controllers.character;
 
+import harryPotterApp.dto.CharacterToUpdate;
 import harryPotterApp.services.HpCharacterService;
 import harryPotterApp.services.HpCharacterServiceImpl;
 import harryPotterApp.services.ValidationService;
@@ -22,7 +23,9 @@ public class UpdateCharacterDateController extends HttpServlet {
         String lastName = req.getParameter("lastName");
         String birthDate = req.getParameter("birthDate");
 
-        Map<String, String> errorsMap = ValidationService.valideteDateToUpdate(firstName, lastName, birthDate);
+        CharacterToUpdate characterToUpdate = new CharacterToUpdate(characterId, firstName, lastName, birthDate);
+
+        Map<String, String> errorsMap = ValidationService.dataToUpdateValidate(characterToUpdate);
         if (errorsMap.isEmpty()){
             characterService.updateCharacter(characterId, firstName, lastName, birthDate);
         } else {
@@ -30,6 +33,8 @@ public class UpdateCharacterDateController extends HttpServlet {
             req.setAttribute("wrongName", errorsMap.get("wrongName"));
             req.setAttribute("wrongLastName", errorsMap.get("wrongLastName"));
             req.setAttribute("wrongData", errorsMap.get("wrongData"));
+            req.setAttribute("characterExist", errorsMap.get("characterExist"));
+
         }
         req.getRequestDispatcher("/view-character?idToView=" + characterId).forward(req, resp);
     }

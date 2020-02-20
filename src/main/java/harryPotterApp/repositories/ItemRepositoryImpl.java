@@ -1,9 +1,11 @@
 package harryPotterApp.repositories;
 
+import harryPotterApp.entities.HPCharacter;
 import harryPotterApp.entities.Item;
 import harryPotterApp.entities.ItemType;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import java.util.List;
@@ -53,4 +55,7 @@ public class ItemRepositoryImpl implements ItemRepository {
         TypedQuery<Item> query = em.createQuery("SELECT item FROM Item as item WHERE item.type = :type", Item.class).setParameter("type", type);
         return query.getResultList();
     }
+
+
+
 }
