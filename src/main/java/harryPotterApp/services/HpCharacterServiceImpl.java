@@ -53,14 +53,10 @@ public class HpCharacterServiceImpl implements HpCharacterService {
         transaction.commit();
     }
 
-    /* TODO
-     * It's list because we add find by name/last name, and there it will by list.*/
+
     @Override
-    public List<HPCharacterDto> findCharacterById(String id) {
-        List<HPCharacterDto> foundedCharacter = new ArrayList<>();
-        HPCharacter character = characterRepository.findById(Long.valueOf(id));
-        foundedCharacter.add(HPCharacterMapper.mapToHPCharacterDto(character));
-        return foundedCharacter;
+    public HPCharacter findCharacterById(String id) {
+        return characterRepository.findById(Long.valueOf(id));
     }
 
     @Override
@@ -111,6 +107,26 @@ public class HpCharacterServiceImpl implements HpCharacterService {
                 .filter(hpCharacterDto -> hpCharacterDto.getLastName().equals(lastName))
                 .map(HPCharacter::getId)
                 .findFirst().get();
+    }
+
+    @Override
+    public void updateCharacter(String characterId, String firstName, String lastName, String birthDate) {
+        EntityTransaction transaction = em.getTransaction();
+        Long id = Long.valueOf(characterId);
+        HPCharacter characterToUpdate = characterRepository.findById(id);
+
+        transaction.begin();
+        if (!firstName.isBlank()){
+            characterToUpdate.setFirstName(firstName);
+        }
+        if (!lastName.isBlank()){
+            characterToUpdate.setLastName(lastName);
+        }
+        if (!birthDate.isBlank()){
+           characterToUpdate.setBirthDate( LocalDate.parse(birthDate));
+        }
+        characterRepository.updateById(id);
+        transaction.commit();
     }
 
     /*@Override

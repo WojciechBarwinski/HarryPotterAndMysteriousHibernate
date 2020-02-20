@@ -23,7 +23,7 @@ public class AddPetController extends HttpServlet {
         String species = req.getParameter("species");
         String owner = req.getParameter("owner");
 
-        Map<String, String> errorsMap = ValidationService.validateAddingPet(name, species, owner);
+        Map<String, String> errorsMap = ValidationService.addingPetValidate(name, species, owner);
         List<HPCharacterDto> charactersWithoutPets = petService.getAllCharactersWithoutPet();
         req.setAttribute("ownersAvailable", charactersWithoutPets);
         if (errorsMap.isEmpty()) {

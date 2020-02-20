@@ -3,6 +3,7 @@ package harryPotterApp.repositories;
 import harryPotterApp.entities.HPCharacter;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import java.util.List;
 import java.util.Objects;

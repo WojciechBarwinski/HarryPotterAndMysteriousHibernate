@@ -85,7 +85,7 @@
 
             <div align="center">
                 <h4>Zmień dane postaci</h4>
-                <form class="form-inline justify-content-center" action="/update-character" method="post">
+                <form class="form-inline justify-content-center" action="/update-character-date" method="post">
                     <p>
                         <label for="firstName" class="mr-sm-2">First Name:</label>
                         <input type="text" class="form-control mb-2 mr-sm-2" placeholder="First name" name="firstName" id="firstName">
@@ -99,14 +99,14 @@
                         <input type="date" class="form-control mb-2 mr-sm-2" placeholder="YYYY-MM-DD" name="birthDate" id="birthDate" value="">
                     </p>
 
-                    <button type="submit" class="btn btn-primary mb-2" value="${character.id}">Update</button>
+                    <button type="submit" class="btn btn-primary mb-2" value="${character.id}" name="characterId">Update</button>
                 </form>
 
                 <p class="error" align="center">${noValue}</p>
                 <p class="error" align="center">${wrongName}</p>
                 <p class="error" align="center">${wrongLastName}</p>
                 <p class="error" align="center">${wrongData}</p>
-                <p class="error" align="center">${characterExists}</p>
+                <p class="error" align="center">${characterExist}</p>
             </div>
 
 
@@ -126,15 +126,16 @@
                         </select>
 
                         <button type="submit" class="btn btn-primary mb-2" value="!!!!!!!!!!!!!!!" name="locationId">Add item</button>
-
                 </form>
+
+
                     <form class="form-inline justify-content-center" action="/update-character" method="post">
                         <label for="residentToAdd" class="mr-sm-2">Remove item</label>
 
                         <select class="form-control mr-sm-2" id="residentToAdd2" name="itemToRemove">
                             <option value=" " disabled selected value>Select</option>
                             <c:forEach items="${itemsToRemove}" var="item">
-                                <option>${item.name}</option>
+                                <option name="itemId" value=${item.id}>${item.name}</option>
                             </c:forEach>
                         </select>
 

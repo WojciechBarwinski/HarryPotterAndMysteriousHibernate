@@ -1,5 +1,6 @@
 package harryPotterApp.services;
 
+import harryPotterApp.entities.HPCharacter;
 import harryPotterApp.entities.Item;
 import harryPotterApp.entities.ItemType;
 import harryPotterApp.repositories.ItemRepository;
