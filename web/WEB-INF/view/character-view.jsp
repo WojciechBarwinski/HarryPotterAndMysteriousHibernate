@@ -113,33 +113,28 @@
 
 
             <div align="center">
-                <h4>Dodaj usuń wyposarzenie</h4>
-                <form class="form-inline justify-content-center" action="/update-character" method="post">
-
-                        <label for="residentToAdd" class="mr-sm-2">Add item</label>
-
-                        <select class="form-control mr-sm-2" id="residentToAdd" name="itemToAdd">
+                <h4>Dodaj usuń wyposażenie</h4>
+                <form class="form-inline justify-content-center" action="/update-character-items" method="post">
+                    <p>
+                        <label for="itemToAdd" class="mr-sm-2">Add item</label>
+                        <select class="form-control mr-sm-2" id="itemToAdd" name="itemToAdd">
                             <option value=" " disabled selected value>Select</option>
-                            <c:forEach items="${itemsToAdd}" var="item">
+                            <c:forEach items="${itemsAvailable}" var="item">
                                 <option>${item.name}</option>
                             </c:forEach>
                         </select>
-
-                        <button type="submit" class="btn btn-primary mb-2" value="!!!!!!!!!!!!!!!" name="locationId">Add item</button>
+                        <button type="submit" class="btn btn-primary mb-2" name="itemIdToAdd">Add</button>
                 </form>
-
-
-                    <form class="form-inline justify-content-center" action="/update-character" method="post">
-                        <label for="residentToAdd" class="mr-sm-2">Remove item</label>
-
-                        <select class="form-control mr-sm-2" id="residentToAdd2" name="itemToRemove">
-                            <option value=" " disabled selected value>Select</option>
-                            <c:forEach items="${itemsToRemove}" var="item">
-                                <option name="itemId" value=${item.id}>${item.name}</option>
-                            </c:forEach>
-                        </select>
-
-                        <button type="submit" class="btn btn-primary mb-2" value="!!!!!!!!!!!!!" name="locationId">Remove item</button>
+                <form class="form-inline justify-content-center" action="/update-character-items" method="post">
+                    <label for="itemToDelete" class="mr-sm-2">Remove item</label>
+                    <select class="form-control mr-sm-2" id="itemToDelete" name="itemToDelete">
+                        <option value=" " disabled selected value>Select</option>
+                        <c:forEach items="${character.itemList}" var="item">
+                            <option>${item.name}</option>
+                        </c:forEach>
+                    </select>
+                    <button type="submit" class="btn btn-primary mb-2" value="${item.id}" name="itemIdToDelete">Remove item</button>
+                    </p>
                 </form>
             </div>
 

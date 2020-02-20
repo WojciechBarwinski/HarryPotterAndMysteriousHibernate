@@ -24,6 +24,7 @@ public class HpCharacterServiceImpl implements HpCharacterService {
 
     @Override
     public List<HPCharacterDto> getAllCharacters() {
+        em.clear();
         return characterRepository.getAllCharacters()
                 .stream()
                 .map(HPCharacterMapper::mapToHPCharacterDto)

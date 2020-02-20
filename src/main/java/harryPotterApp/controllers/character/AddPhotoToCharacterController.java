@@ -33,6 +33,6 @@ public class AddPhotoToCharacterController extends HttpServlet {
         }
         HPCharacterDto characterToView = characterService.prepareCharacterToView(characterId);
         req.setAttribute("character", characterToView);
-        req.getRequestDispatcher("/WEB-INF/view/character-view.jsp").forward(req, resp);
+        req.getRequestDispatcher("/view-character?idToView=" + characterId).forward(req, resp);
     }
 }
