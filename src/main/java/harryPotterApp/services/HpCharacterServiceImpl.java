@@ -105,4 +105,49 @@ public class HpCharacterServiceImpl implements HpCharacterService {
                 .map(HPCharacter::getId)
                 .findFirst().get();
     }
+
+    /*@Override
+    public void updateCharacter(String id, String itemToAddId, String itemToRemoveId) {
+        EntityTransaction transaction = em.getTransaction();
+        if (itemToAddId != null) {
+            Item itemToAdd = itemRepository.findById(Long.valueOf(itemToAddId));
+            HPCharacter characterToUpdate = characterRepository.findById(Long.valueOf(id));
+            characterToUpdate.setItems(itemToAdd);
+            transaction.begin();
+            characterRepository.updateById(Long.valueOf(id));
+        } else {
+            Item itemToRemove = itemRepository.findById(Long.valueOf(itemToRemoveId));
+            HPCharacter characterToUpdate = characterRepository.findById(Long.valueOf(id));
+            characterToUpdate.getItems().remove(itemToRemove);
+            transaction.begin();
+            characterRepository.updateById(Long.valueOf(id));
+        }
+        transaction.commit();
+    }*/
+
+    @Override
+    public void addItemToCharacter(String id, Long itemToAddId) {
+        EntityTransaction transaction = em.getTransaction();
+        Item itemToAdd = itemRepository.findById(itemToAddId);
+        HPCharacter characterToUpdate = characterRepository.findById(Long.valueOf(id));
+
+        //characterToUpdate.setItems(itemToAdd);
+        itemToAdd.setItemOwners(characterToUpdate);
+        transaction.begin();
+        itemRepository.updateById(itemToAddId);
+        //characterRepository.updateById(Long.valueOf(id));
+        transaction.commit();
+    }
+
+    @Override
+    public void removeItemToCharacter(String id, Long itemToRemoveId) {
+        EntityTransaction transaction = em.getTransaction();
+        Item itemToRemove = itemRepository.findById(itemToRemoveId);
+        HPCharacter characterToUpdate = characterRepository.findById(Long.valueOf(id));
+
+        characterToUpdate.getItems().remove(itemToRemove);
+        transaction.begin();
+        characterRepository.updateById(Long.valueOf(id));
+        transaction.commit();
+    }
 }

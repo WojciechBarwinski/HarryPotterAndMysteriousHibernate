@@ -15,6 +15,8 @@ public interface ItemService {
 
     Item findById(String id);
 
+    Item findByName(String name);
+
     List<Item> getAllItemsByCharacterId(String id);
 
 

@@ -117,25 +117,25 @@
                             </c:forEach>
                         </select>
 
-                        <button type="submit" class="btn btn-primary mb-2" value="${item.id}" name="itemIdToAdd">Add</button>
+                        <button type="submit" class="btn btn-primary mb-2" name="itemIdToAdd">Add</button>
 
                 </form>
 
                 <form class="form-inline justify-content-center" action="/update-character-items" method="post">
 
-                        <label for="itemToDelete" class="mr-sm-2">Remove item</label>
+                    <label for="itemToDelete" class="mr-sm-2">Remove item</label>
 
-                        <select class="form-control mr-sm-2" id="itemToDelete" name="itemToDelete">
-                            <option value=" " disabled selected value>Select</option>
-                            <c:forEach items="${character.itemList}" var="item">
+                    <select class="form-control mr-sm-2" id="itemToDelete" name="itemToDelete">
+                        <option value=" " disabled selected value>Select</option>
+                        <c:forEach items="${character.itemList}" var="item">
                             <option>${item.name}</option>
-                            </c:forEach>
-                            <%--<c:forEach items="${residentsAvailable}" var="resident">
-                                ${resident.firstName} ${resident.lastName}
-                            </c:forEach>--%>
-                        </select>
+                        </c:forEach>
+                        <%--<c:forEach items="${residentsAvailable}" var="resident">
+                            ${resident.firstName} ${resident.lastName}
+                        </c:forEach>--%>
+                    </select>
 
-                        <button type="submit" class="btn btn-primary mb-2" value="${item.id}" name="itemIdToDelete">Add</button>
+                    <button type="submit" class="btn btn-primary mb-2" value="${item.id}" name="itemIdToDelete">Remove item</button>
                     </p>
                 </form>
             </div>

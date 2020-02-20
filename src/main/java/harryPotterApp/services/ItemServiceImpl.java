@@ -82,4 +82,14 @@ public class ItemServiceImpl implements ItemService {
         resultList.removeAll(charactersItems);
         return resultList;
     }
+
+    @Override
+    public Item findByName(String name) {
+        if (name == null){
+            return null;
+        }
+        List<Item> allItems = itemRepository.getAllItems();
+        Item searchedItem = allItems.stream().filter(item -> item.getName().equals(name)).findFirst().get();
+        return searchedItem;
+    }
 }

@@ -54,8 +54,8 @@ public class HPCharacter {
     @ManyToMany(mappedBy = "employees", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     Set<HogwartsJob> positions = new HashSet<>();
 
-    @Setter
-    @ManyToMany(mappedBy = "itemOwners", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+
+    @ManyToMany(mappedBy = "itemOwners", fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     Set<Item> items = new HashSet<>();
 
     protected HPCharacter(
@@ -70,5 +70,9 @@ public class HPCharacter {
 
     public void setCharactersAsEmployee(HogwartsJob hogwartsJob) {
         this.positions.add(hogwartsJob);
+    }
+
+    public void setItems(Item item) {
+        this.items.add(item);
     }
 }
