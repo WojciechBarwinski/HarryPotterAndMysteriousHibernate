@@ -41,6 +41,13 @@ public class HpCharacterServiceImpl implements HpCharacterService {
     @Override
     public void deleteCharacterById(Long id) {
         EntityTransaction transaction = em.getTransaction();
+        HPCharacter characterFromDB = characterRepository.findById(id);
+        List<Item> itemByOwnerID = itemRepository.getItemByOwnerID(id);
+
+        transaction.begin();
+        itemByOwnerID.forEach(item -> item.removeCharacterFromItemSet(characterFromDB));
+        transaction.commit();
+
         transaction.begin();
         characterRepository.deleteById(id);
         transaction.commit();
@@ -130,12 +137,9 @@ public class HpCharacterServiceImpl implements HpCharacterService {
         EntityTransaction transaction = em.getTransaction();
         Item itemToAdd = itemRepository.findById(itemToAddId);
         HPCharacter characterToUpdate = characterRepository.findById(Long.valueOf(id));
-
-        //characterToUpdate.setItems(itemToAdd);
         itemToAdd.setItemOwners(characterToUpdate);
         transaction.begin();
         itemRepository.updateById(itemToAddId);
-        //characterRepository.updateById(Long.valueOf(id));
         transaction.commit();
     }
 
@@ -144,10 +148,9 @@ public class HpCharacterServiceImpl implements HpCharacterService {
         EntityTransaction transaction = em.getTransaction();
         Item itemToRemove = itemRepository.findById(itemToRemoveId);
         HPCharacter characterToUpdate = characterRepository.findById(Long.valueOf(id));
-
-        characterToUpdate.getItems().remove(itemToRemove);
+        itemToRemove.getItemOwners().remove(characterToUpdate);
         transaction.begin();
-        characterRepository.updateById(Long.valueOf(id));
+        itemRepository.updateById(itemToRemoveId);
         transaction.commit();
     }
 }

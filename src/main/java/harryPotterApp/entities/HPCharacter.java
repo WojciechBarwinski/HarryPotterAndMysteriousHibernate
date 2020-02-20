@@ -3,17 +3,15 @@ package harryPotterApp.entities;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.NotFound;
-import org.hibernate.annotations.NotFoundAction;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
-@EqualsAndHashCode(exclude = {"imagePath","location","pet","positions","items"})
+
+@EqualsAndHashCode(exclude = {"imagePath", "location", "pet", "positions", "items"})
 @Getter
 @Entity
 @Table(name = "HPCharacter")
@@ -75,4 +73,5 @@ public class HPCharacter {
     public void setItems(Item item) {
         this.items.add(item);
     }
+
 }
