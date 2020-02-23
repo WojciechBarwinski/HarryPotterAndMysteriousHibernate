@@ -17,20 +17,50 @@
         
         <div class="col-md-6 col-md-offset-3">
 
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ligula magna, rhoncus sit amet quam sit amet,
-                tempus posuere nibh. Fusce molestie tempor leo. Maecenas volutpat gravida diam id porta. Nam at est nisi. Nunc
-                eu dui tempor, scelerisque ligula nec, luctus ipsum. Vivamus varius ligula eget orci condimentum, a lacinia
-                mauris rhoncus. Cras porta, odio et molestie placerat, mi lacus ultrices quam, at ornare tellus risus quis mauris.
-                Mauris ultrices justo id odio ultrices egestas quis et turpis. Nam tempor non turpis vel ultricies. Maecenas feugiat
-                consequat metus id condimentum. Duis ac blandit mi, non pellentesque felis. Nulla fermentum lacus sit amet ex aliquam
-                maximus. Suspendisse a dui quam. Sed id velit elit. Proin sed scelerisque felis, ornare lacinia est.
+            <h2>Welcome to magical world of Harry Potter!</h2>
+            <p align="justify">Ever wondered if it's hard to manage such a huge school as Hogwarts from organizational point of view?
+                It must be a tough task and a nasty piece of work to mind the store and keep all information about students
+                and workers up-to-date. But thanks to this application it's no longer the problem!
+                We give you an user-friendly interactive database which will make administrating Hogwarts School Of Witchcraft and Wizardry a pure pleasure!</p>
 
-                Curabitur velit quam, finibus ut auctor sed, varius vitae sem. Proin elit eros, scelerisque id tortor quis, tincidunt
-                varius nulla. Proin condimentum enim sit amet pellentesque finibus. Ut euismod sem id velit congue volutpat. Etiam
-                tempus purus non enim ornare, a ultrices dui vestibulum. Sed ultrices urna lacus, varius feugiat nibh luctus sit amet.
-                Quisque finibus nisl eget odio imperdiet, et placerat ipsum fringilla. Sed dapibus fringilla eleifend. Quisque quis pretium
-                leo, et pellentesque elit. Vivamus euismod lacus a arcu scelerisque iaculis. Etiam vel accumsan ligula. Vivamus mattis id
-                lectus id varius.</p>
+            <h4>Main functionalities:</h4>
+
+            <ul>
+                <li>adding and deleting characters to/from database</li>
+                <li>updating information about characters</li>
+                <li>giving characters pets(each character in Hogwarts can have only one!) and items</li>
+                <li>keeping and updating information about characters place of residence</li>
+                <li>transparent view page for each character</li>
+            </ul><br/>
+
+            <h5>More features to come in application's next version!</h5><br/>
+
+            <div align="center">
+                <h4>Technology stack: Java 11, JSP, JSTL, Servlets, jUnit, Hibernate, MySQL, Tomcat, HTML, CSS, Bootstrap</h4>
+                <br/>
+                <h5>See our GitHub and LinkedIn :)</h5>
+                <br/>
+                <h5>Authors:</h5>
+                <h5>Maja Barwińska</h5>
+                <a href="https://github.com/mbarwinska">
+                    https://github.com/mbarwinska
+                </a><br/>
+                <a href="https://www.linkedin.com/in/maja-barwińska-/">
+                    https://www.linkedin.com/in/maja-barwińska-/
+                </a><br/>
+
+                <h5>Wojciech Barwiński</h5>
+                <a href="https://github.com/WojciechBarwinski">
+                    https://github.com/WojciechBarwinski
+                </a><br/>
+                <a href="https://www.linkedin.com/in/wojciech-barwiński/">
+                    https://www.linkedin.com/in/wojciech-barwiński/
+                </a><br/><br/>
+
+
+                PS If you happen to find any bugs, please let us now so that we can fix them! We're still learners ;)
+            </div>
+
         </div>
         <div class="col-md-3 col-md-offset-3"></div>
     </div>

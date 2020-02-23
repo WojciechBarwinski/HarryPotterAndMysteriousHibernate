@@ -20,17 +20,14 @@
         <div class="col-md-2 col-md-offset-3" align="center">
             <img src="${pet.imagePath}" class="img-fluid" alt="">
 
-            <c:set var="noImg" value="/image/tmpFoto.jpg"/>
+            <c:set var="noImg" value="/image/tmpFoto.jpg" />
             <c:set var="imagePath" value="${pet.imagePath}"/>
             <c:if test="${noImg == imagePath}">
-
-                <form action="/add-photo-to-pet" class="justify-content-center" method="post" name="petId"
-                      value="${pet.id}">
+                <form action="/add-photo-to-pet" class="justify-content-center" method="post" name="petId" value="${pet.id}">
                     <label for="id" class="mr-sm-2">Link to image</label>
                     <input type="text" class="form-control mb-2 mr-sm-2" placeholder="https: ... .jpg/.png" name="imagesPath" id="id">
                     <button type="submit" class="btn btn-primary" name="petId" value=${pet.id}>Add image</button>
                 </form>
-
             </c:if>
             <p class="error" align="center">${noValue}</p>
             <p class="error" align="center">${wrongPath}</p>
@@ -40,6 +37,7 @@
             <h5>Species: ${pet.species}</h5>
             <h5>Owner: ${pet.owner.firstName} ${pet.owner.lastName}</h5>
         </div>
+
         <div class="col-md-3 col-md-offset-3"></div>
     </div>
 </div>

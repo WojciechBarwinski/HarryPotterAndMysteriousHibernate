@@ -33,21 +33,17 @@
                             </tr>
                             </thead>
                             <fmt:setLocale value="en_GB"/>
-
                             <c:forEach items="${itemList}" var="item">
                                 <tr>
                                     <td style="color: white">${item.name}</td>
                                     <td style="color: white"><fmt:formatNumber type="currency" minFractionDigits="2"> ${item.value}</fmt:formatNumber></td>
                                     <td>
                                         <form action="/delete-item" method="post">
-                                            <button type="submit" class="btn btn-danger" name="itemIdToDelete"
-                                                    value=${item.id}>Delete
-                                            </button>
+                                            <button type="submit" class="btn btn-danger" name="itemIdToDelete" value=${item.id}>Delete</button>
                                         </form>
                                     </td>
                                 </tr>
                             </c:forEach>
-
                         </table>
                     </div>
                 </div>
@@ -59,14 +55,15 @@
                     <input type="text" class="form-control mb-2 mr-sm-2" placeholder="Name" name="name" id="name"></p>
 
                 <p><label for="value" class="mr-sm-2">Value:</label>
-                    <input type="number" min="1" max="10000000" class="form-control mb-2 mr-sm-2" placeholder="£ Value"
-                           name="value" id="value"></p>
+                    <input type="number" min="1" max="10000000" class="form-control mb-2 mr-sm-2" placeholder="£ Value" name="value" id="value"></p>
 
                 <button type="submit" class="btn btn-primary mb-2" value="${type}" name="type">Add</button>
             </form>
 
             <p class="error" align="center">${noValue}</p>
             <p class="error" align="center">${wrongName}</p>
+            <br/>
+            <br/>
             <br/>
             <br/>
             <br/>

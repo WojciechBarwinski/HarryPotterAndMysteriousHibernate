@@ -37,7 +37,10 @@
                     <button type="submit" class="btn btn-primary" name="idToDelete">Find</button>
                 </form>
 
+
             </div>
+
+
             <p class="error" align="center">${noInput}</p>
             <p class="error" align="center">${invalidData}</p>
 
@@ -47,7 +50,7 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-hover">
+                        <table class="table table-hover ">
                             <thead class="thead-inverse">
                             <tr>
                                 <th>ID</th>
@@ -58,7 +61,6 @@
                                 <th>Delete</th>
                             </tr>
                             </thead>
-
                             <c:forEach items="${charactersList}" var="character">
                                 <tr>
                                     <td>${character.id}</td>
@@ -70,16 +72,19 @@
                                         <a href="/view-character?idToView=${character.id}">
                                             <button type="submit" class="btn btn-primary" name="idToView">View</button>
                                         </a>
+
                                     </td>
 
                                     <td>
                                         <form action="/delete-character" method="post">
-                                            <button type="submit" class="btn btn-danger" name="idToDelete" value=${character.id}>Delete</button>
+                                            <button type="submit" class="btn btn-danger" name="idToDelete"
+                                                    value=${character.id}>Delete
+                                            </button>
                                         </form>
                                     </td>
+
                                 </tr>
                             </c:forEach>
-
                         </table>
                     </div>
                 </div>

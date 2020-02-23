@@ -80,28 +80,26 @@
                 </div>
             </div>
 
+
+
+
             <div align="center">
-                <h4>Update personal data</h4>
+                <h4>Zmień dane postaci</h4>
                 <form class="form-inline justify-content-center" action="/update-character-date" method="post">
                     <p>
                         <label for="firstName" class="mr-sm-2">First Name:</label>
-                        <input type="text" class="form-control mb-2 mr-sm-2" placeholder="First name" name="firstName"
-                               id="firstName">
+                        <input type="text" class="form-control mb-2 mr-sm-2" placeholder="First name" name="firstName" id="firstName">
                     </p>
                     <p>
                         <label for="lastName" class="mr-sm-2">Last Name:</label>
-                        <input type="text" class="form-control mb-2 mr-sm-2" placeholder="Last name" name="lastName"
-                               id="lastName">
+                        <input type="text" class="form-control mb-2 mr-sm-2" placeholder="Last name" name="lastName" id="lastName">
                     </p>
                     <p>
                         <label for="birthDate" class="mr-sm-2">BirthDate:</label>
-                        <input type="date" class="form-control mb-2 mr-sm-2" placeholder="YYYY-MM-DD" name="birthDate"
-                               id="birthDate" value="">
+                        <input type="date" class="form-control mb-2 mr-sm-2" placeholder="YYYY-MM-DD" name="birthDate" id="birthDate" value="">
                     </p>
 
-                    <button type="submit" class="btn btn-primary mb-2" value="${character.id}" name="characterId">
-                        Update
-                    </button>
+                    <button type="submit" class="btn btn-primary mb-2" value="${character.id}" name="characterId">Update</button>
                 </form>
 
                 <p class="error" align="center">${noValue}</p>
@@ -111,8 +109,11 @@
                 <p class="error" align="center">${characterExist}</p>
             </div>
 
+
+
+
             <div align="center">
-                <h4>Add items</h4>
+                <h4>Dodaj usuń wyposażenie</h4>
                 <form class="form-inline justify-content-center" action="/update-character-items" method="post">
                     <p>
                         <label for="itemToAdd" class="mr-sm-2">Add item</label>
@@ -124,8 +125,6 @@
                         </select>
                         <button type="submit" class="btn btn-primary mb-2" name="itemIdToAdd">Add</button>
                 </form>
-
-                <h4>Remove items</h4>
                 <form class="form-inline justify-content-center" action="/update-character-items" method="post">
                     <label for="itemToDelete" class="mr-sm-2">Remove item</label>
                     <select class="form-control mr-sm-2" id="itemToDelete" name="itemToDelete">
@@ -134,10 +133,14 @@
                             <option>${item.name}</option>
                         </c:forEach>
                     </select>
-                    <button type="submit" class="btn btn-primary mb-2" value="${item.id}" name="itemIdToDelete">Remove</button>
+                    <button type="submit" class="btn btn-primary mb-2" value="${item.id}" name="itemIdToDelete">Remove item</button>
                     </p>
                 </form>
             </div>
+
+
+
+
 
         </div>
     </div>

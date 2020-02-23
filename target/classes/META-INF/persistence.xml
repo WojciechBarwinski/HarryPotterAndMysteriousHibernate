@@ -20,22 +20,22 @@
 
 
 
+       <!-- łączenie z bazą danych na heroku-->
         <properties>
             <property name="javax.persistence.jdbc.driver"
                       value="com.mysql.cj.jdbc.Driver"/>
 
-
             <property name="javax.persistence.jdbc.url"
-                      value="jdbc:mysql://localhost:3306/harry_potter_db?useTimezone=true&amp;serverTimezone=GMT"/>
+                      value="jdbc:mysql://us-cdbr-iron-east-04.cleardb.net/heroku_d512ec62ca83311?reconnect=true"/>
 
             <property name="javax.persistence.jdbc.user"
-                      value="root"/>
+                      value="bc7d1b3c4693ed"/>
 
             <property name="javax.persistence.jdbc.password"
-                      value="Wojtek1806"/>
+                      value="e4c3eccc"/>
 
-            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect"/>
-
+            <property name="hibernate.dialect"
+                      value="org.hibernate.dialect.MySQL8Dialect"/>
 
             <property name="hibernate.show_sql"
                       value="true"/>
@@ -43,14 +43,19 @@
             <property name="hibernate.connection.autocommit"
                       value="true"/>
 
-            <!--WARNING-->
             <property name="hibernate.hbm2ddl.auto"
                       value="create"/>
-
 
             <property name="hibernate.archive.autodetection"
                       value="false"/>
 
+            <property name="connection.autoReconnect" value="true"/>
+            <property name="connection.autoReconnectForPools" value="true"/>
+            <property name="connection.is-connection-validation-required" value="true"/>
+
+            <property name="hibernate.c3p0.min_size" value="5" />
+            <property name="hibernate.c3p0.max_size" value="20" />
+            <property name="hibernate.c3p0.timeout" value="300" />
 
         </properties>
 

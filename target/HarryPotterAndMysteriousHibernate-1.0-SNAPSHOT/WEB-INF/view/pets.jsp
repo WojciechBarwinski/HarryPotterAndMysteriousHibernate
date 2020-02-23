@@ -42,7 +42,6 @@
                                 <th>Delete</th>
                             </tr>
                             </thead>
-
                             <c:forEach items="${petsList}" var="pet">
                                 <tr>
                                     <td>${pet.id}</td>
@@ -60,19 +59,21 @@
                                     </td>
                                 </tr>
                             </c:forEach>
-
                         </table>
                     </div>
                 </div>
             </div>
+
 
             <form class="form-inline justify-content-center" action="/add-pet" method="post">
 
                 <p><label for="name" class="mr-sm-2">Name:</label>
                     <input type="text" class="form-control mb-2 mr-sm-2" placeholder="Name" name="name" id="name"></p>
 
+
                 <p><label for="species" class="mr-sm-2">Species:</label>
                     <input type="text" class="form-control mb-2 mr-sm-2" placeholder="Species" name="species" id="species"></p>
+
 
                 <p><label for="owners" class="mr-sm-2">Owners:</label>
                     <select class="form-control mr-sm-2" id="owners" name="owner">
@@ -82,17 +83,21 @@
                         </c:forEach>
                     </select>
                 </p>
+
+
                 <button type="submit" class="btn btn-primary mb-2">Add</button>
             </form>
-
             <p class="error" align="center">${noValue}</p>
             <p class="error" align="center">${wrongName}</p>
             <p class="error" align="center">${wrongSpecies}</p>
-            <p class="error" align="center">${characterHavePet}</p>
             <br/>
             <br/>
             <br/>
             <br/>
+            <br/>
+            <br/>
+
+
         </div>
         <div class="col-md-3 col-md-offset-3"></div>
     </div>
