@@ -1,0 +1,64 @@
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence
+             http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
+             version="2.1">
+    <!--try change name here and in main EntityManagerFactory-->
+    <persistence-unit name="ORM">
+        <description>
+            Persistence unit for connection to Harry Potter custom DataBase
+        </description>
+
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+
+        <class>harryPotterApp.entities.HPCharacter</class>
+        <class>harryPotterApp.entities.Pet</class>
+        <class>harryPotterApp.entities.HogwartsJob</class>
+        <class>harryPotterApp.entities.Student</class>
+        <class>harryPotterApp.entities.Item</class>
+        <class>harryPotterApp.entities.HPLocation</class>
+
+
+
+        <properties>
+            <property name="javax.persistence.jdbc.driver"
+                      value="com.mysql.cj.jdbc.Driver"/>
+
+            <property name="javax.persistence.jdbc.url"
+                      value="jdbc:mysql://us-cdbr-iron-east-04.cleardb.net/heroku_d512ec62ca83311?reconnect=true"/>
+
+            <property name="javax.persistence.jdbc.user"
+                      value="bc7d1b3c4693ed"/>
+
+            <property name="javax.persistence.jdbc.password"
+                      value="e4c3eccc"/>
+
+            <property name="hibernate.dialect"
+                      value="org.hibernate.dialect.MySQL8Dialect"/>
+
+            <property name="hibernate.show_sql"
+                      value="true"/>
+
+            <property name="hibernate.connection.autocommit"
+                      value="true"/>
+
+            <property name="hibernate.hbm2ddl.auto"
+                      value="create"/>
+
+            <property name="hibernate.archive.autodetection"
+                      value="false"/>
+
+            <property name="connection.autoReconnect" value="true"/>
+            <property name="connection.autoReconnectForPools" value="true"/>
+            <property name="connection.is-connection-validation-required" value="true"/>
+
+            <property name="hibernate.c3p0.min_size" value="5" />
+            <property name="hibernate.c3p0.max_size" value="20" />
+            <property name="hibernate.c3p0.timeout" value="300" />
+
+        </properties>
+
+
+    </persistence-unit>
+
+</persistence>
